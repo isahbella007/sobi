@@ -1,17 +1,40 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------ */
+/* Palette tokens — swapped wholesale via [data-theme] on <html>.      */
+/* Soft Luxury Clinic is the recommended default; the other two are    */
+/* "see it in another mood" alternates surfaced by the palette toggle. */
+/* ------------------------------------------------------------------ */
+
+:root,
+[data-theme="soft-luxury"] {
+  --bg: #f4eee3; /* Warm Ivory */
+  --accent: #a9784f; /* SOBI Bronze */
+  --text: #3b2a20; /* Espresso Brown */
+  --panel: #eae1d2; /* Soft Sand */
+  --highlight: #d9bf8c; /* Champagne Gold */
+  --contrast: #fffcf6; /* Cream White */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-theme="nude-spa"] {
+  --bg: #f5e9e2; /* Blush Ivory */
+  --accent: #bc8a6a; /* Soft Bronze */
+  --text: #4a3327; /* Cocoa Brown */
+  --panel: #ead9cd; /* Rose Beige */
+  --highlight: #e8c9b0; /* Powder Nude */
+  --contrast: #fbf3e7; /* Vanilla Cream */
+}
+
+[data-theme="clinical-bronze"] {
+  --bg: #f7f4ef; /* Porcelain White */
+  --accent: #9c6b3e; /* Heritage Bronze */
+  --text: #2e2620; /* Dark Umber */
+  --panel: #d9cfc0; /* Stone Taupe */
+  --highlight: #cfc9c2; /* Cashmere Grey */
+  --contrast: #8fa089; /* Muted Sage */
 }
 
 html {
   height: 100%;
+  color-scheme: light;
 }
 
 html,
@@ -24,9 +47,11 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* !important: wins over MUI CssBaseline's injected static body reset,
+     which cannot itself hold a var() (see muiTheme.ts). */
+  color: var(--text) !important;
+  background: var(--bg) !important;
+  transition: background-color 0.4s ease, color 0.4s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -42,8 +67,14 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Belt-and-suspenders for the page-load intro: guarantees the correct end
+   state purely via CSS, so reduced-motion users never depend on JS timing
+   to avoid the overlay or a permanently-dimmed page. */
+@media (prefers-reduced-motion: reduce) {
+  [data-intro-overlay] {
+    display: none !important;
+  }
+  [data-intro-content] {
+    opacity: 1 !important;
   }
 }
