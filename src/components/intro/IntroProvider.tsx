@@ -11,28 +11,35 @@ import {
 } from "react";
 import gsap from "gsap";
 import { SunMark } from "@/components/hero/SunMark";
-import { SUN_DOCK_TOP, SUN_DOCK_SIZE } from "@/components/hero/sunDock";
+import { SUN_DOCK_TOP, SUN_DOCK_SIZE, getSunDockLeft } from "@/components/hero/sunDock";
 
 const HOLD = 0.4;
-// Ratio of the viewport height where the sun "breaks the horizon" — matches
-// Hero's own decorative line (top: 54%), so the sun rises from behind the
-// same line that's already part of the page.
+// Ratio of the viewport height where the sun "breaks the horizon" — purely
+// a framing choice for how much of the climb happens below an implicit
+// horizon; not tied to any rendered page element.
 const HORIZON_RATIO = 0.54;
-// One unbroken climb from off-screen bottom to the dock spot. Every tween
-// below shares this duration + ease, which keeps the spotlight's center and
-// the sun's own position mathematically identical at every frame.
+// One unbroken vertical climb from off-screen bottom to the dock height.
+// Every tween below shares this duration + ease, which keeps the
+// spotlight's center and the sun's own position mathematically identical
+// at every frame.
 const GLIDE_DURATION = 4.4;
+// Phase 2: once fully risen (still centered), the sun slides horizontally
+// into the Nav's logo slot. Kept as its own short phase, sequenced AFTER
+// the glide finishes, rather than blended into it or run concurrently with
+// the handoff crossfade below — see SLIDE_DURATION usage.
+const SLIDE_DURATION = 0.9;
 const HANDOFF_DURATION = 0.5;
 // const EASE = "power3.out";
 const EASE = "power3.inOut"
 const SUN_START_SIZE = 240;
 
 type IntroContextValue = {
-  /** True partway through the glide — Hero syncs its heading/tagline/CTA
+  /** True partway through the glide — the Bento hero syncs its tile
    *  cascade to this rather than firing independently on mount. */
   introAwake: boolean;
-  /** True the instant the sun reaches its dock spot — Hero's permanent
-   *  SunMark crossfades in against the overlay's traveling one right here. */
+  /** True the instant the sun reaches its dock spot in the Nav — Nav's
+   *  permanent SunMark crossfades in against the overlay's traveling one
+   *  right here. */
   sunDocked: boolean;
 };
 
@@ -62,8 +69,8 @@ export function IntroProvider({ children }: { children: ReactNode }) {
 
     if (reduceMotion) {
       // The CSS in globals.css already hides the overlay for reduced-motion
-      // users; this just settles the matching React state so Hero's own
-      // effects fire right away too.
+      // users; this just settles the matching React state so Nav's and the
+      // Bento hero's own effects fire right away too.
       setIntroAwake(true);
       setSunDocked(true);
       setShowOverlay(false);
@@ -76,11 +83,14 @@ export function IntroProvider({ children }: { children: ReactNode }) {
       // Big enough that, centered on the sun's final (near-top) position,
       // the gradient's clear zone clears every corner of the viewport.
       const finalRadius = Math.hypot(vw / 2, vh) * 1.35;
+      // Phase 2 target: how far left (from center) the sun must slide once
+      // risen, to land in the Nav's actual logo slot.
+      const deltaX = getSunDockLeft(vw) + SUN_DOCK_SIZE / 2 - vw / 2;
 
       // Sun starts with its top edge at the viewport's bottom edge — fully
       // hidden below the horizon clip. The wash's clear radius starts at
       // zero, centered on that same point, so the scene opens solid dark.
-      gsap.set(travelRef.current, { xPercent: -50, y: vh - SUN_DOCK_TOP });
+      gsap.set(travelRef.current, { xPercent: -50, x: 0, y: vh - SUN_DOCK_TOP });
       gsap.set(raysRef.current, { transformOrigin: "80px 80px", scale: 0.6 });
       washRef.current?.style.setProperty("--r", "0px");
       washRef.current?.style.setProperty("--cy", `${vh}px`);
@@ -125,10 +135,20 @@ export function IntroProvider({ children }: { children: ReactNode }) {
           GLIDE_DURATION * 0.4
         )
         .call(() => setIntroAwake(true), [], GLIDE_DURATION * 0.6)
-        .call(() => setSunDocked(true), [], GLIDE_DURATION)
-        // Handoff: the traveling sun fades out right as Hero's permanent
+        // Phase 2: still fully visible, slide from center into the Nav's
+        // logo slot. Sequenced after the glide finishes — not concurrent
+        // with the handoff below, so the crossfade never has to show the
+        // traveling sun and Nav's permanent mark in two different places
+        // at once.
+        .to(travelRef.current, { x: deltaX, duration: SLIDE_DURATION, ease: "power2.inOut" }, GLIDE_DURATION)
+        .call(() => setSunDocked(true), [], GLIDE_DURATION + SLIDE_DURATION)
+        // Handoff: the traveling sun fades out right as Nav's permanent
         // mark fades in at the same dock coordinates.
-        .to(travelRef.current, { opacity: 0, duration: HANDOFF_DURATION, ease: "power1.in" }, GLIDE_DURATION)
+        .to(
+          travelRef.current,
+          { opacity: 0, duration: HANDOFF_DURATION, ease: "power1.in" },
+          GLIDE_DURATION + SLIDE_DURATION
+        )
         .call(() => setShowOverlay(false));
     });
 

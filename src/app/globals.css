@@ -35,6 +35,11 @@
 html {
   height: 100%;
   color-scheme: light;
+  scroll-behavior: smooth;
+  /* Matches Nav's height (src/components/hero/sunDock.ts NAV_HEIGHT) so
+     anchor-scrolled sections land clear of the sticky nav instead of
+     tucked underneath it. */
+  scroll-padding-top: 80px;
 }
 
 html,
@@ -67,7 +72,7 @@ a {
   text-decoration: none;
 }
 
-/* Belt-and-suspenders for the page-load intro: guarantees the curtain
+/* Belt-and-suspenders for the page-load intro: guarantees the dawn-wash
    overlay never renders for reduced-motion users, so they never depend on
    JS timing to see the page. */
 @media (prefers-reduced-motion: reduce) {
