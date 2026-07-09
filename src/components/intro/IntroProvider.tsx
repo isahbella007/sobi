@@ -6,6 +6,7 @@ import {
   useEffect,
   useRef,
   useState,
+  type CSSProperties,
   type ReactNode,
 } from "react";
 import gsap from "gsap";
@@ -13,12 +14,17 @@ import { SunMark } from "@/components/hero/SunMark";
 import { SUN_DOCK_TOP, SUN_DOCK_SIZE } from "@/components/hero/sunDock";
 
 const HOLD = 0.4;
-// One unbroken rise from off-screen bottom to the dock spot; the page's
-// opacity and the sun's color/size are all driven off this same duration so
-// the reveal reads as the sun's motion, not a separate cross-fade.
-const GLIDE_DURATION = 1.8;
-const HANDOFF_DURATION = 0.45;
-const DIMMED_OPACITY = 0.12;
+// Ratio of the viewport height where the sun "breaks the horizon" — matches
+// Hero's own decorative line (top: 54%), so the sun rises from behind the
+// same line that's already part of the page.
+const HORIZON_RATIO = 0.54;
+// One unbroken climb from off-screen bottom to the dock spot. Every tween
+// below shares this duration + ease, which keeps the spotlight's center and
+// the sun's own position mathematically identical at every frame.
+const GLIDE_DURATION = 4.4;
+const HANDOFF_DURATION = 0.5;
+// const EASE = "power3.out";
+const EASE = "power3.inOut"
 const SUN_START_SIZE = 240;
 
 type IntroContextValue = {
@@ -40,10 +46,12 @@ export function useIntro() {
 }
 
 export function IntroProvider({ children }: { children: ReactNode }) {
-  const contentRef = useRef<HTMLDivElement>(null);
+  const washRef = useRef<HTMLDivElement>(null);
+  const horizonRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const travelRef = useRef<HTMLDivElement>(null);
   const sunWrapRef = useRef<HTMLDivElement>(null);
+  const raysRef = useRef<SVGGElement>(null);
 
   const [introAwake, setIntroAwake] = useState(false);
   const [sunDocked, setSunDocked] = useState(false);
@@ -53,9 +61,9 @@ export function IntroProvider({ children }: { children: ReactNode }) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reduceMotion) {
-      // The CSS in globals.css already hides the overlay and shows full
-      // content instantly for reduced-motion users; this just settles the
-      // matching React state so Hero's own effects fire right away too.
+      // The CSS in globals.css already hides the overlay for reduced-motion
+      // users; this just settles the matching React state so Hero's own
+      // effects fire right away too.
       setIntroAwake(true);
       setSunDocked(true);
       setShowOverlay(false);
@@ -63,17 +71,39 @@ export function IntroProvider({ children }: { children: ReactNode }) {
     }
 
     const ctx = gsap.context(() => {
-      // Start the sun well below the bottom edge so it glides fully into
-      // view rather than fading in already on-screen.
-      gsap.set(travelRef.current, {
-        xPercent: -50,
-        y: window.innerHeight - SUN_DOCK_TOP + SUN_START_SIZE,
-      });
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      // Big enough that, centered on the sun's final (near-top) position,
+      // the gradient's clear zone clears every corner of the viewport.
+      const finalRadius = Math.hypot(vw / 2, vh) * 1.35;
+
+      // Sun starts with its top edge at the viewport's bottom edge — fully
+      // hidden below the horizon clip. The wash's clear radius starts at
+      // zero, centered on that same point, so the scene opens solid dark.
+      gsap.set(travelRef.current, { xPercent: -50, y: vh - SUN_DOCK_TOP });
+      gsap.set(raysRef.current, { transformOrigin: "80px 80px", scale: 0.6 });
+      washRef.current?.style.setProperty("--r", "0px");
+      washRef.current?.style.setProperty("--cy", `${vh}px`);
+
+      const holeProgress = { r: 0, cy: vh };
 
       const tl = gsap.timeline({ delay: HOLD });
 
-      tl.to(contentRef.current, { opacity: 1, duration: GLIDE_DURATION, ease: "power1.inOut" }, 0)
-        .to(travelRef.current, { y: 0, duration: GLIDE_DURATION, ease: "power2.inOut" }, 0)
+      tl.to(travelRef.current, { y: 0, duration: GLIDE_DURATION, ease: EASE }, 0)
+        .to(
+          holeProgress,
+          {
+            r: finalRadius,
+            cy: SUN_DOCK_TOP,
+            duration: GLIDE_DURATION,
+            ease: EASE,
+            onUpdate: () => {
+              washRef.current?.style.setProperty("--r", `${holeProgress.r}px`);
+              washRef.current?.style.setProperty("--cy", `${holeProgress.cy}px`);
+            },
+          },
+          0
+        )
         .to(
           sunWrapRef.current,
           {
@@ -81,19 +111,20 @@ export function IntroProvider({ children }: { children: ReactNode }) {
             height: SUN_DOCK_SIZE,
             filter: "grayscale(0) saturate(1) brightness(1)",
             duration: GLIDE_DURATION,
-            ease: "power2.inOut",
+            ease: EASE,
           },
           0
         )
-        // Glow blooms as the sun crosses the middle of the screen, then
-        // clears before it settles into a small, glow-free logo mark.
-        .to(glowRef.current, { opacity: 0.55, duration: GLIDE_DURATION * 0.45, ease: "sine.out" }, 0)
+        .to(raysRef.current, { scale: 1, duration: GLIDE_DURATION, ease: EASE }, 0)
+        // Glow blooms as the sun crosses the horizon, then clears before it
+        // settles into a small, glow-free logo mark.
+        .to(glowRef.current, { opacity: 0.55, duration: GLIDE_DURATION * 0.4, ease: "sine.out" }, 0)
         .to(
           glowRef.current,
-          { opacity: 0, duration: GLIDE_DURATION * 0.55, ease: "sine.in" },
-          GLIDE_DURATION * 0.45
+          { opacity: 0, duration: GLIDE_DURATION * 0.6, ease: "sine.in" },
+          GLIDE_DURATION * 0.4
         )
-        .call(() => setIntroAwake(true), [], GLIDE_DURATION * 0.55)
+        .call(() => setIntroAwake(true), [], GLIDE_DURATION * 0.6)
         .call(() => setSunDocked(true), [], GLIDE_DURATION)
         // Handoff: the traveling sun fades out right as Hero's permanent
         // mark fades in at the same dock coordinates.
@@ -106,9 +137,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
 
   return (
     <IntroContext.Provider value={{ introAwake, sunDocked }}>
-      <div ref={contentRef} data-intro-content style={{ opacity: DIMMED_OPACITY }}>
-        {children}
-      </div>
+      {children}
 
       {showOverlay && (
         <div
@@ -121,40 +150,72 @@ export function IntroProvider({ children }: { children: ReactNode }) {
             pointerEvents: "none",
           }}
         >
+          {/* Dawn wash: a radial gradient whose clear radius grows from the
+              sun's position outward. Stops are mixed in OKLCH so the band
+              between "dark" and "revealed" passes through a vivid warm glow
+              instead of the muddy grey a plain black-to-cream blend gives. */}
           <div
-            ref={travelRef}
+            ref={washRef}
+            style={
+              {
+                position: "fixed",
+                inset: 0,
+                "--r": "0px",
+                "--cy": "100vh",
+                backgroundImage:
+                  "radial-gradient(circle var(--r) at 50% var(--cy), transparent 0%, transparent 60%, color-mix(in oklab, var(--accent) 15%, transparent) 74%, color-mix(in oklab, var(--accent) 20%, #1a1510) 88%, #1a1510 100%)",
+              } as CSSProperties
+            }
+          />
+
+          {/* Horizon window: clips the sun disc itself so it visibly
+              emerges from behind the line rather than just translating up. */}
+          <div
+            ref={horizonRef}
             style={{
               position: "absolute",
-              top: SUN_DOCK_TOP,
-              left: "50%",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: `${HORIZON_RATIO * 100}vh`,
+              overflow: "hidden",
             }}
           >
             <div
-              ref={glowRef}
+              ref={travelRef}
               style={{
                 position: "absolute",
-                top: "50%",
+                top: SUN_DOCK_TOP,
                 left: "50%",
-                width: 420,
-                height: 420,
-                marginLeft: -210,
-                marginTop: -210,
-                borderRadius: "50%",
-                background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)",
-                filter: "blur(48px)",
-                opacity: 0,
-              }}
-            />
-            <div
-              ref={sunWrapRef}
-              style={{
-                position: "relative",
-                width: SUN_START_SIZE,
-                height: SUN_START_SIZE,
-                filter: "grayscale(0.4) saturate(0.3) brightness(0.9)",
               }}
             >
-              <SunMark />
+              <div
+                ref={glowRef}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: 420,
+                  height: 420,
+                  marginLeft: -210,
+                  marginTop: -210,
+                  borderRadius: "50%",
+                  background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)",
+                  filter: "blur(48px)",
+                  opacity: 0,
+                }}
+              />
+              <div
+                ref={sunWrapRef}
+                style={{
+                  position: "relative",
+                  width: SUN_START_SIZE,
+                  height: SUN_START_SIZE,
+                  filter: "grayscale(0.4) saturate(0.3) brightness(0.9)",
+                }}
+              >
+                <SunMark raysRef={raysRef} />
+              </div>
             </div>
           </div>
         </div>

@@ -33,7 +33,7 @@ export function Hero() {
   // this is for the sun being at the top of the screen
   useEffect(() => {
     if (!sunDocked) return;
-    gsap.to(sunWrapperRef.current, { opacity: 0.1, duration: 0.45, ease: "power1.out" });
+    gsap.to(sunWrapperRef.current, { opacity: 1, duration: 0.45, ease: "power1.out" });
   }, [sunDocked]);
 
   return (

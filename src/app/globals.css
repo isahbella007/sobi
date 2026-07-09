@@ -67,14 +67,11 @@ a {
   text-decoration: none;
 }
 
-/* Belt-and-suspenders for the page-load intro: guarantees the correct end
-   state purely via CSS, so reduced-motion users never depend on JS timing
-   to avoid the overlay or a permanently-dimmed page. */
+/* Belt-and-suspenders for the page-load intro: guarantees the curtain
+   overlay never renders for reduced-motion users, so they never depend on
+   JS timing to see the page. */
 @media (prefers-reduced-motion: reduce) {
   [data-intro-overlay] {
     display: none !important;
-  }
-  [data-intro-content] {
-    opacity: 1 !important;
   }
 }

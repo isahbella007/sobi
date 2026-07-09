@@ -1,3 +1,5 @@
+import type { RefObject } from "react";
+
 const RAY_COUNT = 36;
 const CENTER = 80;
 const DISC_RADIUS = 24;
@@ -5,13 +7,19 @@ const RAY_INNER = 32;
 const RAY_OUTER = 70;
 const RAY_ANGLES = Array.from({ length: RAY_COUNT }, (_, i) => (360 / RAY_COUNT) * i);
 
+type SunMarkProps = {
+  /** Optional handle to the rays group, so an intro animation can scale
+   *  them outward independently of the disc/circle. */
+  raysRef?: RefObject<SVGGElement | null>;
+};
+
 // Rays are drawn once along the vertical axis, then placed by rotating each
 // individually around the center — a plain SVG transform attribute, so the
 // whole mark scales/fades/color-shifts as one unit however a consumer wraps it.
-export function SunMark() {
+export function SunMark({ raysRef }: SunMarkProps = {}) {
   return (
     <svg viewBox="0 0 160 160" width="100%" height="100%" role="img" aria-label="SOBI Sonnenmotiv">
-      <g>
+      <g ref={raysRef}>
         {RAY_ANGLES.map((angle) => (
           <line
             key={angle}
