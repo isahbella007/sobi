@@ -24,6 +24,12 @@ export const navLinks = [
 
 export const serviceChips = ["Skincare", "Foot care", "Hand care", "Waxing"];
 
+export const heroHeadline = "Expert care for skin and feet";
+export const heroTypewriterWords = ["Skincare specialist", "Foot care", "Hand care", "Waxing"];
+export const heroTagline = "A trusted studio in Vienna’s 12th.";
+export const heroMessage =
+  "A quiet studio for skin and feet care in Vienna’s 12th district — thorough, careful, and genuinely glad to have you. Two generations of expert hands, one calm standard of care.";
+
 export const services = [
   {
     name: "Skincare",

@@ -17,7 +17,7 @@ const HOLD = 0.4;
 // Ratio of the viewport height where the sun "breaks the horizon" — purely
 // a framing choice for how much of the climb happens below an implicit
 // horizon; not tied to any rendered page element.
-const HORIZON_RATIO = 0.54;
+const HORIZON_RATIO = 1;
 // One unbroken vertical climb from off-screen bottom to the dock height.
 // Every tween below shares this duration + ease, which keeps the
 // spotlight's center and the sun's own position mathematically identical
@@ -53,6 +53,7 @@ export function useIntro() {
 }
 
 export function IntroProvider({ children }: { children: ReactNode }) {
+  const overlayRootRef = useRef<HTMLDivElement>(null);
   const washRef = useRef<HTMLDivElement>(null);
   const horizonRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
@@ -150,7 +151,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
           GLIDE_DURATION + SLIDE_DURATION
         )
         .call(() => setShowOverlay(false));
-    });
+    }, overlayRootRef);
 
     return () => ctx.revert();
   }, []);
@@ -161,6 +162,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
 
       {showOverlay && (
         <div
+          ref={overlayRootRef}
           data-intro-overlay
           aria-hidden="true"
           style={{

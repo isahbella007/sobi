@@ -1,5 +1,5 @@
 import { Nav } from "@/components/nav/Nav";
-import { BentoHero } from "@/components/bento/BentoHero";
+import { Hero } from "@/components/hero/Hero";
 import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
 import { FindUs } from "@/components/sections/FindUs";
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <BentoHero />
+      <Hero />
       <About />
       <Services />
       <FindUs />

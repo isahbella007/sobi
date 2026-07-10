@@ -1,18 +1,43 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Reveal } from "@/components/common/Reveal";
+import { useIntro } from "@/components/intro/IntroProvider";
 import { Avatar } from "@/components/common/Avatar";
 import { daughterName, daughterPhoto } from "@/content/site";
 
+// About sits close enough to the fold (right after the tightened Bento gap)
 export function About() {
+  const { introAwake } = useIntro();
+  const avatarsRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!introAwake) return;
+
+    const panels = [avatarsRef.current, textRef.current];
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      gsap.set(panels, { opacity: 1, y: 0 });
+      return;
+    }
+
+    gsap.fromTo(
+      panels,
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.inOut", stagger: 0.06 }
+    );
+  }, [introAwake]);
+
   return (
-    <Reveal
-      as="section"
+    <Box
+      component="section"
       id="about"
       sx={{
         mx: { xs: 3, md: 6 },
-        mt: 0,
-        mb: { xs: 6, md: 8 },
+        my: { xs: 6, md: 8 },
         px: { xs: 3, md: 6 },
         py: { xs: 6, md: 8 },
         borderRadius: "16px",
@@ -29,12 +54,12 @@ export function About() {
           mx: "auto",
         }}
       >
-        <Box sx={{ display: "flex", gap: 2, flexShrink: 0 }}>
+        <Box ref={avatarsRef} sx={{ display: "flex", gap: 2, flexShrink: 0, opacity: 0 }}>
           <Avatar name="Sobi" size="lg" />
           <Avatar name={daughterName} src={daughterPhoto} size="lg" />
         </Box>
 
-        <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+        <Box ref={textRef} sx={{ textAlign: { xs: "center", md: "left" }, opacity: 0 }}>
           <Typography
             component="h2"
             sx={{
@@ -54,6 +79,6 @@ export function About() {
           </Typography>
         </Box>
       </Box>
-    </Reveal>
+    </Box>
   );
 }
