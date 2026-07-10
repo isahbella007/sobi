@@ -72,7 +72,7 @@ export function Hero() {
         overflow: "hidden",
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
-        alignItems: "center",
+        alignItems: { xs: "stretch", md: "center" },
         gap: { xs: 6, md: 4 },
         px: { xs: 3, md: 6 },
         py: { xs: 6, md: 10 },
@@ -87,7 +87,7 @@ export function Hero() {
           zIndex: 1,
           flex: { md: "1.15 1 0%" },
           minWidth: 0,
-          textAlign: { xs: "center", md: "left" },
+          textAlign: "left",
         }}
       >
         <Typography sx={eyebrowSx}>SOBI PROFESSIONELLE</Typography>
@@ -97,7 +97,6 @@ export function Hero() {
             height: "2px",
             bgcolor: "var(--highlight)",
             mb: 2,
-            mx: { xs: "auto", md: 0 },
           }}
         />
         <Typography
@@ -122,7 +121,6 @@ export function Hero() {
             opacity: 0.85,
             lineHeight: 1.7,
             maxWidth: 400,
-            mx: { xs: "auto", md: 0 },
             mt:2,
             mb: 2,
           }}
@@ -164,17 +162,18 @@ export function Hero() {
         </Box>
       </Box>
 
-      {/* One large wreath, faded, sitting in the right-middle behind the stats — not tiled */}
+      {/* One large wreath, faded, sitting in the right-middle behind the stats — not tiled. Desktop only. */}
       <Box
         ref={imageRef}
         aria-hidden="true"
         sx={{
           opacity: 0,
+          display: { xs: "none", md: "block" },
           position: "absolute",
           top: "50%",
-          right: { xs: "2%", md: "3%" },
+          right: { md: "3%" },
           transform: "translateY(-50%)",
-          width: { xs: "78%", sm: "60%", md: 480, lg: 600 },
+          width: { md: 480, lg: 600 },
           aspectRatio: "1 / 1",
           backgroundImage: "url(/transparent.png)",
           backgroundRepeat: "no-repeat",
@@ -182,6 +181,22 @@ export function Hero() {
           backgroundSize: "contain",
           // maskImage: "radial-gradient(closest-side, black 62%, transparent 100%)",
           // WebkitMaskImage: "radial-gradient(closest-side, black 62%, transparent 100%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
+
+      {/* Mobile-only backdrop — flat.png tiled at low opacity behind the left-aligned content */}
+      <Box
+        aria-hidden="true"
+        sx={{
+          display: { xs: "block", md: "none" },
+          position: "absolute",
+          inset: 0,
+          // backgroundImage: "url(/flat.png)",
+          // backgroundRepeat: "repeat",
+          // backgroundSize: "200px 200px",
+          opacity: 0.18,
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -196,19 +211,28 @@ export function Hero() {
           zIndex: 1,
           right: { md: 60, lg: 200, xl: 300 }, // increase to shift left, use a negative value to shift right
           display: "flex",
-          flexDirection: "column",
-          alignItems: { xs: "center", md: "flex-end" },
-          gap: 2.5,
-          textAlign: { xs: "center", md: "right" },
-          
+          flexDirection: { xs: "row", md: "column" },
+          flexWrap: { xs: "wrap", md: "nowrap" },
+          alignItems: { xs: "flex-start", md: "flex-end" },
+          gap: { xs: 1.25, md: 2.5 },
+          textAlign: "left",
         }}
       >
         {stats.map((stat) => (
           <Box
             key={stat.label}
-            sx={{ display: "flex", alignItems: "center", gap: 1.5, justifyContent: { xs: "center", md: "flex-end" } }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1.5,
+              justifyContent: { xs: "center", md: "flex-end" },
+              border: { xs: "1px solid var(--highlight)", md: "none" },
+              borderRadius: { xs: 999, md: 0 },
+              px: { xs: 1.5, md: 0 },
+              py: { xs: 0.75, md: 0 },
+            }}
           >
-            <Box sx={{ width: 22, height: "1px", bgcolor: "var(--highlight)", flexShrink: 0 }} />
+            <Box sx={{ width: 22, height: "1px", bgcolor: "var(--highlight)", flexShrink: 0, display: { xs: "none", md: "block" } }} />
             <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", whiteSpace: "nowrap" }}>
               <Box component="span" sx={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--accent)", mr: 0.5 }}>
                 {stat.value}
