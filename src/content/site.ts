@@ -39,7 +39,7 @@ export const services = [
     name: "Foot care",
     germanName: "Podologische Fußpflege",
     description:
-      "Thorough, careful foot and nail care. [CONFIRM: if trained Podologin, say ‘Medical-grade podology done properly.’]",
+      "Thorough, careful foot and nail care.",
   },
   {
     name: "Hand care",
