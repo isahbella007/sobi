@@ -43,34 +43,53 @@ export function Hero() {
   useEffect(() => {
     if (!introAwake) return;
 
-    const panels = [textRef.current, imageRef.current, sideRef.current];
+    const textAndStats = [textRef.current, sideRef.current];
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
-      gsap.set(panels, { opacity: 1, y: 0 });
+      gsap.set(textAndStats, { opacity: 1, y: 0 });
+      gsap.set(imageRef.current, { opacity: 0.22 });
       return;
     }
 
     gsap.fromTo(
-      panels,
+      textAndStats,
       { opacity: 0, y: 24 },
       { opacity: 1, y: 0, duration: 0.5, ease: "power3.inOut", stagger: 0.08 }
     );
+    gsap.fromTo(
+      imageRef.current,
+      { opacity: 0 },
+      { opacity: 0.7, duration: 0.5, ease: "power3.inOut", stagger: 0.08 }
+    );
+
   }, [introAwake]);
 
   return (
     <Box
       component="section"
       sx={{
-        display: "grid",
-        gridTemplateColumns: { xs: "1fr", md: "1.15fr 0.85fr auto" },
-        // gap: { xs: 2, md: 2 },
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
         alignItems: "center",
+        gap: { xs: 6, md: 4 },
         px: { xs: 3, md: 6 },
         py: { xs: 6, md: 10 },
       }}
     >
       {/* LEFT — headline, lead copy, CTA, opening-hours note */}
-      <Box ref={textRef} sx={{opacity: 0, textAlign: { xs: "center", md: "left" } }}>
+      <Box
+        ref={textRef}
+        sx={{
+          opacity: 0,
+          position: "relative",
+          zIndex: 1,
+          flex: { md: "1.15 1 0%" },
+          minWidth: 0,
+          textAlign: { xs: "center", md: "left" },
+        }}
+      >
         <Typography sx={eyebrowSx}>SOBI PROFESSIONELLE</Typography>
         <Box
           sx={{
@@ -104,7 +123,8 @@ export function Hero() {
             lineHeight: 1.7,
             maxWidth: 400,
             mx: { xs: "auto", md: 0 },
-            mb: 4,
+            mt:2,
+            mb: 2,
           }}
         >
           {heroMessage}
@@ -144,21 +164,26 @@ export function Hero() {
         </Box>
       </Box>
 
-      {/* MIDDLE — cutout photo, sitting free on the page (no card/frame) */}
+      {/* One large wreath, faded, sitting in the right-middle behind the stats — not tiled */}
       <Box
-       
         ref={imageRef}
-        component="img"
-        src="/spa_towel_nobg.png"
-        alt="Rolled towels and candles set up for a treatment at SOBI"
+        aria-hidden="true"
         sx={{
           opacity: 0,
-          justifySelf: "center",
-          display: "block",
-          width: { xs: "80%", sm: "60%", md: "100%" },
-          maxWidth: 340,
-          height: "auto",
-          filter: "drop-shadow(0 24px 28px color-mix(in oklch, var(--text) 22%, transparent))",
+          position: "absolute",
+          top: "50%",
+          right: { xs: "2%", md: "3%" },
+          transform: "translateY(-50%)",
+          width: { xs: "78%", sm: "60%", md: 480, lg: 600 },
+          aspectRatio: "1 / 1",
+          backgroundImage: "url(/transparent.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "contain",
+          // maskImage: "radial-gradient(closest-side, black 62%, transparent 100%)",
+          // WebkitMaskImage: "radial-gradient(closest-side, black 62%, transparent 100%)",
+          pointerEvents: "none",
+          zIndex: 0,
         }}
       />
 
@@ -167,11 +192,15 @@ export function Hero() {
         ref={sideRef}
         sx={{
           opacity: 0,
+          position: "relative",
+          zIndex: 1,
+          right: { md: 60, lg: 200, xl: 300 }, // increase to shift left, use a negative value to shift right
           display: "flex",
           flexDirection: "column",
           alignItems: { xs: "center", md: "flex-end" },
           gap: 2.5,
           textAlign: { xs: "center", md: "right" },
+          
         }}
       >
         {stats.map((stat) => (
@@ -181,7 +210,7 @@ export function Hero() {
           >
             <Box sx={{ width: 22, height: "1px", bgcolor: "var(--highlight)", flexShrink: 0 }} />
             <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", whiteSpace: "nowrap" }}>
-              <Box component="span" sx={{ fontFamily: "var(--font-serif)", fontSize: "1rem", color: "var(--accent)", mr: 0.5 }}>
+              <Box component="span" sx={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--accent)", mr: 0.5 }}>
                 {stat.value}
               </Box>
               {stat.label}
@@ -189,7 +218,7 @@ export function Hero() {
           </Box>
         ))}
 
-        <Box sx={{ mt: { xs: 1, md: 3 } }}>
+        {/* <Box sx={{ mt: { xs: 1, md: 3 } }}>
           <Typography sx={{ fontFamily: "var(--font-serif)", fontSize: "2.25rem", color: "var(--text)", lineHeight: 1 }}>
             {heroRating.score}
             <Box component="span" sx={{ fontSize: "1.1rem", color: "var(--text)", opacity: 0.6 }}>
@@ -199,7 +228,7 @@ export function Hero() {
           <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", letterSpacing: "0.05em", textTransform: "uppercase", color: "var(--text)", opacity: 0.55, mt: 0.5 }}>
             From {heroRating.reviewCount} guest reviews
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );
