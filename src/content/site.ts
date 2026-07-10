@@ -24,8 +24,8 @@ export const navLinks = [
 
 export const serviceChips = ["Skincare", "Foot care", "Hand care", "Waxing"];
 
-export const heroHeadline = "Expert care for skin and feet";
-export const heroTypewriterWords = ["Skincare specialist", "Foot care", "Hand care", "Waxing"];
+export const heroHeadline = "Expert care for";
+export const heroTypewriterWords = ["Skincare", "Foot", "Hand", "Waxing"];
 export const heroTagline = "A trusted studio in Vienna’s 12th.";
 export const heroMessage =
   "A quiet studio for skin and feet care in Vienna’s 12th district — thorough, careful, and genuinely glad to have you. Two generations of expert hands, one calm standard of care.";
@@ -50,6 +50,26 @@ export const services = [
     description: "Clean, comfortable waxing, start to finish.",
   },
 ];
+
+export const stats = [
+  { value: "5,000+", label: "Clients served" }, // CONFIRM: real client count
+  { value: "15", label: "Years of experience" }, // CONFIRM: real years in business
+  { value: `${services.length}`, label: "Core services" },
+];
+
+// CONFIRM: fabricated placeholder — swap for the studio's real rating once
+// they have a Google/Instagram review count to point to.
+export const heroRating = {
+  score: "4.9",
+  outOf: "5",
+  reviewCount: "150+",
+};
+
+export const heroFootNote = {
+  text: `Open ${openingHours}, by appointment.`,
+  linkLabel: "Find us",
+  href: "#find-us",
+};
 
 export const lockedTeasers = [
   { label: "Pricing", sub: "Full price list, coming soon" },

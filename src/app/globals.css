@@ -39,7 +39,7 @@ html {
   /* Matches Nav's height (src/components/hero/sunDock.ts NAV_HEIGHT) so
      anchor-scrolled sections land clear of the sticky nav instead of
      tucked underneath it. */
-  scroll-padding-top: 80px;
+  scroll-padding-top: 96px;
 }
 
 html,
@@ -53,9 +53,11 @@ body {
   display: flex;
   flex-direction: column;
   /* !important: wins over MUI CssBaseline's injected static body reset,
-     which cannot itself hold a var() (see muiTheme.ts). */
+     which cannot itself hold a var() (see muiTheme.ts). Split into
+     longhand properties (rather than the `background` shorthand) so each
+     one individually beats CssBaseline's own declarations. */
   color: var(--text) !important;
-  background: var(--bg) !important;
+  background-color: var(--bg) !important;
   transition: background-color 0.4s ease, color 0.4s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -70,6 +72,17 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Gentle idle drift for the Hero's floating photo (Hero.tsx). */
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
 }
 
 /* Belt-and-suspenders for the page-load intro: guarantees the dawn-wash

@@ -27,6 +27,15 @@ const linkSx = {
   "&:hover": { opacity: 1, color: "var(--accent)" },
 };
 
+// Display only — language switching isn't implemented yet.
+const languageSx = {
+  fontFamily: "var(--font-sans)",
+  fontSize: "0.75rem",
+  letterSpacing: "0.1em",
+  color: "var(--text)",
+  opacity: 0.6,
+};
+
 export function Nav() {
   const { sunDocked } = useIntro();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -39,9 +48,9 @@ export function Nav() {
         top: 0,
         zIndex: 10,
         height: NAV_HEIGHT,
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: { xs: "auto 1fr auto", md: "1fr auto 1fr" },
         alignItems: "center",
-        justifyContent: "space-between",
         px: { xs: `${NAV_GUTTER_XS}px`, md: `${NAV_GUTTER_MD}px` },
         bgcolor: "transparent",
       }}
@@ -57,42 +66,49 @@ export function Nav() {
         <SunMark />
       </Box>
 
-      <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: 4 }}>
+      <Box sx={{ display: { xs: "none", md: "flex" }, justifySelf: "center", alignItems: "center", gap: 5 }}>
         {navLinks.map((link) => (
           <Box key={link.href} component="a" href={link.href} sx={linkSx}>
             {link.label}
           </Box>
         ))}
-        <PaletteToggle />
       </Box>
 
-      <Box sx={{ display: { xs: "flex", md: "none" } }}>
-        <IconButton
-          aria-label="Open menu"
-          onClick={(event: MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
-          sx={{ color: "var(--text)" }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
-          {navLinks.map((link) => (
-            <MenuItem
-              key={link.href}
-              component="a"
-              href={link.href}
-              onClick={() => setAnchorEl(null)}
-              sx={linkSx}
-            >
-              {link.label}
-            </MenuItem>
-          ))}
-          <MenuItem
-            disableRipple
-            sx={{ justifyContent: "center", "&:hover": { bgcolor: "transparent" } }}
+      <Box sx={{ justifySelf: "end", display: "flex", alignItems: "center", gap: { xs: 2, md: 3 } }}>
+        <Box sx={languageSx}>EN&nbsp;|&nbsp;DE</Box>
+
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
+          <PaletteToggle />
+        </Box>
+
+        <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <IconButton
+            aria-label="Open menu"
+            onClick={(event: MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
+            sx={{ color: "var(--text)" }}
           >
-            <PaletteToggle />
-          </MenuItem>
-        </Menu>
+            <MenuIcon />
+          </IconButton>
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
+            {navLinks.map((link) => (
+              <MenuItem
+                key={link.href}
+                component="a"
+                href={link.href}
+                onClick={() => setAnchorEl(null)}
+                sx={linkSx}
+              >
+                {link.label}
+              </MenuItem>
+            ))}
+            <MenuItem
+              disableRipple
+              sx={{ justifyContent: "center", "&:hover": { bgcolor: "transparent" } }}
+            >
+              <PaletteToggle />
+            </MenuItem>
+          </Menu>
+        </Box>
       </Box>
     </Box>
   );

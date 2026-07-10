@@ -1,7 +1,7 @@
 // Shared between IntroProvider (the traveling splash sun) and Nav (the
 // permanent docked mark) so the crossfade handoff lands pixel-for-pixel.
-export const NAV_HEIGHT = 80;
-export const SUN_DOCK_SIZE = 48;
+export const NAV_HEIGHT = 96;
+export const SUN_DOCK_SIZE = 52;
 export const SUN_DOCK_TOP = (NAV_HEIGHT - SUN_DOCK_SIZE) / 2;
 export const NAV_GUTTER_XS = 24;
 export const NAV_GUTTER_MD = 48;

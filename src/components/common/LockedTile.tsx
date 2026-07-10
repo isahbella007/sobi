@@ -15,8 +15,8 @@ export function LockedTile({ label, sub }: LockedTileProps) {
       sx={{
         position: "relative",
         borderRadius: "16px",
-        border: "1px solid color-mix(in oklab, var(--highlight) 40%, transparent)",
-        bgcolor: "color-mix(in oklab, var(--panel) 60%, transparent)",
+        border: "1px solid color-mix(in oklch, var(--highlight) 40%, transparent)",
+        bgcolor: "color-mix(in oklch, var(--panel) 60%, transparent)",
         backdropFilter: "blur(3px)",
         p: 3,
         cursor: "default",
