@@ -14,8 +14,8 @@ export const PALETTES: {
   {
     id: "soft-luxury",
     label: "Soft Luxury Clinic",
-    description: "Warm Ivory · SOBI Bronze · Espresso Brown",
-    swatch: "#a9784f",
+    description: "Warm Ivory · SOBI Terracotta · Espresso Brown",
+    swatch: "#a55a2a",
   },
   {
     id: "nude-spa",

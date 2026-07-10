@@ -7,10 +7,10 @@
 :root,
 [data-theme="soft-luxury"] {
   --bg: #f4eee3; /* Warm Ivory */
-  --accent: #a9784f; /* SOBI Bronze */
-  --text: #3b2a20; /* Espresso Brown */
+  --accent: #a55a2a; /* SOBI Terracotta — real brand color, from the client's logo */
+  --text: #3a2416; /* Espresso Brown — real brand color, from the client's logo */
   --panel: #eae1d2; /* Soft Sand */
-  --highlight: #d9bf8c; /* Champagne Gold */
+  --highlight: #c88a4a; /* PROFESSIONELLE Tan — real brand color, from the client's logo */
   --contrast: #fffcf6; /* Cream White */
 }
 

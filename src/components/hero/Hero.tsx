@@ -9,6 +9,15 @@ import { useIntro } from "@/components/intro/IntroProvider";
 import { Typewriter } from "@/components/common/Typewriter";
 import { heroHeadline, heroTypewriterWords, heroTagline, heroMessage } from "@/content/site";
 
+const eyebrowSx = {
+  fontFamily: "var(--font-sans)",
+  fontSize: "0.75rem",
+  letterSpacing: "0.3em",
+  textTransform: "uppercase" as const,
+  color: "var(--accent)",
+  mb: 1.5,
+};
+
 export function Hero() {
   const { introAwake } = useIntro();
   const messageRef = useRef<HTMLDivElement>(null);
@@ -43,7 +52,25 @@ export function Hero() {
         py: { xs: 6, md: 10 },
       }}
     >
-       <Box ref={headlineRef} sx={{ opacity: 0, textAlign: { xs: "center", md: "left" } }}>
+      <Box
+        ref={headlineRef}
+        sx={{
+          opacity: 0,
+          textAlign: { xs: "center", md: "left" },
+          borderRight: { md: "1px solid var(--highlight)" },
+          pr: { md: 8 },
+        }}
+      >
+        <Typography sx={eyebrowSx}>SOBI PROFESSIONELLE</Typography>
+        <Box
+          sx={{
+            width: 48,
+            height: "2px",
+            bgcolor: "var(--highlight)",
+            mb: 2,
+            mx: { xs: "auto", md: 0 },
+          }}
+        />
         <Typography
           component="h1"
           sx={{
@@ -58,10 +85,10 @@ export function Hero() {
         </Typography>
         <Typography
           sx={{
-            fontFamily: "var(--font-sans)",
-            fontSize: { xs: "1.1rem", md: "1.35rem" },
+            fontFamily: "var(--font-serif)",
+            fontSize: { xs: "1.25rem", md: "1.6rem" },
             mb: 2,
-            minHeight: "1.6em",
+            minHeight: "1.4em",
           }}
         >
           <Typewriter words={heroTypewriterWords} />
@@ -72,6 +99,7 @@ export function Hero() {
       </Box>
 
       <Box ref={messageRef} sx={{ opacity: 0, textAlign: { xs: "center", md: "left" } }}>
+        <Typography sx={eyebrowSx}>WELCOME</Typography>
         <Typography
           sx={{ fontFamily: "var(--font-sans)", color: "var(--text)", opacity: 0.85, lineHeight: 1.7, mb: 3 }}
         >
@@ -81,8 +109,6 @@ export function Hero() {
           Book an appointment
         </Button>
       </Box>
-
-     
     </Box>
   );
 }

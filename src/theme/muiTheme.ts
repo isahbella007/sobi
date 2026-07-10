@@ -16,16 +16,16 @@ export const muiTheme = createTheme({
       paper: "#eae1d2",
     },
     text: {
-      primary: "#3b2a20",
-      secondary: "#3b2a20",
+      primary: "#3a2416",
+      secondary: "#3a2416",
     },
     primary: {
-      main: "#a9784f",
+      main: "#a55a2a",
       contrastText: "#fffcf6",
     },
     secondary: {
-      main: "#d9bf8c",
-      contrastText: "#3b2a20",
+      main: "#c88a4a",
+      contrastText: "#3a2416",
     },
   },
   typography: {
