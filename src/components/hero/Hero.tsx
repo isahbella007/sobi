@@ -175,7 +175,7 @@ export function Hero() {
           transform: "translateY(-50%)",
           width: { md: 480, lg: 600 },
           aspectRatio: "1 / 1",
-          backgroundImage: "url(/transparent.png)",
+          backgroundImage: "url(/wreath_transparent.png)",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "contain",
