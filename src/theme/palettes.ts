@@ -1,4 +1,4 @@
-export type PaletteId = "soft-luxury" | "nude-spa" | "clinical-bronze";
+export type PaletteId = "soft-luxury" | "earthy-opulence" | "butter-spa";
 
 export const DEFAULT_PALETTE: PaletteId = "soft-luxury";
 
@@ -17,17 +17,18 @@ export const PALETTES: {
     description: "Warm Ivory · SOBI Terracotta · Espresso Brown",
     swatch: "#a55a2a",
   },
+  
   {
-    id: "nude-spa",
-    label: "Nude Spa Glow",
-    description: "Blush Ivory · Soft Bronze · Cocoa Brown",
-    swatch: "#bc8a6a",
+    id: "earthy-opulence",
+    label: "Earthy Opulence",
+    description: "Putty Ivory · SOBI Terracotta · Deep Olive Night",
+    swatch: "#a55a2a",
   },
   {
-    id: "clinical-bronze",
-    label: "Clinical Bronze",
-    description: "Porcelain White · Heritage Bronze · Dark Umber",
-    swatch: "#9c6b3e",
+    id: "butter-spa",
+    label: "Sun-Kissed Butter",
+    description: "Soft Butter · SOBI Terracotta · Velvety Brown",
+    swatch: "#F7EFCB",
   },
 ];
 

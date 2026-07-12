@@ -22,7 +22,7 @@ const eyebrowSx = {
   fontSize: "0.75rem",
   letterSpacing: "0.3em",
   textTransform: "uppercase" as const,
-  color: "var(--accent)",
+  color: "var(--text-highlight)",
   mb: 1.5,
 };
 
@@ -38,6 +38,7 @@ export function Hero() {
   const { introAwake } = useIntro();
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const mobileImageRef = useRef<HTMLDivElement>(null);
   const sideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -48,6 +49,7 @@ export function Hero() {
     if (reduceMotion) {
       gsap.set(textAndStats, { opacity: 1, y: 0 });
       gsap.set(imageRef.current, { opacity: 0.22 });
+      gsap.set(mobileImageRef.current, { opacity: 0.2 });
       return;
     }
 
@@ -60,6 +62,11 @@ export function Hero() {
       imageRef.current,
       { opacity: 0 },
       { opacity: 0.7, duration: 0.5, ease: "power3.inOut", stagger: 0.08 }
+    );
+    gsap.fromTo(
+      mobileImageRef.current,
+      { opacity: 0 },
+      { opacity: 0.2, duration: 0.5, ease: "power3.inOut", stagger: 0.08 }
     );
 
   }, [introAwake]);
@@ -90,7 +97,7 @@ export function Hero() {
           textAlign: "left",
         }}
       >
-        <Typography sx={eyebrowSx}>SOBI PROFESSIONELLE</Typography>
+        <Typography sx={{...eyebrowSx}}>SOBI PROFESSIONELLE</Typography>
         <Box
           sx={{
             width: 48,
@@ -128,18 +135,56 @@ export function Hero() {
           {heroMessage}
         </Typography>
 
+        {/* Mobile-only compact stats — sits before the CTA, left-aligned
+            like every other line in this block (desktop keeps its own
+            tick-row treatment over in the sideRef column). */}
+        <Box
+          sx={{
+            display: { xs: "flex", md: "none" },
+            alignItems: "center",
+            justifyContent: "flex-start",
+            flexWrap: "wrap",
+            gap: 1,
+            mb: 3,
+          }}
+        >
+          {stats.map((stat, i) => (
+            <Box key={stat.label} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography
+                sx={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.95rem",
+                  letterSpacing: "0.02em",
+                  color: "var(--text)",
+                  opacity: 0.85,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {stat.shortLabel}
+              </Typography>
+              {i < stats.length - 1 && (
+                <Box component="span" sx={{ color: "var(--highlight)", opacity: 0.7, fontSize: "0.95rem" }}>
+                  ·
+                </Box>
+              )}
+            </Box>
+          ))}
+        </Box>
+
         <Button
           component="a"
           href="#book"
           variant="contained"
           sx={{
             borderRadius: "44px",
+            backgroundColor: "var(--highlight)",
+            color:"#FFFFFF",
             "& .hero-cta-arrow": { transition: "transform 0.25s ease" },
             "&:hover .hero-cta-arrow": { transform: "translateX(4px)" },
           }}
         >
           Book an appointment
-          <Box component="span" className="hero-cta-arrow" sx={{ display: "inline-block", ml: 1 }}>
+          <Box component="span" className="hero-cta-arrow" sx={{ color:"#FFFFFF", display: "inline-block", ml: 1 }}>
             →
           </Box>
         </Button>
@@ -186,23 +231,26 @@ export function Hero() {
         }}
       />
 
-      {/* Mobile-only backdrop — flat.png tiled at low opacity behind the left-aligned content */}
+      {/* Mobile-only backdrop — flat.png (leaves) tiled at low opacity
+          across the entire section, standing in for the desktop wreath. */}
       <Box
+        ref={mobileImageRef}
         aria-hidden="true"
         sx={{
+          opacity: 0,
           display: { xs: "block", md: "none" },
           position: "absolute",
           inset: 0,
-          // backgroundImage: "url(/flat.png)",
-          // backgroundRepeat: "repeat",
-          // backgroundSize: "200px 200px",
-          opacity: 0.18,
+          backgroundImage: "url(/flat.png)",
+          backgroundRepeat: "repeat",
+          backgroundSize: "200px 200px",
           pointerEvents: "none",
           zIndex: 0,
         }}
       />
 
-      {/* RIGHT — stats as tick rows, then rating */}
+      {/* RIGHT — stats as tick rows, desktop only. The mobile stats live
+          inline in the LEFT block above, before the CTA. */}
       <Box
         ref={sideRef}
         sx={{
@@ -210,37 +258,29 @@ export function Hero() {
           position: "relative",
           zIndex: 1,
           right: { md: 60, lg: 200, xl: 300 }, // increase to shift left, use a negative value to shift right
-          display: "flex",
-          flexDirection: { xs: "row", md: "column" },
-          flexWrap: { xs: "wrap", md: "nowrap" },
-          alignItems: { xs: "flex-start", md: "flex-end" },
-          gap: { xs: 1.25, md: 2.5 },
           textAlign: "left",
         }}
       >
-        {stats.map((stat) => (
-          <Box
-            key={stat.label}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1.5,
-              justifyContent: { xs: "center", md: "flex-end" },
-              border: { xs: "1px solid var(--highlight)", md: "none" },
-              borderRadius: { xs: 999, md: 0 },
-              px: { xs: 1.5, md: 0 },
-              py: { xs: 0.75, md: 0 },
-            }}
-          >
-            <Box sx={{ width: 22, height: "1px", bgcolor: "var(--highlight)", flexShrink: 0, display: { xs: "none", md: "block" } }} />
-            <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", whiteSpace: "nowrap" }}>
-              <Box component="span" sx={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--accent)", mr: 0.5 }}>
-                {stat.value}
-              </Box>
-              {stat.label}
-            </Typography>
-          </Box>
-        ))}
+        <Box
+          sx={{
+            display: { xs: "none", md: "flex" },
+            flexDirection: "column",
+            alignItems: "flex-end",
+            gap: 2.5,
+          }}
+        >
+          {stats.map((stat) => (
+            <Box key={stat.label} sx={{ display: "flex", alignItems: "center", gap: 1.5, justifyContent: "flex-end" }}>
+              <Box sx={{ width: 22, height: "1px", bgcolor: "var(--highlight)", flexShrink: 0 }} />
+              <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", whiteSpace: "nowrap" }}>
+                <Box component="span" sx={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--text)", mr: 0.5 }}>
+                  {stat.value}
+                </Box>
+                {stat.label}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
 
         {/* <Box sx={{ mt: { xs: 1, md: 3 } }}>
           <Typography sx={{ fontFamily: "var(--font-serif)", fontSize: "2.25rem", color: "var(--text)", lineHeight: 1 }}>

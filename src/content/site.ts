@@ -27,8 +27,9 @@ export const serviceChips = ["Skincare", "Foot care", "Hand care", "Waxing"];
 export const heroHeadline = "Expert care for";
 export const heroTypewriterWords = ["Skincare", "Foot", "Hand", "Waxing"];
 export const heroTagline = "A trusted studio in Vienna’s 12th.";
+// CONFIRM: Lorem Ipsum placeholder — swap for real copy before launch.
 export const heroMessage =
-  "A quiet studio for skin and feet care in Vienna’s 12th district — thorough, careful, and genuinely glad to have you. Two generations of expert hands, one calm standard of care.";
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis eget urna mollis ornare vel eu leo. Cras ultricies ligula sed magna dictum porta.";
 
 export const services = [
   {
@@ -52,9 +53,11 @@ export const services = [
 ];
 
 export const stats = [
-  { value: "5,000+", label: "Clients served" }, // CONFIRM: real client count
-  { value: "15", label: "Years of experience" }, // CONFIRM: real years in business
-  { value: `${services.length}`, label: "Core services" },
+  // shortLabel is the compact mobile form (e.g. "5k+ Clients") — the
+  // full value/label pairing is too large a treatment for mobile width.
+  { value: "5,000+", shortLabel: "5k+ Clients", label: "Clients served" }, // CONFIRM: real client count
+  { value: "15", shortLabel: "15 Years", label: "Years of experience" }, // CONFIRM: real years in business
+  { value: `${services.length}`, shortLabel: `${services.length} Services`, label: "Core services" },
 ];
 
 // CONFIRM: fabricated placeholder — swap for the studio's real rating once
