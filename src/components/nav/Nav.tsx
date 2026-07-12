@@ -37,7 +37,7 @@ const languageSx = {
 };
 
 export function Nav() {
-  const { sunDocked } = useIntro();
+  const { sunDocked, dockedMark } = useIntro();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   return (
@@ -57,13 +57,31 @@ export function Nav() {
     >
       <Box
         sx={{
-          width: SUN_DOCK_SIZE,
-          height: SUN_DOCK_SIZE,
+          display: "flex",
+          alignItems: "center",
+          gap: 1.5,
+          // The wordmark fades in with the mark, as one lockup, rather
+          // than trailing it — both share this single opacity switch.
           opacity: sunDocked ? 1 : 0,
           transition: "opacity 0.45s ease",
         }}
       >
-        <SunMark />
+        <Box sx={{ width: SUN_DOCK_SIZE, height: SUN_DOCK_SIZE, flexShrink: 0 }}>
+          {dockedMark ?? <SunMark />}
+        </Box>
+        <Box
+          component="span"
+          sx={{
+            fontFamily: "var(--font-serif)",
+            fontSize: "1.15rem",
+            fontWeight: 500,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "var(--text)",
+          }}
+        >
+          Sobi
+        </Box>
       </Box>
 
       <Box sx={{ display: { xs: "none", md: "flex" }, justifySelf: "center", alignItems: "center", gap: 5 }}>

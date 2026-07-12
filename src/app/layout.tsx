@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeModeProvider } from "@/theme/ThemeModeProvider";
-import { IntroProvider } from "@/components/intro/IntroProvider";
+import { IntroSwitcher } from "@/components/intro/IntroSwitcher";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -38,7 +38,7 @@ export default function RootLayout({
       <body>
         <AppRouterCacheProvider>
           <ThemeModeProvider>
-            <IntroProvider>{children}</IntroProvider>
+            <IntroSwitcher>{children}</IntroSwitcher>
           </ThemeModeProvider>
         </AppRouterCacheProvider>
       </body>

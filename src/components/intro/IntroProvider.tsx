@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import gsap from "gsap";
-import { SunMark } from "@/components/hero/SunMark";
+import { SunMarkV2 } from "@/components/hero/SunMarkV2";
 import { SUN_DOCK_TOP, SUN_DOCK_SIZE, getSunDockLeft } from "@/components/hero/sunDock";
 
 const HOLD = 0.4;
@@ -38,12 +38,19 @@ type IntroContextValue = {
    *  cascade to this rather than firing independently on mount. */
   introAwake: boolean;
   /** True the instant the sun reaches its dock spot in the Nav — Nav's
-   *  permanent SunMark crossfades in against the overlay's traveling one
+   *  permanent mark crossfades in against the overlay's traveling one
    *  right here. */
   sunDocked: boolean;
+  /** Which mark Nav should show once docked — lets whichever intro
+   *  provider is mounted (this one, or the alternate IntroProviderV2)
+   *  hand off to the mark it actually traveled with. */
+  dockedMark?: ReactNode;
 };
 
-const IntroContext = createContext<IntroContextValue>({
+// Exported so IntroProviderV2 (an alternate choreography, trialed for
+// client comparison) can drive the same context shape Nav already reads
+// from — Nav doesn't need to know which intro variant is mounted above it.
+export const IntroContext = createContext<IntroContextValue>({
   introAwake: true,
   sunDocked: true,
 });
@@ -59,7 +66,6 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   const glowRef = useRef<HTMLDivElement>(null);
   const travelRef = useRef<HTMLDivElement>(null);
   const sunWrapRef = useRef<HTMLDivElement>(null);
-  const raysRef = useRef<SVGGElement>(null);
 
   const [introAwake, setIntroAwake] = useState(false);
   const [sunDocked, setSunDocked] = useState(false);
@@ -92,7 +98,6 @@ export function IntroProvider({ children }: { children: ReactNode }) {
       // hidden below the horizon clip. The wash's clear radius starts at
       // zero, centered on that same point, so the scene opens solid dark.
       gsap.set(travelRef.current, { xPercent: -50, x: 0, y: vh - SUN_DOCK_TOP });
-      gsap.set(raysRef.current, { transformOrigin: "80px 80px", scale: 0.6 });
       washRef.current?.style.setProperty("--r", "0px");
       washRef.current?.style.setProperty("--cy", `${vh}px`);
 
@@ -126,7 +131,6 @@ export function IntroProvider({ children }: { children: ReactNode }) {
           },
           0
         )
-        .to(raysRef.current, { scale: 1, duration: GLIDE_DURATION, ease: EASE }, 0)
         // Glow blooms as the sun crosses the horizon, then clears before it
         // settles into a small, glow-free logo mark.
         .to(glowRef.current, { opacity: 0.55, duration: GLIDE_DURATION * 0.4, ease: "sine.out" }, 0)
@@ -157,7 +161,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <IntroContext.Provider value={{ introAwake, sunDocked }}>
+    <IntroContext.Provider value={{ introAwake, sunDocked, dockedMark: <SunMarkV2 /> }}>
       {children}
 
       {showOverlay && (
@@ -236,7 +240,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
                   filter: "grayscale(0.4) saturate(0.3) brightness(0.9)",
                 }}
               >
-                <SunMark raysRef={raysRef} />
+                <SunMarkV2 />
               </div>
             </div>
           </div>
