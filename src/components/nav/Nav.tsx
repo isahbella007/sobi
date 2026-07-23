@@ -116,9 +116,9 @@ export function Nav() {
       <Box sx={{ justifySelf: "end", display: "flex", alignItems: "center", gap: { xs: 2, md: 3 } }}>
         <Box sx={languageSx}>EN&nbsp;|&nbsp;DE</Box>
 
-        {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
           <PaletteToggle />
-        </Box> */}
+        </Box>
 
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton
@@ -140,12 +140,12 @@ export function Nav() {
                 {link.label}
               </MenuItem>
             ))}
-            {/* <MenuItem
+            <MenuItem
               disableRipple
               sx={{ justifyContent: "center", "&:hover": { bgcolor: "transparent" } }}
             >
               <PaletteToggle />
-            </MenuItem> */}
+            </MenuItem>
           </Menu>
         </Box>
       </Box>
