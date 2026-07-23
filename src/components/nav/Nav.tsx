@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -40,6 +40,14 @@ const languageSx = {
 export function Nav() {
   const { sunDocked, dockedMark } = useIntro();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <Box
@@ -52,9 +60,17 @@ export function Nav() {
         display: "grid",
         gridTemplateColumns: { xs: "auto 1fr auto", md: "1fr auto 1fr" },
         alignItems: "center",
-        px: { xs: `${NAV_GUTTER_XS}px`, md: `${NAV_GUTTER_MD}px` },
-        ml: { md: 4 },
-        bgcolor: "transparent",
+        // Left padding folds in the 32px inset that used to be a separate
+        // `ml` on this box — a margin excludes that strip from the box's
+        // own background, so on scroll (once the bar gets a real bgcolor)
+        // it left a gap showing the page behind it instead of a full-width
+        // bar. Padding shifts the content the same way without that gap.
+        pl: { xs: `${NAV_GUTTER_XS}px`, md: `${NAV_GUTTER_MD + 32}px` },
+        pr: { xs: `${NAV_GUTTER_XS}px`, md: `${NAV_GUTTER_MD}px` },
+        bgcolor: scrolled ? "color-mix(in oklch, var(--contrast) 92%, transparent)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        boxShadow: scrolled ? "0 8px 24px -16px color-mix(in oklch, var(--text) 40%, transparent)" : "none",
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease",
       }}
     >
       <Box
@@ -100,9 +116,9 @@ export function Nav() {
       <Box sx={{ justifySelf: "end", display: "flex", alignItems: "center", gap: { xs: 2, md: 3 } }}>
         <Box sx={languageSx}>EN&nbsp;|&nbsp;DE</Box>
 
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
+        {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
           <PaletteToggle />
-        </Box>
+        </Box> */}
 
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton
@@ -124,12 +140,12 @@ export function Nav() {
                 {link.label}
               </MenuItem>
             ))}
-            <MenuItem
+            {/* <MenuItem
               disableRipple
               sx={{ justifyContent: "center", "&:hover": { bgcolor: "transparent" } }}
             >
               <PaletteToggle />
-            </MenuItem>
+            </MenuItem> */}
           </Menu>
         </Box>
       </Box>
