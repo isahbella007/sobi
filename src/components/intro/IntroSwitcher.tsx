@@ -14,6 +14,14 @@ import { IntroProviderV2 } from "@/components/intro/IntroProviderV2";
 // /intro-preview manages its own intros per-iframe (each iframe is a full
 // navigation to "/" with its own query string), so the outer preview page
 // itself must not also get an intro overlay layered on top.
+//
+// This switch stays keyed only on /intro-preview — NOT on every route —
+// so the provider mounted here persists, unremounted, across client-side
+// navigation between "/" and inner pages like "/about". (Whether the
+// sunrise animation actually plays is instead decided once, at that
+// single mount, inside IntroProvider/IntroProviderV2 themselves — see the
+// entry-pathname check there. Keying this switch on route would make the
+// provider remount on every navigation and replay the intro each time.)
 export function IntroSwitcher({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [variant, setVariant] = useState<"1" | "2" | null>(null);

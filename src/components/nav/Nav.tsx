@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type MouseEvent } from "react";
+import Link from "next/link";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -87,7 +88,7 @@ export function Nav() {
 
       <Box sx={{ display: { xs: "none", md: "flex" }, justifySelf: "center", alignItems: "center", gap: 5 }}>
         {navLinks.map((link) => (
-          <Box key={link.href} component="a" href={link.href} sx={linkSx}>
+          <Box key={link.href} component={Link} href={link.href} sx={linkSx}>
             {link.label}
           </Box>
         ))}
@@ -112,7 +113,7 @@ export function Nav() {
             {navLinks.map((link) => (
               <MenuItem
                 key={link.href}
-                component="a"
+                component={Link}
                 href={link.href}
                 onClick={() => setAnchorEl(null)}
                 sx={linkSx}

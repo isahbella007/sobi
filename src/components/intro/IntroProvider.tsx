@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import gsap from "gsap";
+import { usePathname } from "next/navigation";
 import { SunMarkV2 } from "@/components/hero/SunMarkV2";
 import { SUN_DOCK_TOP, SUN_DOCK_SIZE, getSunDockLeft } from "@/components/hero/sunDock";
 
@@ -60,6 +61,13 @@ export function useIntro() {
 }
 
 export function IntroProvider({ children }: { children: ReactNode }) {
+  // Captured once, at mount — the sunrise is a homepage moment. Landing
+  // straight on an inner page (a shared /about link, a refresh) skips it,
+  // but this deliberately does NOT track pathname on every render: this
+  // provider lives for the whole session (see IntroSwitcher), and once
+  // settled it should stay settled through later client-side navigation
+  // back to "/", rather than re-arming.
+  const entryPathname = useRef(usePathname()).current;
   const overlayRootRef = useRef<HTMLDivElement>(null);
   const washRef = useRef<HTMLDivElement>(null);
   const horizonRef = useRef<HTMLDivElement>(null);
@@ -74,10 +82,11 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (reduceMotion) {
+    if (reduceMotion || entryPathname !== "/") {
       // The CSS in globals.css already hides the overlay for reduced-motion
       // users; this just settles the matching React state so Nav's and the
-      // Bento hero's own effects fire right away too.
+      // Bento hero's own effects fire right away too. Same settle for any
+      // entry point other than the homepage.
       setIntroAwake(true);
       setSunDocked(true);
       setShowOverlay(false);

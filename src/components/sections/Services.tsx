@@ -53,11 +53,8 @@ export function Services() {
       as="section"
       id="services"
       sx={{
-        mx: { xs: 3, md: 6 },
-        my: { xs: 6, md: 8 },
         px: { xs: 3, md: 6 },
-        py: { xs: 6, md: 10 },
-        borderRadius: "16px",
+        py: { xs: 8, md: 12 },
         bgcolor: "var(--contrast)",
       }}
     >
@@ -171,13 +168,13 @@ export function Services() {
         </Box>
       </Box>
 
-      <Reveal
+      {/* <Reveal
         stagger
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", sm: "repeat(3, 1fr)" },
+          gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" },
           gap: 3,
-          maxWidth: 880,
+          maxWidth: 600,
           mx: "auto",
           mt: { xs: 6, md: 8 },
         }}
@@ -185,7 +182,7 @@ export function Services() {
         {lockedTeasers.map((teaser) => (
           <LockedTile key={teaser.label} label={teaser.label} sub={teaser.sub} />
         ))}
-      </Reveal>
+      </Reveal> */}
     </Reveal>
   );
 }

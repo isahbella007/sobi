@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import gsap from "gsap";
+import { usePathname } from "next/navigation";
 import { SunMarkV2 } from "@/components/hero/SunMarkV2";
 import { SUN_DOCK_TOP, SUN_DOCK_SIZE, getSunDockLeft } from "@/components/hero/sunDock";
 import { IntroContext } from "@/components/intro/IntroProvider";
@@ -22,6 +23,10 @@ const EASE = "power3.inOut";
 const SUN_START_SIZE = 240;
 
 export function IntroProviderV2({ children }: { children: ReactNode }) {
+  // See the matching comment in IntroProvider (v1) — captured once at
+  // mount so the sunrise only plays when the session actually entered on
+  // the homepage, and never re-arms on later client-side navigation.
+  const entryPathname = useRef(usePathname()).current;
   const overlayRootRef = useRef<HTMLDivElement>(null);
   const washRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
@@ -35,7 +40,7 @@ export function IntroProviderV2({ children }: { children: ReactNode }) {
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (reduceMotion) {
+    if (reduceMotion || entryPathname !== "/") {
       setIntroAwake(true);
       setSunDocked(true);
       setShowOverlay(false);
