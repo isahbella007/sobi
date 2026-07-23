@@ -4,14 +4,14 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Collapse from "@mui/material/Collapse";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
+import MyLocationOutlinedIcon from "@mui/icons-material/MyLocationOutlined";
 import { Reveal } from "@/components/common/Reveal";
 import { streetAddress, postalCity, openingHours, mapEmbedSrc, mapQuery } from "@/content/site";
-import { scanDistance, type ScanResult } from "@/lib/adventureMode";
+import { locateAndScan, type ScanResult } from "@/lib/adventureMode";
 
 const navigationUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
 
@@ -23,8 +23,8 @@ function resultMessage(result: ScanResult): string {
       return `Boom! You're only a ${result.minutes}-minute trip away.`;
     case "far":
       return `Whoa, that's a ${result.hours}-hour journey — worth the trip!`;
-    case "not-found":
-      return "Couldn't quite place that one — try a postal code like 1150, or a district name.";
+    case "denied":
+      return "No worries — we didn't get your location. Feel free to just imagine how close you are.";
     case "error":
       return "The radar lost signal for a moment — mind trying again?";
   }
@@ -67,26 +67,24 @@ function RadarPulse() {
 
 export function FindUs() {
   const [adventureMode, setAdventureMode] = useState(false);
-  const [query, setQuery] = useState("");
   const [phase, setPhase] = useState<"idle" | "scanning" | "result">("idle");
   const [result, setResult] = useState<ScanResult | null>(null);
 
   function handleToggle(next: boolean) {
     setAdventureMode(next);
-    setQuery("");
     setPhase("idle");
     setResult(null);
   }
 
-  async function handleScan() {
-    if (!query.trim() || phase === "scanning") return;
+  async function handleLocate() {
+    if (phase === "scanning") return;
 
     setPhase("scanning");
     setResult(null);
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const [scanResult] = await Promise.all([
-      scanDistance(query),
+      locateAndScan(),
       reduceMotion ? Promise.resolve() : new Promise((resolve) => setTimeout(resolve, 1000)),
     ]);
 
@@ -186,42 +184,34 @@ export function FindUs() {
 
             <Collapse in={adventureMode}>
               <Box sx={{ pt: 2 }}>
-                <Box sx={{ display: "flex", gap: 1, alignItems: "flex-start" }}>
-                  <TextField
-                    size="small"
-                    placeholder="Your neighborhood or postal code"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleScan()}
-                    fullWidth
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        fontFamily: "var(--font-sans)",
-                        fontSize: "0.9rem",
-                        bgcolor: "var(--contrast)",
-                        "& fieldset": { borderColor: "var(--highlight)" },
-                        "&:hover fieldset": { borderColor: "var(--accent)" },
-                        "&.Mui-focused fieldset": { borderColor: "var(--accent)" },
-                      },
-                    }}
-                  />
-                  <Button
-                    onClick={handleScan}
-                    disabled={!query.trim() || phase === "scanning"}
-                    variant="contained"
-                    sx={{
-                      whiteSpace: "nowrap",
-                      bgcolor: "var(--accent)",
-                      color: "var(--contrast)",
-                      "&:hover": { bgcolor: "var(--accent)", opacity: 0.9 },
-                      "&.Mui-disabled": { bgcolor: "var(--accent)", opacity: 0.4, color: "var(--contrast)" },
-                    }}
-                  >
-                    Scan Distance
-                  </Button>
-                </Box>
+                <Typography
+                  sx={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.8rem",
+                    color: "var(--text)",
+                    opacity: 0.65,
+                    mb: 2,
+                  }}
+                >
+                  We&rsquo;ll ask your browser for your location and do the math right there — nothing gets sent anywhere.
+                </Typography>
 
-                <Box sx={{ minHeight: 96, display: "flex", alignItems: "center", justifyContent: phase === "scanning" ? "flex-start" : "flex-start", mt: phase === "idle" ? 0 : 2 }}>
+                <Button
+                  onClick={handleLocate}
+                  disabled={phase === "scanning"}
+                  variant="contained"
+                  startIcon={<MyLocationOutlinedIcon />}
+                  sx={{
+                    bgcolor: "var(--accent)",
+                    color: "var(--contrast)",
+                    "&:hover": { bgcolor: "var(--accent)", opacity: 0.9 },
+                    "&.Mui-disabled": { bgcolor: "var(--accent)", opacity: 0.4, color: "var(--contrast)" },
+                  }}
+                >
+                  Locate me
+                </Button>
+
+                <Box sx={{ minHeight: 96, display: "flex", alignItems: "center", mt: phase === "idle" ? 0 : 2 }}>
                   {phase === "scanning" && (
                     <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                       <RadarPulse />
@@ -230,7 +220,7 @@ export function FindUs() {
                         aria-live="polite"
                         sx={{ fontFamily: "var(--font-sans)", fontSize: "0.85rem", color: "var(--text)", opacity: 0.7 }}
                       >
-                        Scanning your area…
+                        Finding you…
                       </Typography>
                     </Box>
                   )}

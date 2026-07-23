@@ -58,6 +58,9 @@ export function Nav() {
       }}
     >
       <Box
+        component={Link}
+        href="/"
+        aria-label="Sobi Professionelle — home"
         sx={{
           display: "flex",
           alignItems: "center",
