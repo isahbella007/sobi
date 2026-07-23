@@ -1,22 +1,53 @@
-import type { ComponentType } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import SpaIcon from "@mui/icons-material/Spa";
-import FaceIcon from "@mui/icons-material/Face";
-import BackHandIcon from "@mui/icons-material/BackHand";
-import ContentCutIcon from "@mui/icons-material/ContentCut";
 import { Reveal } from "@/components/common/Reveal";
 import { LockedTile } from "@/components/common/LockedTile";
 import { services, lockedTeasers } from "@/content/site";
 
-const ICONS: Record<string, ComponentType<{ sx?: object }>> = {
-  Skincare: FaceIcon,
-  "Foot care": SpaIcon,
-  "Hand care": BackHandIcon,
-  Waxing: ContentCutIcon,
+const ROTATE_INTERVAL_MS = 3000;
+const PANEL_HEIGHT = { xs: 280, md: 440 };
+
+const PLACEHOLDER_IMAGES: Record<string, string> = {
+  Skincare: "/services/skincare.jpg",
+  "Foot care": "/services/foot.jpg",
+  "Hand care": "/services/manicure.jpg",
+  Waxing: "/services/waxing.jpg",
 };
 
 export function Services() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const rowRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const listRef = useRef<HTMLDivElement | null>(null);
+
+  // Auto-advance the active service on a timer. The list stays in place —
+  // only the highlight moves, and the list container auto-scrolls to keep
+  // the highlighted row in view if it runs past the visible height.
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return; // stays on the first service, no auto-rotation
+
+    const id = window.setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % services.length);
+    }, ROTATE_INTERVAL_MS);
+
+    return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const list = listRef.current;
+    const row = rowRefs.current[activeIndex];
+    if (!list || !row) return;
+
+    const target = row.offsetTop - list.clientHeight / 2 + row.clientHeight / 2;
+    list.scrollTo({
+      top: Math.max(0, Math.min(target, list.scrollHeight - list.clientHeight)),
+      behavior: "smooth",
+    });
+  }, [activeIndex]);
+
   return (
     <Reveal
       as="section"
@@ -46,44 +77,98 @@ export function Services() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" },
-          gap: 4,
-          maxWidth: 880,
+          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+          gap: { xs: 4, md: 6 },
+          maxWidth: 1100,
           mx: "auto",
         }}
       >
-        {services.map((service) => {
-          const Icon = ICONS[service.name];
-          return (
-            <Box key={service.name} sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
-              <Box
+        {/* Image panel — same fixed height as the text list, crossfading
+            between services in sync with the auto-advancing highlight. */}
+        <Box
+          sx={{
+            position: { xs: "relative", md: "sticky" },
+            top: { md: 120 },
+            height: PANEL_HEIGHT,
+            borderRadius: "16px",
+            overflow: "hidden",
+            border: "1px solid var(--highlight)",
+          }}
+        >
+          {services.map((service, i) => (
+            <Box
+              key={service.name}
+              component="img"
+              src={PLACEHOLDER_IMAGES[service.name]}
+              alt={service.name}
+              sx={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                opacity: activeIndex === i ? 1 : 0,
+                transition: "opacity 0.6s ease",
+              }}
+            />
+          ))}
+        </Box>
+
+        {/* Text column — on desktop it's capped to the image's height and
+            auto-scrolls to keep the highlighted row in view; on mobile
+            there's no room for that trick, so it just renders in full and
+            the highlight cycles through the visible list. */}
+        <Box
+          ref={listRef}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            height: { md: PANEL_HEIGHT.md },
+            overflowY: { md: "auto" },
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
+        >
+          {services.map((service, i) => (
+            <Box
+              key={service.name}
+              ref={(el: HTMLDivElement | null) => {
+                rowRefs.current[i] = el;
+              }}
+              sx={{
+                py: { xs: 4, md: 5 },
+                borderBottom: i < services.length - 1 ? "1px solid var(--highlight)" : "none",
+                opacity: activeIndex === i ? 1 : 0.45,
+                transition: "opacity 0.4s ease",
+              }}
+            >
+              <Typography
                 sx={{
-                  width: 44,
-                  height: 44,
-                  flexShrink: 0,
-                  borderRadius: "50%",
-                  bgcolor: "var(--panel)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  fontFamily: "var(--font-serif)",
+                  fontSize: { xs: "1.4rem", md: "1.75rem" },
+                  color: activeIndex === i ? "var(--accent)" : "var(--text)",
+                  transition: "color 0.4s ease",
                 }}
               >
-                <Icon sx={{ color: "var(--accent)", fontSize: 22 }} />
-              </Box>
-              <Box>
-                <Typography sx={{ fontFamily: "var(--font-serif)", fontSize: "1.1rem", color: "var(--text)" }}>
-                  {service.name}
-                  {service.germanName ? ` (${service.germanName})` : ""}
-                </Typography>
-                <Typography
-                  sx={{ fontFamily: "var(--font-sans)", fontSize: "0.9rem", color: "var(--text)", opacity: 0.8, mt: 0.5 }}
-                >
-                  {service.description}
-                </Typography>
-              </Box>
+                {service.name}
+                {service.germanName ? ` · ${service.germanName}` : ""}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.95rem",
+                  color: "var(--text)",
+                  opacity: 0.8,
+                  lineHeight: 1.6,
+                  mt: 1,
+                  maxWidth: 420,
+                }}
+              >
+                {service.description}
+              </Typography>
             </Box>
-          );
-        })}
+          ))}
+        </Box>
       </Box>
 
       <Reveal

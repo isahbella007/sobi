@@ -49,7 +49,7 @@ export function Hero() {
     if (reduceMotion) {
       gsap.set(textAndStats, { opacity: 1, y: 0 });
       gsap.set(imageRef.current, { opacity: 0.22 });
-      gsap.set(mobileImageRef.current, { opacity: 0.2 });
+      gsap.set(mobileImageRef.current, { opacity: 0.1 });
       return;
     }
 
@@ -66,7 +66,7 @@ export function Hero() {
     gsap.fromTo(
       mobileImageRef.current,
       { opacity: 0 },
-      { opacity: 0.2, duration: 0.5, ease: "power3.inOut", stagger: 0.08 }
+      { opacity: 0.1, duration: 0.5, ease: "power3.inOut", stagger: 0.08 }
     );
 
   }, [introAwake]);
@@ -83,6 +83,7 @@ export function Hero() {
         gap: { xs: 6, md: 4 },
         px: { xs: 3, md: 6 },
         py: { xs: 6, md: 10 },
+        ml: { md:4}
       }}
     >
       {/* LEFT — headline, lead copy, CTA, opening-hours note */}
@@ -243,7 +244,7 @@ export function Hero() {
           inset: 0,
           backgroundImage: "url(/flat.png)",
           backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px",
+          backgroundSize: "340px 340px",
           pointerEvents: "none",
           zIndex: 0,
         }}

@@ -52,6 +52,7 @@ export function Nav() {
         gridTemplateColumns: { xs: "auto 1fr auto", md: "1fr auto 1fr" },
         alignItems: "center",
         px: { xs: `${NAV_GUTTER_XS}px`, md: `${NAV_GUTTER_MD}px` },
+        ml: { md: 4 },
         bgcolor: "transparent",
       }}
     >
