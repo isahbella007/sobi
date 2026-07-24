@@ -24,7 +24,6 @@ export default function IntroPreviewLayout({ children }: { children: React.React
   return (
     <html
       lang="en"
-      data-theme="soft-luxury"
       className={`${cormorant.variable} ${manrope.variable}`}
     >
       <body>

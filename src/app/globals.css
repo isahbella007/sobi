@@ -1,53 +1,14 @@
 /* ------------------------------------------------------------------ */
-/* Palette tokens — swapped wholesale via [data-theme] on <html>.      */
-/* Soft Luxury Clinic is the recommended default; the other two are    */
-/* "see it in another mood" alternates surfaced by the palette toggle. */
+/* Palette tokens — Soft Luxury Clinic, the client-approved palette.   */
 /* ------------------------------------------------------------------ */
 
-:root,
-[data-theme="soft-luxury"] {
+:root {
   --bg: #f4eee3; /* Warm Ivory */
   --accent: #a55a2a; /* SOBI Terracotta — real brand color, from the client's logo */
   --text: #3a2416; /* Espresso Brown — real brand color, from the client's logo */
   --panel: #eae1d2; /* Soft Sand */
   --highlight: #c88a4a; /* PROFESSIONELLE Tan — real brand color, from the client's logo */
   --contrast: #fffcf6; /* Cream White */
-}
-
-
-[data-theme="earthy-opulence"] {
-  /* Updated to a cooler, softer ivory for better depth */
-  --bg: #71806D;
-
-  /* The SOBI Sun Logo Color - KEEP THIS */
-  --accent: #a55a2a;
-
-  --text: #1E291B;
-
-  --panel: #E3DDD3;
-  --highlight: #a55a2a;
-  --contrast: #F0EDE6;
-}
-
-/* --- SUN-KISSED BUTTER --- */
-[data-theme="butter-spa"] {
-  /* The Canvas: A soft, creamy butter yellow that replaces boring beige */
-  --bg: #F7EFCB;        
-
-  /* The SOBI Sun Logo Color: Stays grounded as the brand hero */
-  --accent: #a55a2a;    /* Terracotta Sun */
-
-  /* The Anchor: A deep, velvety charcoal-brown to make the serif fonts crisp */
-  --text: #2C221A;      /* Dark Cacao */
-
-  /* The Transition: A slightly deeper, warm biscuit tone for secondary sections */
-  --panel: #EADCB9;     /* Warm Biscuit */
-
-  /* The Wild Card Pop: A rich, warm honey/marigold for your primary buttons */
-  --highlight: #D99646; /* Honey Amber */
-
-  /* The Soft Light: A bright, milky vanilla for text cards or contrast elements */
-  --contrast: #FFFDF6;  /* Vanilla Cream */
 }
 
 html {

@@ -2,7 +2,6 @@ import { getTranslations } from "next-intl/server";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SunMark } from "@/components/hero/SunMark";
-import { PaletteToggle } from "@/components/PaletteToggle";
 import { services, socialLinks, postalCity } from "@/content/site";
 
 export async function Footer() {
@@ -52,7 +51,6 @@ export async function Footer() {
           </Box>
         ))}
       </Box>
-      <PaletteToggle />
     </Box>
   );
 }

@@ -17,7 +17,6 @@ import {
   NAV_GUTTER_XS,
   NAV_GUTTER_MD,
 } from "@/components/hero/sunDock";
-import { PaletteToggle } from "@/components/PaletteToggle";
 import { navLinks } from "@/content/site";
 
 const linkSx = {
@@ -140,10 +139,6 @@ export function Nav() {
           ))}
         </Box>
 
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
-          <PaletteToggle />
-        </Box>
-
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton
             aria-label={t("openMenuAria")}
@@ -164,12 +159,6 @@ export function Nav() {
                 {t(`links.${link.id}`)}
               </MenuItem>
             ))}
-            <MenuItem
-              disableRipple
-              sx={{ justifyContent: "center", "&:hover": { bgcolor: "transparent" } }}
-            >
-              <PaletteToggle />
-            </MenuItem>
           </Menu>
         </Box>
       </Box>

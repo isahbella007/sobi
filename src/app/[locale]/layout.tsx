@@ -40,7 +40,6 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      data-theme="soft-luxury"
       className={`${cormorant.variable} ${manrope.variable}`}
     >
       <body>
