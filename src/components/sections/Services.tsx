@@ -1,26 +1,33 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Reveal } from "@/components/common/Reveal";
-import { LockedTile } from "@/components/common/LockedTile";
-import { services, lockedTeasers } from "@/content/site";
+import { services } from "@/content/site";
 
 const ROTATE_INTERVAL_MS = 3000;
 const PANEL_HEIGHT = { xs: 280, md: 440 };
 
 const PLACEHOLDER_IMAGES: Record<string, string> = {
-  Skincare: "/services/skincare.jpg",
-  "Foot care": "/services/foot.jpg",
-  "Hand care": "/services/manicure.jpg",
-  Waxing: "/services/waxing.jpg",
+  skincare: "/services/skincare.jpg",
+  footCare: "/services/foot.jpg",
+  handCare: "/services/manicure.jpg",
+  waxing: "/services/waxing.jpg",
 };
 
 export function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
   const rowRefs = useRef<Array<HTMLDivElement | null>>([]);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const t = useTranslations("services");
+
+  const list = services.map((s) => ({
+    ...s,
+    name: t(`items.${s.id}.name`),
+    description: t(`items.${s.id}.description`),
+  }));
 
   // Auto-advance the active service on a timer. The list stays in place —
   // only the highlight moves, and the list container auto-scrolls to keep
@@ -30,11 +37,11 @@ export function Services() {
     if (reduceMotion) return; // stays on the first service, no auto-rotation
 
     const id = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % services.length);
+      setActiveIndex((prev) => (prev + 1) % list.length);
     }, ROTATE_INTERVAL_MS);
 
     return () => window.clearInterval(id);
-  }, []);
+  }, [list.length]);
 
   useEffect(() => {
     const list = listRef.current;
@@ -68,7 +75,7 @@ export function Services() {
           mb: { xs: 4, md: 6 },
         }}
       >
-        What we do
+        {t("heading")}
       </Typography>
 
       <Box
@@ -92,11 +99,11 @@ export function Services() {
             border: "1px solid var(--highlight)",
           }}
         >
-          {services.map((service, i) => (
+          {list.map((service, i) => (
             <Box
-              key={service.name}
+              key={service.id}
               component="img"
-              src={PLACEHOLDER_IMAGES[service.name]}
+              src={PLACEHOLDER_IMAGES[service.id]}
               alt={service.name}
               sx={{
                 position: "absolute",
@@ -126,15 +133,15 @@ export function Services() {
             "&::-webkit-scrollbar": { display: "none" },
           }}
         >
-          {services.map((service, i) => (
+          {list.map((service, i) => (
             <Box
-              key={service.name}
+              key={service.id}
               ref={(el: HTMLDivElement | null) => {
                 rowRefs.current[i] = el;
               }}
               sx={{
                 py: { xs: 4, md: 5 },
-                borderBottom: i < services.length - 1 ? "1px solid var(--highlight)" : "none",
+                borderBottom: i < list.length - 1 ? "1px solid var(--highlight)" : "none",
                 opacity: activeIndex === i ? 1 : 0.45,
                 transition: "opacity 0.4s ease",
               }}
@@ -148,7 +155,6 @@ export function Services() {
                 }}
               >
                 {service.name}
-                {service.germanName ? ` · ${service.germanName}` : ""}
               </Typography>
               <Typography
                 sx={{

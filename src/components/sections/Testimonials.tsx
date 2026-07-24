@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import StarIcon from "@mui/icons-material/Star";
@@ -12,6 +13,8 @@ export function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(true);
   const active = testimonials[activeIndex];
+  const t = useTranslations("testimonials");
+  const tCommon = useTranslations("common");
 
   function selectTestimonial(i: number) {
     if (i === activeIndex) return;
@@ -42,7 +45,7 @@ export function Testimonials() {
           mb: { xs: 5, md: 6 },
         }}
       >
-        Customers are our priority
+        {t("heading")}
       </Typography>
 
       {/* Avatar picker — click one to bring their quote up below. */}
@@ -59,11 +62,11 @@ export function Testimonials() {
       >
         {testimonials.map((testimonial, i) => (
           <Box
-            key={testimonial.name}
+            key={testimonial.id}
             component="button"
             type="button"
             onClick={() => selectTestimonial(i)}
-            aria-label={`Show ${testimonial.name}'s testimonial`}
+            aria-label={tCommon("showTestimonialAria", { name: testimonial.name })}
             aria-pressed={i === activeIndex}
             sx={{
               border: "none",
@@ -131,13 +134,13 @@ export function Testimonials() {
               lineHeight: 1.7,
             }}
           >
-            &ldquo;{active.quote}&rdquo;
+            &ldquo;{t(`items.${active.id}.quote`)}&rdquo;
           </Typography>
 
           <Box sx={{ width: 40, height: "1px", bgcolor: "var(--highlight)", mx: "auto", my: 3, opacity: 0.6 }} />
 
           <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.95rem", color: "var(--accent)" }}>
-            {active.name} · {active.service}
+            {active.name} · {t(`items.${active.id}.service`)}
           </Typography>
         </Box>
       </Box>

@@ -2,20 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useTranslations } from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useIntro } from "@/components/intro/IntroProvider";
 import { RotatingWord } from "@/components/common/RotatingWord";
-import {
-  heroHeadline,
-  heroTypewriterWords,
-  heroTagline,
-  heroMessage,
-  heroFootNote,
-  heroRating,
-  stats,
-} from "@/content/site";
+import { openingHours, heroFootNoteHref, services } from "@/content/site";
 
 const eyebrowSx = {
   fontFamily: "var(--font-sans)",
@@ -36,10 +29,23 @@ const mutedSx = {
 
 export function Hero() {
   const { introAwake } = useIntro();
+  const t = useTranslations("hero");
+  const tStats = useTranslations("stats");
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const mobileImageRef = useRef<HTMLDivElement>(null);
   const sideRef = useRef<HTMLDivElement>(null);
+
+  const stats = [
+    { key: "clients", value: tStats("clients.value"), shortLabel: tStats("clients.shortLabel"), label: tStats("clients.label") },
+    { key: "years", value: tStats("years.value"), shortLabel: tStats("years.shortLabel"), label: tStats("years.label") },
+    {
+      key: "services",
+      value: `${services.length}`,
+      shortLabel: tStats("services.shortLabel", { count: services.length }),
+      label: tStats("services.label"),
+    },
+  ];
 
   useEffect(() => {
     if (!introAwake) return;
@@ -98,7 +104,7 @@ export function Hero() {
           textAlign: "left",
         }}
       >
-        <Typography sx={{...eyebrowSx}}>SOBI PROFESSIONELLE</Typography>
+        <Typography sx={{...eyebrowSx}}>{t("eyebrow")}</Typography>
         <Box
           sx={{
             width: 48,
@@ -117,9 +123,9 @@ export function Hero() {
             lineHeight: 1.05,
           }}
         >
-          {heroHeadline}
+          {t("headline")}
           <br />
-          <RotatingWord words={heroTypewriterWords} />
+          <RotatingWord words={t.raw("typewriterWords")} />
         </Typography>
         <Typography
           sx={{
@@ -133,7 +139,7 @@ export function Hero() {
             mb: 2,
           }}
         >
-          {heroMessage}
+          {t("message")}
         </Typography>
 
         {/* Mobile-only compact stats — sits before the CTA, left-aligned
@@ -150,7 +156,7 @@ export function Hero() {
           }}
         >
           {stats.map((stat, i) => (
-            <Box key={stat.label} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Box key={stat.key} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <Typography
                 sx={{
                   fontFamily: "var(--font-sans)",
@@ -184,17 +190,17 @@ export function Hero() {
             "&:hover .hero-cta-arrow": { transform: "translateX(4px)" },
           }}
         >
-          Book an appointment
+          {t("cta")}
           <Box component="span" className="hero-cta-arrow" sx={{ color:"#FFFFFF", display: "inline-block", ml: 1 }}>
             →
           </Box>
         </Button>
 
         <Box sx={{ mt: 5, display: { xs: "none", md: "block" } }}>
-          <Typography sx={mutedSx}>{heroFootNote.text}</Typography>
+          <Typography sx={mutedSx}>{t("footNoteText", { hours: openingHours })}</Typography>
           <Typography
             component="a"
-            href={heroFootNote.href}
+            href={heroFootNoteHref}
             sx={{
               ...mutedSx,
               opacity: 1,
@@ -203,7 +209,7 @@ export function Hero() {
               textUnderlineOffset: "3px",
             }}
           >
-            {heroFootNote.linkLabel} →
+            {t("footNoteLink")} →
           </Typography>
         </Box>
       </Box>
@@ -225,8 +231,6 @@ export function Hero() {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "contain",
-          // maskImage: "radial-gradient(closest-side, black 62%, transparent 100%)",
-          // WebkitMaskImage: "radial-gradient(closest-side, black 62%, transparent 100%)",
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -271,7 +275,7 @@ export function Hero() {
           }}
         >
           {stats.map((stat) => (
-            <Box key={stat.label} sx={{ display: "flex", alignItems: "center", gap: 1.5, justifyContent: "flex-end" }}>
+            <Box key={stat.key} sx={{ display: "flex", alignItems: "center", gap: 1.5, justifyContent: "flex-end" }}>
               <Box sx={{ width: 22, height: "1px", bgcolor: "var(--highlight)", flexShrink: 0 }} />
               <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", whiteSpace: "nowrap" }}>
                 <Box component="span" sx={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--text)", mr: 0.5 }}>
@@ -282,18 +286,6 @@ export function Hero() {
             </Box>
           ))}
         </Box>
-
-        {/* <Box sx={{ mt: { xs: 1, md: 3 } }}>
-          <Typography sx={{ fontFamily: "var(--font-serif)", fontSize: "2.25rem", color: "var(--text)", lineHeight: 1 }}>
-            {heroRating.score}
-            <Box component="span" sx={{ fontSize: "1.1rem", color: "var(--text)", opacity: 0.6 }}>
-              /{heroRating.outOf}
-            </Box>
-          </Typography>
-          <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", letterSpacing: "0.05em", textTransform: "uppercase", color: "var(--text)", opacity: 0.55, mt: 0.5 }}>
-            From {heroRating.reviewCount} guest reviews
-          </Typography>
-        </Box> */}
       </Box>
     </Box>
   );

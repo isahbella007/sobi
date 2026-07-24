@@ -1,10 +1,12 @@
+import { getTranslations } from "next-intl/server";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Reveal } from "@/components/common/Reveal";
 import { bookingLink, phoneNumber } from "@/content/site";
 
-export function Book() {
+export async function Book() {
+  const t = await getTranslations("book");
   return (
     <Reveal
       as="section"
@@ -23,10 +25,10 @@ export function Book() {
         component="h2"
         sx={{ fontFamily: "var(--font-serif)", fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "var(--contrast)", mb: 1 }}
       >
-        Ready when you are
+        {t("heading")}
       </Typography>
       <Typography sx={{ fontFamily: "var(--font-sans)", color: "var(--contrast)", opacity: 0.9, mb: 4 }}>
-        Reach out and we&rsquo;ll find a time that suits you.
+        {t("subhead")}
       </Typography>
 
       <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2, justifyContent: "center" }}>
@@ -36,10 +38,10 @@ export function Book() {
           variant="contained"
           sx={{ bgcolor: "var(--contrast)", color: "var(--accent)", "&:hover": { bgcolor: "var(--contrast)", opacity: 0.9 } }}
         >
-          Book an appointment
+          {t("bookButton")}
         </Button>
         <Button component="a" href={`tel:${phoneNumber}`} variant="outlined" sx={{ borderColor: "var(--contrast)", color: "var(--contrast)" }}>
-          Call the studio
+          {t("callButton")}
         </Button>
       </Box>
     </Reveal>

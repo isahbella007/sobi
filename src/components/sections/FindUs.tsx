@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
@@ -14,21 +15,6 @@ import { streetAddress, postalCity, openingHours, mapEmbedSrc, mapQuery } from "
 import { locateAndScan, type ScanResult } from "@/lib/adventureMode";
 
 const navigationUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
-
-function resultMessage(result: ScanResult): string {
-  switch (result.kind) {
-    case "nearby":
-      return "Boom! You're practically on our doorstep.";
-    case "minutes":
-      return `Boom! You're only a ${result.minutes}-minute trip away.`;
-    case "far":
-      return `Whoa, that's a ${result.hours}-hour journey — worth the trip!`;
-    case "denied":
-      return "No worries — we didn't get your location. Feel free to just imagine how close you are.";
-    case "error":
-      return "The radar lost signal for a moment — mind trying again?";
-  }
-}
 
 function RadarPulse() {
   return (
@@ -69,6 +55,23 @@ export function FindUs() {
   const [adventureMode, setAdventureMode] = useState(false);
   const [phase, setPhase] = useState<"idle" | "scanning" | "result">("idle");
   const [result, setResult] = useState<ScanResult | null>(null);
+  const t = useTranslations("findUs");
+  const tResults = useTranslations("findUs.adventure.results");
+
+  function resultMessage(result: ScanResult): string {
+    switch (result.kind) {
+      case "nearby":
+        return tResults("nearby");
+      case "minutes":
+        return tResults("minutes", { minutes: result.minutes });
+      case "far":
+        return tResults("far", { hours: result.hours });
+      case "denied":
+        return tResults("denied");
+      case "error":
+        return tResults("error");
+    }
+  }
 
   function handleToggle(next: boolean) {
     setAdventureMode(next);
@@ -115,7 +118,7 @@ export function FindUs() {
           component="iframe"
           src={mapEmbedSrc}
           loading="lazy"
-          title="SOBI Professionelle — map"
+          title={t("mapTitle")}
           sx={{
             border: "1px solid var(--highlight)",
             borderRadius: "16px",
@@ -130,7 +133,7 @@ export function FindUs() {
             component="h2"
             sx={{ fontFamily: "var(--font-serif)", fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "var(--text)", mb: 2 }}
           >
-            Find us in the 12th
+            {t("heading")}
           </Typography>
           <Typography sx={{ fontFamily: "var(--font-sans)", color: "var(--text)", opacity: 0.85, mb: 1 }}>
             {streetAddress}, {postalCity}
@@ -139,7 +142,7 @@ export function FindUs() {
             {openingHours}
           </Typography>
           <Typography sx={{ fontFamily: "var(--font-sans)", color: "var(--accent)", fontStyle: "italic", mb: 3 }}>
-            Easy to reach, easy to relax.
+            {t("tagline")}
           </Typography>
 
           <Box
@@ -167,7 +170,7 @@ export function FindUs() {
                   color: "var(--text)",
                 }}
               >
-                Adventure Mode — how close are you, really?
+                {t("adventure.label")}
               </Typography>
               <Switch
                 checked={adventureMode}
@@ -193,7 +196,7 @@ export function FindUs() {
                     mb: 2,
                   }}
                 >
-                  We&rsquo;ll ask your browser for your location and do the math right there — nothing gets sent anywhere.
+                  {t("adventure.privacyNote")}
                 </Typography>
 
                 <Button
@@ -208,7 +211,7 @@ export function FindUs() {
                     "&.Mui-disabled": { bgcolor: "var(--accent)", opacity: 0.4, color: "var(--contrast)" },
                   }}
                 >
-                  Locate me
+                  {t("adventure.locateButton")}
                 </Button>
 
                 <Box sx={{ minHeight: 96, display: "flex", alignItems: "center", mt: phase === "idle" ? 0 : 2 }}>
@@ -220,7 +223,7 @@ export function FindUs() {
                         aria-live="polite"
                         sx={{ fontFamily: "var(--font-sans)", fontSize: "0.85rem", color: "var(--text)", opacity: 0.7 }}
                       >
-                        Finding you…
+                        {t("adventure.scanning")}
                       </Typography>
                     </Box>
                   )}
@@ -252,7 +255,7 @@ export function FindUs() {
                             "&:hover": { borderColor: "var(--accent)", bgcolor: "transparent", opacity: 0.85 },
                           }}
                         >
-                          Launch Navigation Quest
+                          {t("adventure.navigateButton")}
                         </Button>
                       )}
                     </Box>

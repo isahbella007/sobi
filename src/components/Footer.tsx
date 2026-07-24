@@ -1,11 +1,14 @@
+import { getTranslations } from "next-intl/server";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SunMark } from "@/components/hero/SunMark";
 import { PaletteToggle } from "@/components/PaletteToggle";
 import { services, socialLinks, postalCity } from "@/content/site";
 
-export function Footer() {
-  const serviceNames = services.map((service) => service.name).join(" · ");
+export async function Footer() {
+  const t = await getTranslations("footer");
+  const tServices = await getTranslations("services");
+  const serviceNames = services.map((service) => tServices(`items.${service.id}.name`)).join(" · ");
 
   return (
     <Box
@@ -24,7 +27,7 @@ export function Footer() {
         <SunMark />
       </Box>
       <Typography sx={{ fontFamily: "var(--font-serif)", fontSize: "1rem", color: "var(--text)" }}>
-        SOBI Professionelle · {postalCity}
+        {t("tagline", { city: postalCity })}
       </Typography>
       <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", opacity: 0.7 }}>
         {serviceNames}

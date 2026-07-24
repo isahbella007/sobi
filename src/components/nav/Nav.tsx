@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState, type MouseEvent } from "react";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -28,19 +30,21 @@ const linkSx = {
   "&:hover": { opacity: 1, color: "var(--accent)" },
 };
 
-// Display only — language switching isn't implemented yet.
 const languageSx = {
   fontFamily: "var(--font-sans)",
   fontSize: "0.75rem",
   letterSpacing: "0.1em",
   color: "var(--text)",
-  opacity: 0.6,
+  textDecoration: "none",
 };
 
 export function Nav() {
   const { sunDocked, dockedMark } = useIntro();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const locale = useLocale();
+  const pathname = usePathname();
+  const t = useTranslations("nav");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -76,7 +80,7 @@ export function Nav() {
       <Box
         component={Link}
         href="/"
-        aria-label="Sobi Professionelle — home"
+        aria-label={t("brandAria")}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -101,20 +105,40 @@ export function Nav() {
             color: "var(--text)",
           }}
         >
-          Sobi
+          {t("brand")}
         </Box>
       </Box>
 
       <Box sx={{ display: { xs: "none", md: "flex" }, justifySelf: "center", alignItems: "center", gap: 5 }}>
         {navLinks.map((link) => (
-          <Box key={link.href} component={Link} href={link.href} sx={linkSx}>
-            {link.label}
+          <Box key={link.id} component={Link} href={link.href} sx={linkSx}>
+            {t(`links.${link.id}`)}
           </Box>
         ))}
       </Box>
 
       <Box sx={{ justifySelf: "end", display: "flex", alignItems: "center", gap: { xs: 2, md: 3 } }}>
-        <Box sx={languageSx}>EN&nbsp;|&nbsp;DE</Box>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+          {routing.locales.map((l, i) => (
+            <Box key={l} sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+              {i > 0 && <Box sx={{ ...languageSx, opacity: 0.4 }}>|</Box>}
+              <Box
+                component={Link}
+                href={pathname}
+                locale={l}
+                aria-current={l === locale ? "true" : undefined}
+                sx={{
+                  ...languageSx,
+                  opacity: l === locale ? 1 : 0.6,
+                  fontWeight: l === locale ? 600 : 400,
+                  "&:hover": { opacity: 1, color: "var(--accent)" },
+                }}
+              >
+                {l.toUpperCase()}
+              </Box>
+            </Box>
+          ))}
+        </Box>
 
         <Box sx={{ display: { xs: "none", md: "block" } }}>
           <PaletteToggle />
@@ -122,7 +146,7 @@ export function Nav() {
 
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton
-            aria-label="Open menu"
+            aria-label={t("openMenuAria")}
             onClick={(event: MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
             sx={{ color: "var(--text)" }}
           >
@@ -131,13 +155,13 @@ export function Nav() {
           <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
             {navLinks.map((link) => (
               <MenuItem
-                key={link.href}
+                key={link.id}
                 component={Link}
                 href={link.href}
                 onClick={() => setAnchorEl(null)}
                 sx={linkSx}
               >
-                {link.label}
+                {t(`links.${link.id}`)}
               </MenuItem>
             ))}
             <MenuItem

@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "home": {
+      "title": "SOBI Professionelle",
+      "description": "Kosmetik und Fußpflege im 12. Wiener Gemeindebezirk — Gesichtsbehandlungen, Fußpflege, Handpflege und Waxing von einem familiengeführten Studio."
+    },
+    "about": {
+      "title": "Über uns — SOBI Professionelle",
+      "description": "Ein familiengeführtes Kosmetik- und Fußpflegestudio in der Wiener Donaustadt, geführt von einem Mutter-Tochter-Team seit 2014."
+    }
+  },
+  "nav": {
+    "brand": "Sobi",
+    "brandAria": "Sobi Professionelle — Startseite",
+    "openMenuAria": "Menü öffnen",
+    "links": {
+      "about": "Über uns",
+      "services": "Leistungen",
+      "findUs": "So finden Sie uns",
+      "book": "Termin"
+    }
+  },
+  "hero": {
+    "eyebrow": "SOBI PROFESSIONELLE",
+    "headline": "Professionelle Pflege für",
+    "typewriterWords": ["Kosmetik", "Füße", "Hände", "Waxing"],
+    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis eget urna mollis ornare vel eu leo. Cras ultricies ligula sed magna dictum porta.",
+    "cta": "Termin buchen",
+    "footNoteText": "Geöffnet {hours}, nach Vereinbarung.",
+    "footNoteLink": "So finden Sie uns"
+  },
+  "stats": {
+    "clients": { "value": "5.000+", "shortLabel": "5.000+ Kunden", "label": "Kunden betreut" },
+    "years": { "value": "15", "shortLabel": "15 Jahre", "label": "Jahre Erfahrung" },
+    "services": { "shortLabel": "{count} Leistungen", "label": "Kernleistungen" }
+  },
+  "services": {
+    "heading": "Unsere Leistungen",
+    "items": {
+      "skincare": {
+        "name": "Kosmetik",
+        "description": "Gesichtsbehandlungen und Hautpflege, abgestimmt auf die tatsächlichen Bedürfnisse Ihrer Haut."
+      },
+      "footCare": {
+        "name": "Podologische Fußpflege",
+        "description": "Gründliche, sorgfältige Fuß- und Nagelpflege."
+      },
+      "handCare": {
+        "name": "Handpflege",
+        "description": "Maniküre und Handpflege — auf die Details kommt es an."
+      },
+      "waxing": {
+        "name": "Waxing",
+        "description": "Saubere, angenehme Haarentfernung von Anfang bis Ende."
+      }
+    }
+  },
+  "pricing": {
+    "heading": "Preise",
+    "note": "Richtpreise — die endgültige Liste wird vom Studio bestätigt.",
+    "categories": {
+      "skincare": {
+        "items": {
+          "expressFacial": "Express-Gesichtsbehandlung",
+          "signatureFacial": "Signature-Gesichtsbehandlung",
+          "deepCleanse": "Tiefenreinigung & Extraktion"
+        }
+      },
+      "footCare": {
+        "items": {
+          "classicPedicure": "Klassische Pediküre",
+          "medicalFootCare": "Medizinische Fußpflege",
+          "callusNailTreatment": "Hornhaut- & Nagelbehandlung"
+        }
+      },
+      "handCare": {
+        "items": {
+          "classicManicure": "Klassische Maniküre",
+          "gelManicure": "Gel-Maniküre",
+          "paraffinHandTreatment": "Paraffin-Handbehandlung"
+        }
+      },
+      "waxing": {
+        "items": {
+          "eyebrowLip": "Augenbrauen / Lippe",
+          "halfLeg": "Halbes Bein",
+          "fullLeg": "Ganzes Bein"
+        }
+      }
+    }
+  },
+  "testimonials": {
+    "heading": "Unsere Kundschaft steht bei uns an erster Stelle",
+    "items": {
+      "annaK": {
+        "quote": "Ich hatte noch nie eine Gesichtsbehandlung, bei der wirklich auf die Bedürfnisse meiner Haut eingegangen wurde. Sobi ist Dinge aufgefallen, die anderswo übersehen wurden.",
+        "service": "Kundin – Kosmetik"
+      },
+      "markusR": {
+        "quote": "Gründlich, einfühlsam und jedes Mal pünktlich. Meine Füße wurden noch nie so gut gepflegt.",
+        "service": "Kunde – Fußpflege"
+      },
+      "priyaS": {
+        "quote": "Tyras Liebe zum Detail ist unglaublich — saubere Linien, keine Hektik, und meine Hände sehen auch einen Monat später noch besser aus.",
+        "service": "Kundin – Handpflege"
+      },
+      "elisabethW": {
+        "quote": "Seit fünfzehn Jahren gehe ich hierher und freue mich jedes Mal darauf. Das sagt eigentlich alles.",
+        "service": "Kundin – Kosmetik"
+      },
+      "juliaF": {
+        "quote": "Eigentlich nur für ein schnelles Waxing gebucht, geblieben für Tee und ein nettes Gespräch. Fühlt sich an wie Familie.",
+        "service": "Kundin – Waxing"
+      },
+      "nadiaB": {
+        "quote": "Meine Mutter hat mir Sobi empfohlen, jetzt empfehle ich sie jedem weiter.",
+        "service": "Kundin – Handpflege"
+      },
+      "thomasG": {
+        "quote": "Sorgfältig, geduldig und ehrlich gesagt der einzige Ort, dem ich meine Füße noch anvertraue.",
+        "service": "Kunde – Fußpflege"
+      },
+      "saraM": {
+        "quote": "Kleines Studio, riesiges Können. Man merkt, dass ihnen das Ergebnis wirklich wichtig ist.",
+        "service": "Kundin – Kosmetik"
+      }
+    }
+  },
+  "findUs": {
+    "heading": "So finden Sie uns im 12. Bezirk",
+    "tagline": "Gut erreichbar, entspannt ankommen.",
+    "mapTitle": "SOBI Professionelle — Karte",
+    "adventure": {
+      "label": "Abenteuer-Modus — wie nah sind Sie wirklich?",
+      "privacyNote": "Wir fragen Ihren Browser nach Ihrem Standort und rechnen direkt dort — es wird nichts irgendwohin gesendet.",
+      "locateButton": "Standort ermitteln",
+      "scanning": "Wir suchen Sie…",
+      "navigateButton": "Navigation starten",
+      "results": {
+        "nearby": "Boom! Sie stehen praktisch schon vor unserer Tür.",
+        "minutes": "Boom! Nur {minutes} Minuten entfernt.",
+        "far": "Wow, das sind {hours} Stunden Fahrt — der Weg lohnt sich!",
+        "denied": "Kein Problem — wir haben Ihren Standort nicht erhalten. Stellen Sie sich einfach vor, wie nah Sie sind.",
+        "error": "Kurz das Signal verloren — mögen Sie es noch einmal versuchen?"
+      }
+    }
+  },
+  "book": {
+    "heading": "Wann immer Sie bereit sind",
+    "subhead": "Melden Sie sich, wir finden gemeinsam einen passenden Termin.",
+    "bookButton": "Termin buchen",
+    "callButton": "Studio anrufen"
+  },
+  "about": {
+    "eyebrow": "Über uns",
+    "h1": "Unsere Geschichte",
+    "paragraphs": {
+      "founding": "Seit 2014 steht unser Familienunternehmen in der Wiener Donaustadt für Qualität, Fachwissen und persönliche Betreuung. Unsere Leidenschaft für Schönheitsbehandlungen und Fußpflege ist nicht nur unser Beruf – sie ist unsere Berufung.",
+      "personal": "Ich übe meinen Beruf seit über 30 Jahren mit großer Freude, Hingabe und Leidenschaft aus. In dieser Zeit durfte ich viele Kundinnen und Kunden betreuen und wertvolle Erfahrungen sammeln. Heute erfüllt es mich mit großem Stolz, dieses Wissen und diese Leidenschaft an die nächste Generation weiterzugeben.",
+      "team": "Heute führen wir unser Unternehmen gemeinsam als Mutter-Tochter-Team. Indem wir jahrzehntelange Erfahrung mit frischen Ideen und modernem Fachwissen verbinden, können wir bewährte Techniken mit innovativen Behandlungsmethoden kombinieren. So schaffen wir eine warme, einladende Atmosphäre, in der sich jede Kundin und jeder Kunde wohl, verstanden und gut aufgehoben fühlt.",
+      "training": "Um Behandlungen von höchster Qualität anzubieten, legen wir großen Wert auf kontinuierliche Weiterbildung. Durch die regelmäßige Teilnahme an Seminaren, Workshops, Auffrischungskursen und Fortbildungsprogrammen erweitern wir laufend unser Wissen und bleiben stets auf dem neuesten Stand der Entwicklungen in der Kosmetik und Fußpflege.",
+      "hygiene": "Die Gesundheit und das Wohlbefinden Ihrer Haut und Füße haben für uns oberste Priorität. Deshalb arbeiten wir nach höchsten Hygiene- und Qualitätsstandards, bieten individuelle Beratungen an und verbessern unser Qualitätsmanagement fortlaufend.",
+      "credential": "Als Mitglied der Wirtschaftskammer Österreich (WKO) erfüllen wir alle fachlichen und qualitativen Standards und verpflichten uns zu Professionalität, Sicherheit und Vertrauen."
+    },
+    "pillarsHeading": "So arbeiten wir",
+    "pillars": {
+      "training": "Kontinuierliche Weiterbildung",
+      "hygiene": "Hygiene & Qualität"
+    },
+    "caption": "Sobi & {daughterName}"
+  },
+  "footer": {
+    "tagline": "SOBI Professionelle · {city}"
+  },
+  "common": {
+    "sunMarkAria": "SOBI Sonnenmotiv",
+    "avatarPlaceholder": "Platzhalter-Avatar",
+    "showTestimonialAria": "Erfahrungsbericht von {name} anzeigen"
+  }
+}

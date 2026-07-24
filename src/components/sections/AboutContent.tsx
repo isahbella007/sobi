@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
@@ -8,7 +8,7 @@ import HealthAndSafetyOutlinedIcon from "@mui/icons-material/HealthAndSafetyOutl
 import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import { Reveal } from "@/components/common/Reveal";
 import { Avatar } from "@/components/common/Avatar";
-import { aboutParagraphs, daughterName, daughterPhoto } from "@/content/site";
+import { daughterName, daughterPhoto } from "@/content/site";
 
 const eyebrowSx = {
   fontFamily: "var(--font-sans)",
@@ -27,12 +27,15 @@ const bodySx = {
   lineHeight: 1.8,
 };
 
-// Six verbatim paragraphs from the owner, unpacked into named slots so
-// each one can be given its own visual treatment below rather than
-// stacking identically — see the per-block comments.
-const [founding, personal, team, training, hygiene, credential] = aboutParagraphs;
-
 export function AboutContent() {
+  const t = useTranslations("about");
+  const founding = t("paragraphs.founding");
+  const personal = t("paragraphs.personal");
+  const team = t("paragraphs.team");
+  const training = t("paragraphs.training");
+  const hygiene = t("paragraphs.hygiene");
+  const credential = t("paragraphs.credential");
+
   return (
     <>
       {/* Banner */}
@@ -55,8 +58,7 @@ export function AboutContent() {
             textAlign: { xs: "center", md: "left" },
           }}
         >
-
-          <Typography sx={eyebrowSx}>About us</Typography>
+          <Typography sx={eyebrowSx}>{t("eyebrow")}</Typography>
           <Box
             sx={{
               width: 48,
@@ -76,7 +78,7 @@ export function AboutContent() {
               lineHeight: 1.1,
             }}
           >
-            Our story
+            {t("h1")}
           </Typography>
         </Box>
 
@@ -138,9 +140,6 @@ export function AboutContent() {
               <Avatar name="Sobi" size="lg" />
               <Avatar name={daughterName} src={daughterPhoto} size="lg" />
             </Box>
-            <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", opacity: 0.65 }}>
-              Sobi &amp; {daughterName}
-            </Typography>
           </Box>
           <Typography sx={{ ...bodySx, textAlign: { xs: "center", md: "left" } }}>{team}</Typography>
         </Box>
@@ -158,7 +157,7 @@ export function AboutContent() {
             mb: { xs: 5, md: 6 },
           }}
         >
-          How we work
+          {t("pillarsHeading")}
         </Typography>
         <Box
           sx={{
@@ -172,14 +171,14 @@ export function AboutContent() {
           <Box>
             <SchoolOutlinedIcon sx={{ fontSize: 28, color: "var(--accent)", mb: 1.5 }} />
             <Typography sx={{ fontFamily: "var(--font-serif)", fontSize: "1.15rem", color: "var(--text)", mb: 1.5 }}>
-              Continuous training
+              {t("pillars.training")}
             </Typography>
             <Typography sx={bodySx}>{training}</Typography>
           </Box>
           <Box>
             <HealthAndSafetyOutlinedIcon sx={{ fontSize: 28, color: "var(--accent)", mb: 1.5 }} />
             <Typography sx={{ fontFamily: "var(--font-serif)", fontSize: "1.15rem", color: "var(--text)", mb: 1.5 }}>
-              Hygiene &amp; quality
+              {t("pillars.hygiene")}
             </Typography>
             <Typography sx={bodySx}>{hygiene}</Typography>
           </Box>

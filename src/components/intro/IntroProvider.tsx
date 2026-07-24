@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import gsap from "gsap";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { SunMarkV2 } from "@/components/hero/SunMarkV2";
 import { SUN_DOCK_TOP, SUN_DOCK_SIZE, getSunDockLeft } from "@/components/hero/sunDock";
 

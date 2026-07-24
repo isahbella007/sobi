@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "home": {
+      "title": "SOBI Professionelle",
+      "description": "Skincare and foot care in Vienna's 12th district — facials, foot care, hand care, and waxing from a family-run studio."
+    },
+    "about": {
+      "title": "About — SOBI Professionelle",
+      "description": "A family-run skincare and foot care studio in Vienna's Donaustadt district, run by a mother-and-daughter team since 2014."
+    }
+  },
+  "nav": {
+    "brand": "Sobi",
+    "brandAria": "Sobi Professionelle — home",
+    "openMenuAria": "Open menu",
+    "links": {
+      "about": "About",
+      "services": "Services",
+      "findUs": "Find us",
+      "book": "Book"
+    }
+  },
+  "hero": {
+    "eyebrow": "SOBI PROFESSIONELLE",
+    "headline": "Expert care for",
+    "typewriterWords": ["Skincare", "Foot", "Hand", "Waxing"],
+    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis eget urna mollis ornare vel eu leo. Cras ultricies ligula sed magna dictum porta.",
+    "cta": "Book an appointment",
+    "footNoteText": "Open {hours}, by appointment.",
+    "footNoteLink": "Find us"
+  },
+  "stats": {
+    "clients": { "value": "5,000+", "shortLabel": "5k+ Clients", "label": "Clients served" },
+    "years": { "value": "15", "shortLabel": "15 Years", "label": "Years of experience" },
+    "services": { "shortLabel": "{count} Services", "label": "Core services" }
+  },
+  "services": {
+    "heading": "What we do",
+    "items": {
+      "skincare": {
+        "name": "Skincare",
+        "description": "Facials and skin treatments tailored to how your skin actually behaves."
+      },
+      "footCare": {
+        "name": "Foot care",
+        "description": "Thorough, careful foot and nail care."
+      },
+      "handCare": {
+        "name": "Hand care",
+        "description": "Manicures and hand treatments — the details people notice."
+      },
+      "waxing": {
+        "name": "Waxing",
+        "description": "Clean, comfortable waxing, start to finish."
+      }
+    }
+  },
+  "pricing": {
+    "heading": "Pricing",
+    "note": "Indicative pricing — final list confirmed by the studio.",
+    "categories": {
+      "skincare": {
+        "items": {
+          "expressFacial": "Express Facial",
+          "signatureFacial": "Signature Facial",
+          "deepCleanse": "Deep Cleanse & Extraction"
+        }
+      },
+      "footCare": {
+        "items": {
+          "classicPedicure": "Classic Pedicure",
+          "medicalFootCare": "Medical Foot Care",
+          "callusNailTreatment": "Callus & Nail Treatment"
+        }
+      },
+      "handCare": {
+        "items": {
+          "classicManicure": "Classic Manicure",
+          "gelManicure": "Gel Manicure",
+          "paraffinHandTreatment": "Paraffin Hand Treatment"
+        }
+      },
+      "waxing": {
+        "items": {
+          "eyebrowLip": "Eyebrow / Lip",
+          "halfLeg": "Half Leg",
+          "fullLeg": "Full Leg"
+        }
+      }
+    }
+  },
+  "testimonials": {
+    "heading": "Customers are our priority",
+    "items": {
+      "annaK": {
+        "quote": "I've never had a facial that actually listened to what my skin needed. Sobi noticed things other places missed.",
+        "service": "Skincare client"
+      },
+      "markusR": {
+        "quote": "Thorough, gentle, and exactly on time every visit. My feet have never felt this looked after.",
+        "service": "Foot care client"
+      },
+      "priyaS": {
+        "quote": "Tyra's attention to detail is unreal — clean lines, no rush, and my hands look better a month later.",
+        "service": "Hand care client"
+      },
+      "elisabethW": {
+        "quote": "Fifteen years going and I still look forward to it. That says everything.",
+        "service": "Skincare client"
+      },
+      "juliaF": {
+        "quote": "Booked for a quick wax, stayed for the tea and conversation. Feels like family.",
+        "service": "Waxing client"
+      },
+      "nadiaB": {
+        "quote": "My mother recommended Sobi to me, now I recommend her to everyone I know.",
+        "service": "Hand care client"
+      },
+      "thomasG": {
+        "quote": "Careful, patient, and honestly the only place I trust with my feet anymore.",
+        "service": "Foot care client"
+      },
+      "saraM": {
+        "quote": "Small studio, huge skill. You can tell they actually care about the result.",
+        "service": "Skincare client"
+      }
+    }
+  },
+  "findUs": {
+    "heading": "Find us in the 12th",
+    "tagline": "Easy to reach, easy to relax.",
+    "mapTitle": "SOBI Professionelle — map",
+    "adventure": {
+      "label": "Adventure Mode — how close are you, really?",
+      "privacyNote": "We'll ask your browser for your location and do the math right there — nothing gets sent anywhere.",
+      "locateButton": "Locate me",
+      "scanning": "Finding you…",
+      "navigateButton": "Launch Navigation Quest",
+      "results": {
+        "nearby": "Boom! You're practically on our doorstep.",
+        "minutes": "Boom! You're only a {minutes}-minute trip away.",
+        "far": "Whoa, that's a {hours}-hour journey — worth the trip!",
+        "denied": "No worries — we didn't get your location. Feel free to just imagine how close you are.",
+        "error": "The radar lost signal for a moment — mind trying again?"
+      }
+    }
+  },
+  "book": {
+    "heading": "Ready when you are",
+    "subhead": "Reach out and we'll find a time that suits you.",
+    "bookButton": "Book an appointment",
+    "callButton": "Call the studio"
+  },
+  "about": {
+    "eyebrow": "About us",
+    "h1": "Our story",
+    "paragraphs": {
+      "founding": "Since 2014, our family-owned business in Vienna's Donaustadt district has stood for quality, expertise, and personal care. Our passion for beauty treatments and foot care is not just our profession—it is our vocation.",
+      "personal": "I have been practicing my profession with great joy, dedication, and passion for over 30 years. During this time, I have had the privilege of caring for many clients and gaining valuable experience. Today, it fills me with great pride to pass on this knowledge and passion to the next generation.",
+      "team": "Today, we run our business together as a mother-and-daughter team. By combining decades of experience with fresh ideas and modern expertise, we are able to blend proven techniques with innovative treatment methods. This allows us to create a warm, welcoming atmosphere where every client feels comfortable, understood, and well cared for.",
+      "training": "To provide the highest quality treatments, we place great importance on continuous professional development. By regularly attending seminars, workshops, refresher courses, and advanced training programs, we continuously expand our knowledge and stay up to date with the latest developments in beauty therapy and foot care.",
+      "hygiene": "The health and well-being of your skin and feet are our highest priorities. That is why we work according to the highest standards of hygiene and quality, offer personalized consultations, and continuously improve our quality management.",
+      "credential": "As a member of the Austrian Federal Economic Chamber (WKO), we comply with all professional and quality standards and are committed to professionalism, safety, and trust."
+    },
+    "pillarsHeading": "How we work",
+    "pillars": {
+      "training": "Continuous training",
+      "hygiene": "Hygiene & quality"
+    },
+    "caption": "Sobi & {daughterName}"
+  },
+  "footer": {
+    "tagline": "SOBI Professionelle · {city}"
+  },
+  "common": {
+    "sunMarkAria": "SOBI sun motif",
+    "avatarPlaceholder": "Placeholder avatar",
+    "showTestimonialAria": "Show {name}'s testimonial"
+  }
+}

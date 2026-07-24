@@ -1,9 +1,13 @@
+import { getTranslations } from "next-intl/server";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Reveal } from "@/components/common/Reveal";
-import { pricingCategories, pricingNote } from "@/content/site";
+import { pricingCategories } from "@/content/site";
 
-export function Pricing() {
+export async function Pricing() {
+  const t = await getTranslations("pricing");
+  const tServices = await getTranslations("services");
+
   return (
     <Reveal
       as="section"
@@ -23,7 +27,7 @@ export function Pricing() {
           textAlign: "center",
         }}
       >
-        Pricing
+        {t("heading")}
       </Typography>
       <Typography
         sx={{
@@ -37,7 +41,7 @@ export function Pricing() {
           mb: { xs: 4, md: 6 },
         }}
       >
-        {pricingNote}
+        {t("note")}
       </Typography>
 
       <Reveal
@@ -52,7 +56,7 @@ export function Pricing() {
       >
         {pricingCategories.map((category) => (
           <Box
-            key={category.name}
+            key={category.id}
             sx={{
               borderRadius: "16px",
               border: "1px solid var(--highlight)",
@@ -68,12 +72,12 @@ export function Pricing() {
                 mb: 2.5,
               }}
             >
-              {category.name}
+              {tServices(`items.${category.id}.name`)}
             </Typography>
 
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               {category.items.map((item) => (
-                <Box key={item.label} sx={{ display: "flex", alignItems: "baseline", gap: 1 }}>
+                <Box key={item.id} sx={{ display: "flex", alignItems: "baseline", gap: 1 }}>
                   <Typography
                     sx={{
                       fontFamily: "var(--font-sans)",
@@ -83,7 +87,7 @@ export function Pricing() {
                       whiteSpace: "nowrap",
                     }}
                   >
-                    {item.label}
+                    {t(`categories.${category.id}.items.${item.id}`)}
                   </Typography>
                   <Box
                     sx={{

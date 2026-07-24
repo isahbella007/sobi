@@ -5,9 +5,12 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+// Hardcoded to /de (rather than bare "/") so this stays deterministic
+// regardless of the developer's own browser Accept-Language — bare "/"
+// now redirects through the locale middleware.
 const PANELS = [
-  { key: "1" as const, label: "Intro 1 — current", src: "/?intro=1" },
-  { key: "2" as const, label: "Intro 2 — new", src: "/?intro=2" },
+  { key: "1" as const, label: "Intro 1 — current", src: "/de?intro=1" },
+  { key: "2" as const, label: "Intro 2 — new", src: "/de?intro=2" },
 ];
 
 export function IntroPreviewClient() {

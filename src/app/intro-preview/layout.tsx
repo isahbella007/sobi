@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeModeProvider } from "@/theme/ThemeModeProvider";
-import { IntroSwitcher } from "@/components/intro/IntroSwitcher";
-import "./globals.css";
+import "../globals.css";
 
+// Independent root layout for this internal tool page — no next-intl, no
+// IntroSwitcher. It compares the two real intro choreographies by loading
+// them in iframes (see IntroPreviewClient), so the outer preview shell
+// itself must never get an intro overlay layered on top of it.
 const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
@@ -18,28 +20,16 @@ const manrope = Manrope({
   weight: ["300", "400", "500", "600"],
 });
 
-export const metadata: Metadata = {
-  title: "SOBI Professionelle",
-  description:
-    "Skincare & podologische Fußpflege in 1120 Wien — Skincare, Podologische Fußpflege, Handpflege, Waxing.",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function IntroPreviewLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="de"
+      lang="en"
       data-theme="soft-luxury"
       className={`${cormorant.variable} ${manrope.variable}`}
     >
       <body>
         <AppRouterCacheProvider>
-          <ThemeModeProvider>
-            <IntroSwitcher>{children}</IntroSwitcher>
-          </ThemeModeProvider>
+          <ThemeModeProvider>{children}</ThemeModeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>
