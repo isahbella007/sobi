@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { SvgIconComponent } from "@mui/icons-material";
+import SpaOutlined from "@mui/icons-material/SpaOutlined";
+import FrontHandOutlined from "@mui/icons-material/FrontHandOutlined";
+import WaterDropOutlined from "@mui/icons-material/WaterDropOutlined";
 import { useTranslations } from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -15,6 +19,36 @@ const PLACEHOLDER_IMAGES: Record<string, string> = {
   footCare: "/services/foot.jpg",
   handCare: "/services/manicure.jpg",
   waxing: "/services/waxing.jpg",
+};
+
+// No MUI icon reads as "foot" (SquareFoot is a ruler), so footCare gets a
+// small hand-drawn footprint; the other three map onto existing icons.
+function FootprintIcon({ sx }: { sx?: object }) {
+  return (
+    <Box
+      component="svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      sx={{ width: 20, height: 20, display: "block", ...sx }}
+    >
+      <path
+        d="M9.6 21c-1.4 0-2.5-1.1-2.5-2.6 0-1.8.6-3 .6-4.9 0-2.2-1.1-3.3-1.1-5.8C6.6 4.9 7.9 3 9.7 3c2 0 3.2 1.9 3.2 5 0 2.7-.9 3.9-.9 6.6 0 1.7.5 2.7.5 4.1 0 1.2-1.1 2.3-2.9 2.3z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+      <circle cx="7.9" cy="4.4" r="0.9" fill="currentColor" />
+      <circle cx="10.2" cy="3.5" r="0.9" fill="currentColor" />
+      <circle cx="12.3" cy="4" r="0.8" fill="currentColor" />
+      <circle cx="14" cy="5.1" r="0.7" fill="currentColor" />
+    </Box>
+  );
+}
+
+const SERVICE_ICONS: Record<string, SvgIconComponent> = {
+  skincare: SpaOutlined,
+  handCare: FrontHandOutlined,
+  waxing: WaterDropOutlined,
 };
 
 export function Services() {
@@ -88,10 +122,13 @@ export function Services() {
         }}
       >
         {/* Image panel — same fixed height as the text list, crossfading
-            between services in sync with the auto-advancing highlight. */}
+            between services in sync with the auto-advancing highlight.
+            Hidden on mobile: there's no room to do the image justice, so
+            the text list gets a per-service icon instead (see below). */}
         <Box
           sx={{
-            position: { xs: "relative", md: "sticky" },
+            display: { xs: "none", md: "block" },
+            position: { md: "sticky" },
             top: { md: 120 },
             height: PANEL_HEIGHT,
             borderRadius: "16px",
@@ -133,7 +170,9 @@ export function Services() {
             "&::-webkit-scrollbar": { display: "none" },
           }}
         >
-          {list.map((service, i) => (
+          {list.map((service, i) => {
+            const ServiceIcon = SERVICE_ICONS[service.id];
+            return (
             <Box
               key={service.id}
               ref={(el: HTMLDivElement | null) => {
@@ -146,16 +185,46 @@ export function Services() {
                 transition: "opacity 0.4s ease",
               }}
             >
-              <Typography
+              <Box
                 sx={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: { xs: "1.4rem", md: "1.75rem" },
-                  color: activeIndex === i ? "var(--accent)" : "var(--text)",
-                  transition: "color 0.4s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.5,
                 }}
               >
-                {service.name}
-              </Typography>
+                {/* Mobile-only icon standing in for the (hidden) image panel. */}
+                <Box
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    border: "1px solid",
+                    borderColor: activeIndex === i ? "var(--accent)" : "var(--highlight)",
+                    color: activeIndex === i ? "var(--accent)" : "var(--text)",
+                    transition: "color 0.4s ease, border-color 0.4s ease",
+                  }}
+                >
+                  {service.id === "footCare" ? (
+                    <FootprintIcon />
+                  ) : ServiceIcon ? (
+                    <ServiceIcon sx={{ fontSize: 20 }} />
+                  ) : null}
+                </Box>
+                <Typography
+                  sx={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: { xs: "1.4rem", md: "1.75rem" },
+                    color: activeIndex === i ? "var(--accent)" : "var(--text)",
+                    transition: "color 0.4s ease",
+                  }}
+                >
+                  {service.name}
+                </Typography>
+              </Box>
               <Typography
                 sx={{
                   fontFamily: "var(--font-sans)",
@@ -170,7 +239,8 @@ export function Services() {
                 {service.description}
               </Typography>
             </Box>
-          ))}
+            );
+          })}
         </Box>
       </Box>
 
