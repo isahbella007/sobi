@@ -164,14 +164,19 @@ export function Services() {
             return (
             <Box
               key={service.id}
+              component={Link}
+              href={{ pathname: "/services", query: { category: service.id } }}
               ref={(el: HTMLDivElement | null) => {
                 rowRefs.current[i] = el;
               }}
               sx={{
+                display: "block",
+                textDecoration: "none",
                 py: { xs: 4, md: 5 },
                 borderBottom: i < list.length - 1 ? "1px solid var(--highlight)" : "none",
-                opacity: activeIndex === i ? 1 : 0.45,
+                opacity: { xs: 1, md: activeIndex === i ? 1 : 0.45 },
                 transition: "opacity 0.4s ease",
+                "&:hover": { opacity: 1 },
               }}
             >
               <Box
@@ -192,9 +197,8 @@ export function Services() {
                     height: 40,
                     borderRadius: "50%",
                     border: "1px solid",
-                    borderColor: activeIndex === i ? "var(--accent)" : "var(--highlight)",
-                    color: activeIndex === i ? "var(--accent)" : "var(--text)",
-                    transition: "color 0.4s ease, border-color 0.4s ease",
+                    borderColor: "var(--highlight)",
+                    color: "var(--text)",
                   }}
                 >
                   <ServiceIcon id={service.id} />
@@ -203,7 +207,7 @@ export function Services() {
                   sx={{
                     fontFamily: "var(--font-serif)",
                     fontSize: { xs: "1.4rem", md: "1.75rem" },
-                    color: activeIndex === i ? "var(--accent)" : "var(--text)",
+                    color: { xs: "var(--text)", md: activeIndex === i ? "var(--accent)" : "var(--text)" },
                     transition: "color 0.4s ease",
                   }}
                 >
@@ -215,8 +219,8 @@ export function Services() {
                   fontFamily: "var(--font-sans)",
                   fontSize: "0.75rem",
                   letterSpacing: "0.05em",
-                  color: activeIndex === i ? "var(--accent)" : "var(--text)",
-                  opacity: 0.6,
+                  color: { xs: "var(--highlight)", md: activeIndex === i ? "var(--accent)" : "var(--text)" },
+                  opacity: { xs: 1, md: activeIndex === i ? 1 : 0.45 },
                   mt: 0.5,
                   transition: "color 0.4s ease",
                 }}

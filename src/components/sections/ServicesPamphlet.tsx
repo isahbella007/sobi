@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import gsap from "gsap";
 import { useTranslations } from "next-intl";
 import Box from "@mui/material/Box";
@@ -15,9 +16,22 @@ import { priceListCategories } from "@/content/site";
 export function ServicesPamphlet() {
   const t = useTranslations("priceList");
   const tServices = useTranslations("services");
-  const [activeCategory, setActiveCategory] = useState<string>(priceListCategories[0].id);
+
+  // Deep-linked from the homepage teaser (Services.tsx) via ?category=<id>
+  // — read once, synchronously, at render (no effect/setState needed, so
+  // there's no post-mount flash of the default category).
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const hasValidCategoryParam = priceListCategories.some((c) => c.id === categoryParam);
+
+  const [activeCategory, setActiveCategory] = useState<string>(
+    hasValidCategoryParam ? categoryParam! : priceListCategories[0].id
+  );
   const [pageIndex, setPageIndex] = useState(0);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  // Mobile starts open too (not just on a deep link) — the cover already
+  // highlights the first category as "active", so leaving the panel
+  // collapsed made it look selected but empty until tapped again.
+  const [mobileOpen, setMobileOpen] = useState(true);
 
   const pageRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);

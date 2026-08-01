@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Nav } from "@/components/nav/Nav";
 import { ServicesPamphlet } from "@/components/sections/ServicesPamphlet";
@@ -30,7 +31,9 @@ export default async function ServicesPage({
   return (
     <>
       <Nav compact />
-      <ServicesPamphlet />
+      <Suspense fallback={null}>
+        <ServicesPamphlet />
+      </Suspense>
       {/* <Footer /> */}
     </>
   );
