@@ -23,6 +23,20 @@ export const phoneNumberTel = "+436601620234";
 export const mapQuery = "1120 Wien, Austria";
 export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
 
+// Real "getting here" perks from the client — icon assignment lives in
+// FindUs.tsx (a code-level/visual choice), translated labels live in
+// messages under `findUs.perks.<id>`.
+export const findUsPerks = [
+  "accessible",
+  "u1Kagran",
+  "bus26A",
+  "tram25",
+  "taxiStand",
+  "bikeParking",
+  "parkingGarage",
+  "donauZentrum",
+] as const;
+
 export const navLinks = [
   { id: "about", href: "/about" },
   { id: "services", href: "/services" },
@@ -234,6 +248,24 @@ export const socialLinks = [
   { label: "Instagram", href: "#" }, // CONFIRM: real Instagram URL
   { label: "Facebook", href: "#" }, // CONFIRM: real Facebook URL
 ];
+
+// Real FAQ content from the client (public/sobi folder/faq.jpeg). Question/
+// answer text lives in messages under `faq.items.<id>` — this only holds
+// the grouping and ordering.
+export const faqCategories = [
+  {
+    id: "generalAppointments",
+    questionIds: ["parking", "bookingRequired", "howToBook", "cancelReschedule", "lateArrival"],
+  },
+  {
+    id: "footCare",
+    questionIds: ["treatmentFrequency", "fungalNails", "ownNailPolish"],
+  },
+  {
+    id: "payments",
+    questionIds: ["paymentMethods"],
+  },
+] as const;
 
 // CONFIRM: fabricated placeholder — swap for the studio's real rating once
 // they have a Google/Instagram review count to point to. Currently unused

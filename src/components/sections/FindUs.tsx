@@ -10,11 +10,31 @@ import Collapse from "@mui/material/Collapse";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
 import MyLocationOutlinedIcon from "@mui/icons-material/MyLocationOutlined";
+import AccessibleOutlinedIcon from "@mui/icons-material/AccessibleOutlined";
+import TrainOutlinedIcon from "@mui/icons-material/TrainOutlined";
+import DirectionsBusOutlinedIcon from "@mui/icons-material/DirectionsBusOutlined";
+import TramOutlinedIcon from "@mui/icons-material/TramOutlined";
+import LocalTaxiOutlinedIcon from "@mui/icons-material/LocalTaxiOutlined";
+import PedalBikeOutlinedIcon from "@mui/icons-material/PedalBikeOutlined";
+import LocalParkingOutlinedIcon from "@mui/icons-material/LocalParkingOutlined";
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
+import type { SvgIconComponent } from "@mui/icons-material";
 import { Reveal } from "@/components/common/Reveal";
-import { streetAddress, postalCity, mapEmbedSrc, mapQuery } from "@/content/site";
+import { streetAddress, postalCity, mapEmbedSrc, mapQuery, findUsPerks } from "@/content/site";
 import { locateAndScan, type ScanResult } from "@/lib/adventureMode";
 
 const navigationUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
+
+const PERK_ICONS: Record<(typeof findUsPerks)[number], SvgIconComponent> = {
+  accessible: AccessibleOutlinedIcon,
+  u1Kagran: TrainOutlinedIcon,
+  bus26A: DirectionsBusOutlinedIcon,
+  tram25: TramOutlinedIcon,
+  taxiStand: LocalTaxiOutlinedIcon,
+  bikeParking: PedalBikeOutlinedIcon,
+  parkingGarage: LocalParkingOutlinedIcon,
+  donauZentrum: LocalMallOutlinedIcon,
+};
 
 function RadarPulse() {
   return (
@@ -104,7 +124,7 @@ export function FindUs() {
       sx={{
         px: { xs: 3, md: 6 },
         py: { xs: 8, md: 12 },
-        bgcolor: "var(--panel)",
+        bgcolor: "var(--contrast)",
       }}
     >
       <Box
@@ -276,6 +296,57 @@ export function FindUs() {
               </Box>
             </Collapse>
           </Box>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          maxWidth: 1000,
+          mx: "auto",
+          mt: { xs: 6, md: 7 },
+          pt: { xs: 4, md: 5 },
+          borderTop: "1px solid var(--highlight)",
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "0.75rem",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "var(--highlight)",
+            mb: 2.5,
+            textAlign: { xs: "center", md: "left" },
+          }}
+        >
+          {t("perksHeading")}
+        </Typography>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr 1fr", sm: "repeat(3, 1fr)", md: "repeat(4, 1fr)" },
+            gap: { xs: 2.5, md: 3 },
+          }}
+        >
+          {findUsPerks.map((id) => {
+            const Icon = PERK_ICONS[id];
+            return (
+              <Box key={id} sx={{ display: "flex", alignItems: "flex-start", gap: 1.25 }}>
+                <Icon sx={{ fontSize: 20, color: "var(--accent)", flexShrink: 0, mt: "1px" }} />
+                <Typography
+                  sx={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.85rem",
+                    color: "var(--text)",
+                    opacity: 0.85,
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {t(`perks.${id}`)}
+                </Typography>
+              </Box>
+            );
+          })}
         </Box>
       </Box>
     </Reveal>

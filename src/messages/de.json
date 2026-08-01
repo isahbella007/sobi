@@ -302,6 +302,17 @@
     "heading": "So finden Sie uns im 12. Bezirk",
     "tagline": "Gut erreichbar, entspannt ankommen.",
     "mapTitle": "SOBI Professionelle — Karte",
+    "perksHeading": "Anreise",
+    "perks": {
+      "accessible": "Barrierefrei zugänglich",
+      "u1Kagran": "U1 Kagran — 5 Gehminuten",
+      "bus26A": "Buslinie 26A — 2 Minuten entfernt",
+      "tram25": "Straßenbahn 25 — 2 Minuten entfernt",
+      "taxiStand": "Taxistand in der Nähe",
+      "bikeParking": "Fahrradabstellplatz & Service-Station",
+      "parkingGarage": "Parkgarage vor Ort (Rabatt mit der Westfield-App)",
+      "donauZentrum": "Direkter Zugang vom Donau Zentrum"
+    },
     "adventure": {
       "label": "Abenteuer-Modus — wie nah sind Sie wirklich?",
       "privacyNote": "Wir fragen Ihren Browser nach Ihrem Standort und rechnen direkt dort — es wird nichts irgendwohin gesendet.",
@@ -321,6 +332,52 @@
     "heading": "Wann immer Sie bereit sind",
     "subhead": "Melden Sie sich, wir finden gemeinsam einen passenden Termin.",
     "bookButton": "Jetzt anrufen"
+  },
+  "faq": {
+    "heading": "Häufig gestellte Fragen",
+    "categories": {
+      "generalAppointments": "Allgemeines & Termine",
+      "footCare": "Fußpflege",
+      "payments": "Zahlungen"
+    },
+    "items": {
+      "parking": {
+        "question": "Ist ein Parkplatz verfügbar?",
+        "answer": "Ja. Ein bequemer Parkplatz steht Ihnen im Parkhaus des Westfield Donau Zentrum zur Verfügung. Mit der Westfield-App können Sie zudem von einem vergünstigten Parktarif profitieren."
+      },
+      "bookingRequired": {
+        "question": "Muss ich einen Termin vereinbaren?",
+        "answer": "Ja, eine Terminvereinbarung ist erforderlich. Je nachdem, wie flexibel Sie bei Ihren bevorzugten Tagen und Uhrzeiten sind, empfehlen wir, Ihren Termin 1 bis 3 Wochen im Voraus zu buchen, um die beste Verfügbarkeit zu sichern."
+      },
+      "howToBook": {
+        "question": "Wie kann ich einen Termin buchen?",
+        "answer": "Sie können einen Termin telefonisch unter {phone} vereinbaren. Wir helfen Ihnen gerne dabei, einen passenden Termin für Ihren Besuch zu finden."
+      },
+      "cancelReschedule": {
+        "question": "Kann ich meinen Termin stornieren oder verschieben?",
+        "answer": "Ja, Sie können Ihren Termin stornieren oder verschieben. Wir bitten Sie, uns dies mindestens 24 Stunden im Voraus mitzuteilen, damit wir den Termin an eine andere Kundin oder einen anderen Kunden vergeben können. Vielen Dank für Ihr Verständnis."
+      },
+      "lateArrival": {
+        "question": "Was passiert, wenn ich zu spät komme?",
+        "answer": "Wenn Sie mehr als 15 Minuten zu spät kommen, müssen wir Ihre Behandlung unter Umständen verkürzen, um die nachfolgenden Termine nicht zu verzögern. In manchen Fällen müssen wir Ihren Termin auf einen anderen Tag verschieben. Vielen Dank für Ihr Verständnis."
+      },
+      "treatmentFrequency": {
+        "question": "Wie oft sollte ich eine Fußpflegebehandlung in Anspruch nehmen?",
+        "answer": "Grundsätzlich empfehlen wir eine Fußpflegebehandlung alle 4 bis 5 Wochen. Das ideale Intervall hängt jedoch von Ihren individuellen Bedürfnissen und etwaigen spezifischen Fußproblemen ab. Wir beurteilen Ihren Zustand bei Ihrem Besuch und empfehlen Ihnen einen persönlich abgestimmten Behandlungsplan."
+      },
+      "fungalNails": {
+        "question": "Behandeln Sie Nagelpilz?",
+        "answer": "Ja, wir bieten eine professionelle Behandlung und Pflege bei Nagelpilz an und empfehlen Ihnen den für Sie am besten geeigneten Behandlungsplan."
+      },
+      "ownNailPolish": {
+        "question": "Muss ich für das Lackieren bezahlen, wenn ich meinen eigenen Nagellack mitbringe?",
+        "answer": "Ja. Sie können gerne Ihren eigenen Nagellack in Ihrer bevorzugten Farbe mitbringen. Die Lackierung wird dennoch berechnet, da die Gebühr den Zeitaufwand und die fachgerechte Anwendung abdeckt und nicht den Nagellack selbst. Zudem bieten wir eine große Auswahl an Nagellackfarben zur Auswahl an."
+      },
+      "paymentMethods": {
+        "question": "Welche Zahlungsmethoden akzeptieren Sie?",
+        "answer": "Wir akzeptieren Bar- und Bankomatkarten-Zahlungen. Kreditkartenzahlungen sind ab einem Betrag von €150 möglich."
+      }
+    }
   },
   "about": {
     "eyebrow": "Über uns",

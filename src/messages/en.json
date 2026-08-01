@@ -305,6 +305,17 @@
     "heading": "Find us in the 12th",
     "tagline": "Easy to reach, easy to relax.",
     "mapTitle": "SOBI Professionelle — map",
+    "perksHeading": "Getting here",
+    "perks": {
+      "accessible": "Barrier-free access",
+      "u1Kagran": "U1 Kagran — 5 min walk",
+      "bus26A": "Bus 26A — 2 min away",
+      "tram25": "Tram 25 — 2 min away",
+      "taxiStand": "Taxi stand nearby",
+      "bikeParking": "Bike parking & service station",
+      "parkingGarage": "On-site parking (discount with the Westfield app)",
+      "donauZentrum": "Direct access from Donau Zentrum"
+    },
     "adventure": {
       "label": "Adventure Mode — how close are you, really?",
       "privacyNote": "We'll ask your browser for your location and do the math right there — nothing gets sent anywhere.",
@@ -324,6 +335,52 @@
     "heading": "Ready when you are",
     "subhead": "Reach out and we'll find a time that suits you.",
     "bookButton": "Call to reserve"
+  },
+  "faq": {
+    "heading": "Frequently asked questions",
+    "categories": {
+      "generalAppointments": "General & Appointments",
+      "footCare": "Foot Care",
+      "payments": "Payments"
+    },
+    "items": {
+      "parking": {
+        "question": "Is parking available?",
+        "answer": "Yes. Convenient parking is available in the Westfield Donau Zentrum parking garage. Guests can enjoy discounted parking by using the Westfield app, making their visit even more convenient."
+      },
+      "bookingRequired": {
+        "question": "Do I need to book an appointment?",
+        "answer": "Yes, appointments are required. Depending on how flexible you are with your preferred days and times, we recommend booking your appointment 1 to 3 weeks in advance to ensure the best availability."
+      },
+      "howToBook": {
+        "question": "How can I book an appointment?",
+        "answer": "You can book an appointment by calling us at {phone}. We will be happy to assist you in finding a convenient date and time for your visit."
+      },
+      "cancelReschedule": {
+        "question": "Can I cancel or reschedule my appointment?",
+        "answer": "Yes, you may cancel or reschedule your appointment. We kindly request at least 24 hours' notice so that we have the opportunity to offer your appointment time to another client. We appreciate your understanding."
+      },
+      "lateArrival": {
+        "question": "What happens if I arrive late?",
+        "answer": "If you arrive more than 15 minutes late, we may need to shorten your treatment to avoid delaying the next appointments. In some cases, we may need to reschedule your appointment for another day. Thank you for your understanding."
+      },
+      "treatmentFrequency": {
+        "question": "How often should I have a foot care treatment?",
+        "answer": "We generally recommend scheduling a foot care treatment every 4 to 5 weeks. However, the ideal interval depends on your individual needs and any specific foot concerns you may have. We will assess your condition during your visit and recommend a personalized treatment schedule that is best suited to you."
+      },
+      "fungalNails": {
+        "question": "Do you treat fungal nail infections?",
+        "answer": "Yes, we offer professional treatment and care for fungal nail infections and will recommend the most suitable treatment plan based on your individual needs."
+      },
+      "ownNailPolish": {
+        "question": "If I bring my own nail polish, do I still have to pay for the nail polish application?",
+        "answer": "Yes. You are welcome to bring your own nail polish if you have a preferred color. However, the nail polish application service will still be charged, as the fee covers the time and professional application rather than the nail polish itself. We also offer a wide selection of nail polish colors for you to choose from."
+      },
+      "paymentMethods": {
+        "question": "Which payment methods do you accept?",
+        "answer": "We accept cash and debit card payments. Credit card payments are accepted for transactions of €150 or more."
+      }
+    }
   },
   "about": {
     "eyebrow": "About us",

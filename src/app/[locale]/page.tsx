@@ -7,6 +7,7 @@ import { Pricing } from "@/components/sections/Pricing";
 import { Testimonials } from "@/components/sections/Testimonials";
 
 import { FindUs } from "@/components/sections/FindUs";
+import { FAQ } from "@/components/sections/FAQ";
 import { Book } from "@/components/sections/Book";
 import { Footer } from "@/components/Footer";
 import { routing } from "@/i18n/routing";
@@ -47,6 +48,8 @@ export default async function Home({
       <Services />
       {/* <Pricing /> */}
       {/* <Testimonials /> */}
+      
+      <FAQ />
       <FindUs />
       {/* <Book /> */}
       {/* <Footer /> */}
