@@ -22,7 +22,7 @@ export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
 
 export const navLinks = [
   { id: "about", href: "/about" },
-  { id: "services", href: { pathname: "/", hash: "services" } },
+  { id: "services", href: "/services" },
   { id: "findUs", href: { pathname: "/", hash: "find-us" } },
   { id: "book", href: { pathname: "/", hash: "book" } },
 ] as const;
@@ -40,40 +40,177 @@ export const services = [
 
 export const heroFootNoteHref = "#find-us";
 
+// Three flagship picks per category, pulled from the real Feb 2026 price
+// list (see `priceListCategories` below for the full menu) — a curated
+// spread of price points, not just the cheapest or priciest three.
 export const pricingCategories = [
   {
     id: "skincare",
     items: [
-      { id: "expressFacial", price: "€45" },
-      { id: "signatureFacial", price: "€75" },
-      { id: "deepCleanse", price: "€85" },
+      { id: "expertCleansProSystem", price: "€90" },
+      { id: "aquatermRecovery", price: "€105" },
+      { id: "powerRetinol", price: "€99" },
     ],
   },
   {
     id: "footCare",
     items: [
-      { id: "classicPedicure", price: "€40" },
-      { id: "medicalFootCare", price: "€60" },
-      { id: "callusNailTreatment", price: "€35" },
+      { id: "footCareClassic", price: "€53" },
+      { id: "nailProsthetics", price: "€45" },
+      { id: "nailBrace", price: "€42" },
     ],
   },
   {
     id: "handCare",
     items: [
-      { id: "classicManicure", price: "€35" },
-      { id: "gelManicure", price: "€50" },
-      { id: "paraffinHandTreatment", price: "€25" },
+      { id: "manicureClassic", price: "€40" },
+      { id: "shellacManicure", price: "€60" },
+      { id: "paraffinAlone", price: "€35" },
     ],
   },
   {
     id: "waxing",
     items: [
-      { id: "eyebrowLip", price: "€12" },
-      { id: "halfLeg", price: "€28" },
-      { id: "fullLeg", price: "€45" },
+      { id: "lowerLegKnee", price: "€25" },
+      { id: "bikini", price: "€20" },
+      { id: "upperLip", price: "€13" },
     ],
   },
 ] as const;
+
+// The complete Feb 2026 price list (public/sobi folder/*.pdf), grouped by
+// the same 4 brand categories as `services` above, each broken into the
+// PDF's own sub-groups so a dense category still reads cleanly. Item
+// display names/descriptions live in messages under `priceList.items.<id>`
+// — this only holds ids, prices, and the "from" flag for open-ended prices.
+export type PriceListItem = { id: string; price: string; fromPrice?: boolean };
+export type PriceListGroup = { id: string; items: PriceListItem[] };
+export type PriceListCategory = {
+  id: "skincare" | "footCare" | "handCare" | "waxing";
+  groups: PriceListGroup[];
+};
+
+export const priceListCategories: PriceListCategory[] = [
+  {
+    id: "skincare",
+    groups: [
+      {
+        id: "cleansing",
+        items: [
+          { id: "expertCleansProSystem", price: "€90" },
+          { id: "clearBalance", price: "€85" },
+        ],
+      },
+      {
+        id: "hydration",
+        items: [
+          { id: "aquatermRecovery", price: "€105" },
+          { id: "powerHyaluronicDynamic", price: "€110" },
+          { id: "powerHyaluronicEyeContour", price: "€70" },
+        ],
+      },
+      {
+        id: "intensivSpecial",
+        items: [
+          { id: "powerCPlus", price: "€95" },
+          { id: "powerRetinol", price: "€99" },
+        ],
+      },
+      {
+        id: "antiAging",
+        items: [
+          { id: "globalLift", price: "€120" },
+          { id: "correctiveProgramm", price: "€170" },
+        ],
+      },
+      {
+        id: "menTreatments",
+        items: [
+          { id: "intensiveHydratingTreatment", price: "€85" },
+          { id: "expressEnergizingTreatment", price: "€85" },
+          { id: "bacialBackTreatment", price: "€75" },
+        ],
+      },
+      {
+        id: "addOns",
+        items: [
+          { id: "intensivAmpullen", price: "€15", fromPrice: true },
+          { id: "eyeContourPatches", price: "€15" },
+          { id: "diamondPeel", price: "€50" },
+          { id: "ultrasoundTreatment", price: "€20" },
+          { id: "faceMassage", price: "€20" },
+        ],
+      },
+      {
+        id: "browLash",
+        items: [
+          { id: "browTinting", price: "€15" },
+          { id: "lashTinting", price: "€15" },
+          { id: "browShaping", price: "€13" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "footCare",
+    groups: [
+      {
+        id: "treatments",
+        items: [
+          { id: "footCareClassic", price: "€53" },
+          { id: "acuteAppointment", price: "€35", fromPrice: true },
+          { id: "nailBrace", price: "€42" },
+          { id: "nailProsthetics", price: "€45" },
+          { id: "toenailPolish", price: "€10" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "handCare",
+    groups: [
+      {
+        id: "treatments",
+        items: [
+          { id: "manicureClassic", price: "€40" },
+          { id: "smallNailService", price: "€15" },
+          { id: "nailPolish", price: "€10" },
+          { id: "shellacManicure", price: "€60" },
+          { id: "shellacRemoval", price: "€40" },
+          { id: "paraffinWithTreatment", price: "€25" },
+          { id: "paraffinAlone", price: "€35" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "waxing",
+    groups: [
+      {
+        id: "women",
+        items: [
+          { id: "upperLip", price: "€13" },
+          { id: "chin", price: "€13" },
+          { id: "cheeks", price: "€13" },
+          { id: "underarm", price: "€16" },
+          { id: "forearm", price: "€22" },
+          { id: "upperArm", price: "€22" },
+          { id: "lowerLegKnee", price: "€25" },
+          { id: "upperLeg", price: "€25" },
+          { id: "bikini", price: "€20" },
+        ],
+      },
+      {
+        id: "men",
+        items: [
+          { id: "backNeck", price: "€46" },
+          { id: "chest", price: "€25" },
+          { id: "belly", price: "€25" },
+        ],
+      },
+    ],
+  },
+];
 
 // CONFIRM: fabricated placeholder quotes — swap for real client testimonials
 // once the studio has some to share. Eight rather than three so the "wall

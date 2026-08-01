@@ -7,6 +7,10 @@
     "about": {
       "title": "About — SOBI Professionelle",
       "description": "A family-run skincare and foot care studio in Vienna's Donaustadt district, run by a mother-and-daughter team since 2014."
+    },
+    "services": {
+      "title": "Services & Pricing — SOBI Professionelle",
+      "description": "The complete treatment menu from SOBI Fußpflege & mehr — skincare, foot care, hand care, and waxing, with full pricing."
     }
   },
   "nav": {
@@ -53,40 +57,201 @@
         "name": "Waxing",
         "description": "Clean, comfortable waxing, start to finish."
       }
-    }
+    },
+    "itemCount": "{count} treatments",
+    "ctaFullMenu": "See the full menu & pricing"
   },
   "pricing": {
     "heading": "Pricing",
-    "note": "Indicative pricing — final list confirmed by the studio.",
+    "note": "A few favorites — see the full menu for everything we offer.",
+    "ctaFullMenu": "See the full price list",
     "categories": {
       "skincare": {
         "items": {
-          "expressFacial": "Express Facial",
-          "signatureFacial": "Signature Facial",
-          "deepCleanse": "Deep Cleanse & Extraction"
+          "expertCleansProSystem": "Expert Cleans Pro-System",
+          "aquatermRecovery": "Aquaterm Recovery",
+          "powerRetinol": "Power Retinol"
         }
       },
       "footCare": {
         "items": {
-          "classicPedicure": "Classic Pedicure",
-          "medicalFootCare": "Medical Foot Care",
-          "callusNailTreatment": "Callus & Nail Treatment"
+          "footCareClassic": "Foot Care Classic",
+          "nailProsthetics": "Nail Prosthetics",
+          "nailBrace": "Nail Brace"
         }
       },
       "handCare": {
         "items": {
-          "classicManicure": "Classic Manicure",
-          "gelManicure": "Gel Manicure",
-          "paraffinHandTreatment": "Paraffin Hand Treatment"
+          "manicureClassic": "Classic Manicure",
+          "shellacManicure": "Shellac UV Manicure",
+          "paraffinAlone": "Paraffin Bath"
         }
       },
       "waxing": {
         "items": {
-          "eyebrowLip": "Eyebrow / Lip",
-          "halfLeg": "Half Leg",
-          "fullLeg": "Full Leg"
+          "lowerLegKnee": "Lower Leg incl. Knee",
+          "bikini": "Bikini Zone",
+          "upperLip": "Upper Lip"
         }
       }
+    }
+  },
+  "priceList": {
+    "heading": "Full Menu & Pricing",
+    "subheading": "From quick add-ons to our signature programs — everything we offer, in one place.",
+    "note": "Valid from February 2026",
+    "fromPrefix": "from",
+    "footCareNote": "We're trained in diabetic and wound-care foot management.",
+    "tabs": {
+      "skincare": "Skincare",
+      "footCare": "Foot Care",
+      "handCare": "Hand Care",
+      "waxing": "Waxing"
+    },
+    "groups": {
+      "cleansing": "Cleansing",
+      "hydration": "Hydration",
+      "intensivSpecial": "Intensive Special Program",
+      "antiAging": "Ladies' Anti-Aging Program",
+      "menTreatments": "Skeyndor Men Treatments",
+      "addOns": "Add-ons",
+      "browLash": "Brows & Lashes",
+      "treatments": "Treatments",
+      "women": "For Women",
+      "men": "For Men"
+    },
+    "items": {
+      "expertCleansProSystem": {
+        "name": "Expert Cleans Pro-System",
+        "description": "Double Dimension Cleansing System — a gentle surface and deep cleanse. Cleansing, an enzyme or fruit-acid peel suited to your skin, steam, extraction, mask, and finishing care. Suited to all skin types, especially congested skin."
+      },
+      "clearBalance": {
+        "name": "Clear Balance",
+        "description": "A specially developed deep cleanse that targets the three main causes of blemished skin. Suited to hyperkeratosis, excess oil production, and infection-prone skin."
+      },
+      "aquatermRecovery": {
+        "name": "Aquaterm Recovery",
+        "description": "A stabilizing, balancing facial for sensitive skin that guards against redness and swelling. Every Aquaterm product is made with mineral thermal water from the Salies-de-Béarn spring. Suited to all skin types, including couperose or easily reactive skin."
+      },
+      "powerHyaluronicDynamic": {
+        "name": "Power Hyaluronic – HA Dynamic",
+        "description": "An intensive moisture treatment that rebalances the skin's hydrodynamics, reaching an optimal hydration level in every layer. Delivers deep, lasting moisture and guards against premature water loss, strengthening the skin's own barrier. Suited to all skin types."
+      },
+      "powerHyaluronicEyeContour": {
+        "name": "Power Hyaluronic – HA Eye Contour",
+        "description": "An eye treatment that rejuvenates the eye contour with a lifting effect on the eyelids and works against contour wrinkles. Reduces under-eye bags and strengthens and nourishes the lashes."
+      },
+      "powerCPlus": {
+        "name": "Power C+ (Brightening Antioxidant)",
+        "description": "A treatment with highly concentrated antioxidants for radiant, revitalized, visibly younger-looking skin. Suited to dull, devitalized skin and sun-aged skin."
+      },
+      "powerRetinol": {
+        "name": "Power Retinol – Intensive Repairing Programme",
+        "description": "Rejuvenates naturally or sun-aged skin. Supports skin structure, refines pores, and stimulates collagen production, while supporting the skin's own healing process for inflammation. Suited to all skin types, mature skin, and acne-prone skin."
+      },
+      "globalLift": {
+        "name": "Global Lift (ProGEN-in)",
+        "description": "An innovative global anti-aging strategy designed to cosmetically firm deeper cell layers with progressive tightening actives, for a more oval facial contour and against a double chin. Includes an ultrasound treatment. Suited to mature skin."
+      },
+      "correctiveProgramm": {
+        "name": "Corrective Programme",
+        "description": "A cosmetic alternative — or an ideal complement — to aesthetic medicine. A fusion of three mechanisms (peel, filler, decontraction) intensively smooths wrinkles, rejuvenates expression, and restores a smooth, youthful look. Nine key actives, including botox-like peptides, snake venom, and hyaluronic-acid filler. Includes an ultrasound treatment. Suited to mature skin."
+      },
+      "intensiveHydratingTreatment": {
+        "name": "Intensive Hydrating Treatment",
+        "description": "A moisture-replenishing treatment for men's skin left dry or damaged by extreme weather."
+      },
+      "expressEnergizingTreatment": {
+        "name": "Express Energizing Treatment",
+        "description": "An energizing treatment with oxygen-releasing components that revitalizes tired or stress-worn skin."
+      },
+      "bacialBackTreatment": {
+        "name": "Bacial – Back Treatment",
+        "description": "Cleansing, peel, steam, extraction, mask, and finishing care."
+      },
+      "intensivAmpullen": {
+        "name": "Intensive Ampoules",
+        "description": "Uniqcure Hi-Tech concentrates — highly concentrated actives, matched to your skin's specific needs."
+      },
+      "eyeContourPatches": {
+        "name": "Eye Contour Patches — Express Care",
+        "description": "Refreshes the eye contour for an instant anti-fatigue effect."
+      },
+      "diamondPeel": {
+        "name": "Diamond Microdermabrasion Peel",
+        "description": "A gentle cleanse and effective peel using diamond tips for a deeper resurfacing of the skin's outer layer. Suited to anti-aging and acne treatment. Stimulates collagen production."
+      },
+      "ultrasoundTreatment": {
+        "name": "Ultrasound Treatment (approx. 10 min)",
+        "description": "Boosts circulation and helps actives absorb; the micro-massage stimulates cell metabolism and works against lines, wrinkles, and slack skin. Supports skin regeneration from acne and inflammation."
+      },
+      "faceMassage": {
+        "name": "Face Massage (approx. 10 min)",
+        "description": ""
+      },
+      "browTinting": { "name": "Brow Tinting", "description": "" },
+      "lashTinting": { "name": "Lash Tinting", "description": "" },
+      "browShaping": { "name": "Brow Shaping, With or Without Wax", "description": "" },
+      "footCareClassic": {
+        "name": "Foot Care Classic",
+        "description": "A foot bath, removal of calluses and pressure spots by scalpel, corn removal, trimming and shaping the toenails, tamponade for ingrown toenails if needed, cuticle care, and finishing care."
+      },
+      "acuteAppointment": {
+        "name": "Acute Appointment — Pain or Growth Guidance",
+        "description": "For problem toes or ongoing pressure pain: cleaning and disinfecting the nail or pressure spot, treating the source of pain, tamponade if needed, aftercare guidance, and a follow-up discussion."
+      },
+      "nailBrace": {
+        "name": "Nail Brace (BS Adhesive Brace)",
+        "description": "A gentle correction of nail growth for chronically ingrown toenails using a BS adhesive brace."
+      },
+      "nailProsthetics": {
+        "name": "Nail Prosthetics",
+        "description": "Painless reconstruction of a partly missing or damaged nail using UV gel material. Once reconstructed, the nail can be polished as usual."
+      },
+      "toenailPolish": {
+        "name": "Toenail Polish",
+        "description": "Choose from our on-trend, high-quality color range."
+      },
+      "manicureClassic": {
+        "name": "Classic Manicure",
+        "description": "A hand bath, trimming and shaping the nails, cleaning, polishing and sealing the nail plate, cuticle care, and pressure-spot relief in the palm if needed. Finished with cuticle oil and a strengthening nail serum."
+      },
+      "smallNailService": {
+        "name": "Small Nail Service",
+        "description": "Trimming and shaping the nails, finished with nail oil."
+      },
+      "nailPolish": {
+        "name": "Nail Polish",
+        "description": "Choose your favorite shade from current trends and classics."
+      },
+      "shellacManicure": {
+        "name": "Shellac UV Manicure",
+        "description": "Includes removal of any existing shellac. Choose your shade from a wide color range — no drying time needed. Nails cleaned, shaped, cuticles cared for, shellac applied, finishing care."
+      },
+      "shellacRemoval": {
+        "name": "Shellac Removal",
+        "description": "Without a fresh UV shellac polish. Shellac gently lifted with remover and remover wraps, nails shaped, finished with a strengthening nail serum and cuticle oil."
+      },
+      "paraffinWithTreatment": {
+        "name": "Paraffin Bath — Add-on to a Treatment",
+        "description": "After a thorough cleanse and disinfection, hands are dipped in soothing warm liquid paraffin and wrapped in mitts for around 20 minutes. The occlusive effect boosts circulation, relaxes, and eases discomfort, leaving skin ready to better absorb what comes next."
+      },
+      "paraffinAlone": {
+        "name": "Paraffin Bath — Standalone",
+        "description": "A warming treatment in soothing liquid paraffin that boosts circulation, relaxes, and eases discomfort."
+      },
+      "upperLip": { "name": "Upper Lip", "description": "" },
+      "chin": { "name": "Chin", "description": "" },
+      "cheeks": { "name": "Cheeks", "description": "" },
+      "underarm": { "name": "Underarm", "description": "" },
+      "forearm": { "name": "Forearm", "description": "" },
+      "upperArm": { "name": "Upper Arm", "description": "" },
+      "lowerLegKnee": { "name": "Lower Leg incl. Knee", "description": "" },
+      "upperLeg": { "name": "Upper Leg", "description": "" },
+      "bikini": { "name": "Bikini Zone", "description": "" },
+      "backNeck": { "name": "Back incl. Neck", "description": "" },
+      "chest": { "name": "Chest", "description": "" },
+      "belly": { "name": "Belly", "description": "" }
     }
   },
   "testimonials": {

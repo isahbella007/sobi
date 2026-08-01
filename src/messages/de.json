@@ -7,6 +7,10 @@
     "about": {
       "title": "Über uns — SOBI Professionelle",
       "description": "Ein familiengeführtes Kosmetik- und Fußpflegestudio in der Wiener Donaustadt, geführt von einem Mutter-Tochter-Team seit 2014."
+    },
+    "services": {
+      "title": "Leistungen & Preise — SOBI Professionelle",
+      "description": "Das vollständige Leistungsangebot von SOBI Fußpflege & mehr — Kosmetik, Fußpflege, Handpflege und Waxing, mit allen Preisen."
     }
   },
   "nav": {
@@ -53,40 +57,198 @@
         "name": "Waxing",
         "description": "Saubere, angenehme Haarentfernung von Anfang bis Ende."
       }
-    }
+    },
+    "itemCount": "{count} Behandlungen",
+    "ctaFullMenu": "Zur vollständigen Preisliste"
   },
   "pricing": {
     "heading": "Preise",
-    "note": "Richtpreise — die endgültige Liste wird vom Studio bestätigt.",
+    "note": "Eine Auswahl unserer Favoriten — die vollständige Liste finden Sie in unserer Preisübersicht.",
+    "ctaFullMenu": "Alle Preise ansehen",
     "categories": {
       "skincare": {
         "items": {
-          "expressFacial": "Express-Gesichtsbehandlung",
-          "signatureFacial": "Signature-Gesichtsbehandlung",
-          "deepCleanse": "Tiefenreinigung & Extraktion"
+          "expertCleansProSystem": "Expert Cleans Pro-System",
+          "aquatermRecovery": "Aquaterm Recovery",
+          "powerRetinol": "Power Retinol"
         }
       },
       "footCare": {
         "items": {
-          "classicPedicure": "Klassische Pediküre",
-          "medicalFootCare": "Medizinische Fußpflege",
-          "callusNailTreatment": "Hornhaut- & Nagelbehandlung"
+          "footCareClassic": "Fußpflege Classic",
+          "nailProsthetics": "Nagelprothetik",
+          "nailBrace": "Nagelspange"
         }
       },
       "handCare": {
         "items": {
-          "classicManicure": "Klassische Maniküre",
-          "gelManicure": "Gel-Maniküre",
-          "paraffinHandTreatment": "Paraffin-Handbehandlung"
+          "manicureClassic": "Maniküre Classic",
+          "shellacManicure": "Shellac UV Maniküre",
+          "paraffinAlone": "Paraffinbad"
         }
       },
       "waxing": {
         "items": {
-          "eyebrowLip": "Augenbrauen / Lippe",
-          "halfLeg": "Halbes Bein",
-          "fullLeg": "Ganzes Bein"
+          "lowerLegKnee": "Unterschenkel inkl. Knie",
+          "bikini": "Bikinizone",
+          "upperLip": "Oberlippe"
         }
       }
+    }
+  },
+  "priceList": {
+    "heading": "Preisliste",
+    "subheading": "Von schnellen Zusatzbehandlungen bis zu unseren Signature-Programmen — hier finden Sie unser gesamtes Leistungsangebot.",
+    "note": "Gültig ab Februar 2026",
+    "fromPrefix": "ab",
+    "footCareNote": "Wir sind Diabetiker und Wundmanagement geschult.",
+    "tabs": {
+      "skincare": "Kosmetik",
+      "footCare": "Fußpflege",
+      "handCare": "Handpflege",
+      "waxing": "Waxing"
+    },
+    "groups": {
+      "cleansing": "Cleansing",
+      "hydration": "Hydration",
+      "intensivSpecial": "Intensiv Special Program",
+      "antiAging": "Ladys Anti-Aging Program",
+      "menTreatments": "Skeyndor Men Behandlung",
+      "addOns": "Benefits",
+      "browLash": "Augenbrauen & Wimpern",
+      "treatments": "Behandlungen",
+      "women": "Damen",
+      "men": "Herren"
+    },
+    "items": {
+      "expertCleansProSystem": {
+        "name": "Expert Cleans Pro-System",
+        "description": "Double Dimension Cleansing System — Doppelreinigungs-System, sanfte Oberflächen- und Tiefenreinigung. Reinigung, Peeling je nach Hautbedarf (Enzym- oder Fruchtsäurepeeling), Dampf, Ausreinigen, Maske, Abschlusspflege. Geeignet: alle Hauttypen, unreine Haut."
+      },
+      "clearBalance": {
+        "name": "Clear Balance",
+        "description": "Speziell entwickelte Tiefenreinigung, um die drei Hauptursachen von Hautunreinheiten zu normalisieren. Geeignet: Hyperkeratose, Hyperseborrhoe und infektanfällige Haut."
+      },
+      "aquatermRecovery": {
+        "name": "Aquaterm Recovery",
+        "description": "Stabilisierende und ausgleichende Gesichtsbehandlung, speziell für sensible Haut. Beugt Rötungen und Schwellungen vor. Alle Produkte der Aquaterm-Serie werden mit Mineral-Thermalwasser aus der Quelle Salies-de-Béarn hergestellt. Geeignet: alle Hauttypen, auch für Couperose oder leicht reagierende Haut."
+      },
+      "powerHyaluronicDynamic": {
+        "name": "Power Hyaluronic – HA Dynamic",
+        "description": "Intensive Feuchtigkeitsbehandlung, wirkt ausgleichend auf die Hydrodynamik der Haut. Erzielt ein optimales Hydrationsniveau in allen Hautschichten. Versorgt die Haut tiefenwirksam mit Feuchtigkeit und schützt vor vorzeitigem Wasserverlust, was die Schutzschildfunktion der Haut erhöht. Geeignet: alle Hauttypen."
+      },
+      "powerHyaluronicEyeContour": {
+        "name": "Power Hyaluronic – HA Eye Contour",
+        "description": "Augenbehandlung zur Verjüngung der Augenkontur, Lifting-Effekt der Augenlider, wirkt den Falten der Augenkontur entgegen. Reduziert Tränensäcke, stärkt und pflegt die Wimpern."
+      },
+      "powerCPlus": {
+        "name": "Power C+ (Brightening Antioxidant)",
+        "description": "Behandlung mit hochkonzentrierten Antioxidantien — für eine leuchtende, revitalisierte und sichtbar jüngere Haut. Geeignet: devitalisierte Haut mit mangelnder Leuchtkraft und fotogealterte Haut."
+      },
+      "powerRetinol": {
+        "name": "Power Retinol – Intensive Repairing Programme",
+        "description": "Behandlung zur Verjüngung natürlich gealterter oder sonnengealterter Haut. Unterstützt den Aufbau der Hautstruktur, verfeinert die Poren, regt die Kollagenbildung an und unterstützt den Heilprozess bei Entzündungen. Geeignet: alle Hauttypen, reife Haut, zu Akne neigende Haut."
+      },
+      "globalLift": {
+        "name": "Global Lift (ProGEN-in)",
+        "description": "Innovative globale Anti-Aging-Strategie, speziell konzipiert für die kosmetische Hautstraffung tiefliegender Zellen mit progressiven straffenden Wirkstoffen — für eine ovale Gesichtsform und gegen ein Doppelkinn. Inklusive Ultraschallbehandlung. Geeignet: reife Haut."
+      },
+      "correctiveProgramm": {
+        "name": "Corrective Programm",
+        "description": "Kosmetische Alternative oder ideale Ergänzung zur ästhetischen Medizin. Die Fusion dreier Wirkmechanismen — Peeling, Füllung, Dekontraktion — bewirkt ein intensives Glätten der Falten, verjüngt den Ausdruck und stellt das glatte, jugendliche Aussehen der Haut wieder her. 9 Hauptwirkstoffe, u. a. Botox-ähnliche Peptide, Schlangengift und Hyaluronsäure-Filler. Inklusive Ultraschallbehandlung. Geeignet: reife Haut."
+      },
+      "intensiveHydratingTreatment": {
+        "name": "Intensive Hydrating Treatment",
+        "description": "Feuchtigkeitsspendende Behandlung für trockene oder geschädigte Männerhaut aufgrund extremer Wetterbedingungen."
+      },
+      "expressEnergizingTreatment": {
+        "name": "Express Energizing Treatment",
+        "description": "Energetisierende Behandlung mit Komponenten, die Sauerstoff freisetzen. Revitalisiert müde oder durch Stress geschädigte Haut."
+      },
+      "bacialBackTreatment": {
+        "name": "Bacial – Rückenbehandlung",
+        "description": "Reinigung, Peeling, Bedampfen, Ausreinigen, Maske und Abschlusspflege."
+      },
+      "intensivAmpullen": {
+        "name": "Intensiv-Ampullen",
+        "description": "Uniqcure-Hitech-Konzentrate — hochkonzentrierte Wirkstoffe, angepasst an die unterschiedlichsten Bedürfnisse der Haut."
+      },
+      "eyeContourPatches": {
+        "name": "Augenkonturen-Patches Express-Pflege",
+        "description": "Erfrischt die Augenkonturen und sorgt für einen Anti-Müdigkeitseffekt."
+      },
+      "diamondPeel": {
+        "name": "Diamantabrasion-Peeling",
+        "description": "Sanfte Reinigung, effektive Peeling-Behandlung mit Diamantaufsätzen, intensivere Abtragung der oberen Hornschicht der Haut. Geeignet zur Anti-Aging- und Aknebehandlung. Regt die Kollagenbildung an."
+      },
+      "ultrasoundTreatment": {
+        "name": "Ultraschallbehandlung (ca. 10 Min.)",
+        "description": "Durchblutungsfördernd, unterstützt die Aufnahme von Wirkstoffen. Die Mikromassage der Hautzellen regt den Zellstoffwechsel an und wirkt Linien, Falten und schlaffer Haut entgegen. Unterstützt die Regeneration bei Akne und Entzündungsprozessen."
+      },
+      "faceMassage": { "name": "Gesichtsmassage (ca. 10 Min.)", "description": "" },
+      "browTinting": { "name": "Augenbrauen färben", "description": "" },
+      "lashTinting": { "name": "Wimpern färben", "description": "" },
+      "browShaping": { "name": "Augenbrauen facionieren, mit oder ohne Harz", "description": "" },
+      "footCareClassic": {
+        "name": "Fußpflege Classic",
+        "description": "Fußbad, Entfernen der Hornhaut und Druckstellen mittels Skalpell, Entfernung von Hühneraugen, Kürzen und Formen der Zehennägel, bei Bedarf Tamponieren des eingewachsenen Zehennagels, Optimieren der Nagelhaut, Abschlusspflege."
+      },
+      "acuteAppointment": {
+        "name": "Akut-Termin bei Schmerzen oder Wachstumsbegleitung",
+        "description": "Bei Problemzehen oder anhaltenden Druckschmerzen: Reinigen und Desinfizieren des Nagels oder der Druckstelle, Bearbeiten der Schmerzstelle, gegebenenfalls Tamponieren, optimale Nachsorge und Vorgangsbesprechung."
+      },
+      "nailBrace": {
+        "name": "Nagelspange (BS Klebespange)",
+        "description": "Sanfte Korrektur des Nagelwachstums bei chronisch eingewachsenen Zehennägeln mittels BS Klebespange."
+      },
+      "nailProsthetics": {
+        "name": "Nagelprothetik",
+        "description": "Schmerzlose Rekonstruktion eines teils fehlenden oder verletzten Nagels mittels UV-Kunststoffmaterial. Nach Abschluss der Rekonstruktion kann der Nagel wie gewohnt lackiert werden."
+      },
+      "toenailPolish": {
+        "name": "Lackieren der Fußnägel",
+        "description": "Wählen Sie aus unserem trendsortierten, hochwertigen Farben-Sortiment."
+      },
+      "manicureClassic": {
+        "name": "Maniküre Classic",
+        "description": "Handbad, Nägel kürzen und in Form bringen, Nagelplatte reinigen, polieren und versiegeln. Nagelhaut optimieren, gegebenenfalls Druckstellen im Handinneren entfernen. Auftragen von Nagelhautöl sowie stärkendem Serum für die Nagelplatte, Abschlusspflege."
+      },
+      "smallNailService": {
+        "name": "Kleines Nagelservice",
+        "description": "Nägel kürzen und in Form bringen, Nagelöl und Abschlusspflege auftragen."
+      },
+      "nailPolish": {
+        "name": "Nägel lackieren",
+        "description": "Wählen Sie Ihren Lieblingsfarbton aus aktuellen Trends und Klassikern."
+      },
+      "shellacManicure": {
+        "name": "Shellac UV Maniküre",
+        "description": "Inklusive Entfernung des bestehenden Shellac. Wählen Sie aus einer breiten Farbpalette Ihren gewünschten Farbton — keine Trocknungszeit. Nägel reinigen, formen, Nagelhaut optimieren, Shellac auftragen, Abschlusspflege."
+      },
+      "shellacRemoval": {
+        "name": "Shellac entfernen",
+        "description": "Ohne weitere UV-Shellac-Lackierung. Sanftes Ablösen von Shellac mittels Remover und Remover Wraps, Fingernägel formen, Auftragen von stärkendem Nagelserum und Nagelhautöl, Abschlusspflege."
+      },
+      "paraffinWithTreatment": {
+        "name": "Paraffinbad in Verbindung mit einer Zusatzbehandlung",
+        "description": "Bei dieser Wärmebehandlung werden die Hände nach einer gründlichen Reinigung und Desinfektion in wohltuend warmes flüssiges Paraffin getaucht und für ca. 20 Minuten in Handschuhe gewickelt. Der Okklusiveffekt fördert die Durchblutung, wirkt entspannend und lindert Schmerzen. Die Haut kann danach wieder ideal Wirkstoffe aufnehmen."
+      },
+      "paraffinAlone": {
+        "name": "Paraffinbad ohne Zusatzbehandlung",
+        "description": "Wärmebehandlung mit wohltuend warmem, flüssigem Paraffin — fördert die Durchblutung, wirkt entspannend und lindert Schmerzen."
+      },
+      "upperLip": { "name": "Oberlippe", "description": "" },
+      "chin": { "name": "Kinn", "description": "" },
+      "cheeks": { "name": "Wangen", "description": "" },
+      "underarm": { "name": "Achsel", "description": "" },
+      "forearm": { "name": "Unterarm", "description": "" },
+      "upperArm": { "name": "Oberarm", "description": "" },
+      "lowerLegKnee": { "name": "Unterschenkel inkl. Knie", "description": "" },
+      "upperLeg": { "name": "Oberschenkel", "description": "" },
+      "bikini": { "name": "Bikinizone", "description": "" },
+      "backNeck": { "name": "Rücken inkl. Nacken", "description": "" },
+      "chest": { "name": "Brustregion", "description": "" },
+      "belly": { "name": "Bauchregion", "description": "" }
     }
   },
   "testimonials": {

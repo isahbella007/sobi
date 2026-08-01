@@ -1,7 +1,9 @@
+
 import { getTranslations } from "next-intl/server";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Reveal } from "@/components/common/Reveal";
+import { Link } from "@/i18n/navigation";
 import { pricingCategories } from "@/content/site";
 
 export async function Pricing() {
@@ -113,6 +115,23 @@ export async function Pricing() {
           </Box>
         ))}
       </Reveal>
+
+      <Box sx={{ textAlign: "center", mt: { xs: 5, md: 6 } }}>
+        <Link href="/services">
+          <Typography
+            component="span"
+            sx={{
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.9rem",
+              color: "var(--accent)",
+              textDecoration: "underline",
+              textUnderlineOffset: "3px",
+            }}
+          >
+            {t("ctaFullMenu")} →
+          </Typography>
+        </Link>
+      </Box>
     </Reveal>
   );
 }

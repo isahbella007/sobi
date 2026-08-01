@@ -45,8 +45,8 @@ export default async function Home({
       <Nav />
       <Hero />
       <Services />
-      <Pricing />
-      <Testimonials />
+      {/* <Pricing /> */}
+      {/* <Testimonials /> */}
       <FindUs />
       {/* <Book /> */}
       {/* <Footer /> */}

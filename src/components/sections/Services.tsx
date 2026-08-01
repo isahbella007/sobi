@@ -1,15 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { SvgIconComponent } from "@mui/icons-material";
-import SpaOutlined from "@mui/icons-material/SpaOutlined";
-import FrontHandOutlined from "@mui/icons-material/FrontHandOutlined";
-import WaterDropOutlined from "@mui/icons-material/WaterDropOutlined";
 import { useTranslations } from "next-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Reveal } from "@/components/common/Reveal";
-import { services } from "@/content/site";
+import { ServiceIcon } from "@/components/common/ServiceIcons";
+import { Link } from "@/i18n/navigation";
+import { services, priceListCategories } from "@/content/site";
 
 const ROTATE_INTERVAL_MS = 3000;
 const PANEL_HEIGHT = { xs: 280, md: 440 };
@@ -21,35 +19,11 @@ const PLACEHOLDER_IMAGES: Record<string, string> = {
   waxing: "/services/waxing.jpg",
 };
 
-// No MUI icon reads as "foot" (SquareFoot is a ruler), so footCare gets a
-// small hand-drawn footprint; the other three map onto existing icons.
-function FootprintIcon({ sx }: { sx?: object }) {
-  return (
-    <Box
-      component="svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      sx={{ width: 20, height: 20, display: "block", ...sx }}
-    >
-      <path
-        d="M9.6 21c-1.4 0-2.5-1.1-2.5-2.6 0-1.8.6-3 .6-4.9 0-2.2-1.1-3.3-1.1-5.8C6.6 4.9 7.9 3 9.7 3c2 0 3.2 1.9 3.2 5 0 2.7-.9 3.9-.9 6.6 0 1.7.5 2.7.5 4.1 0 1.2-1.1 2.3-2.9 2.3z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <circle cx="7.9" cy="4.4" r="0.9" fill="currentColor" />
-      <circle cx="10.2" cy="3.5" r="0.9" fill="currentColor" />
-      <circle cx="12.3" cy="4" r="0.8" fill="currentColor" />
-      <circle cx="14" cy="5.1" r="0.7" fill="currentColor" />
-    </Box>
-  );
-}
-
-const SERVICE_ICONS: Record<string, SvgIconComponent> = {
-  skincare: SpaOutlined,
-  handCare: FrontHandOutlined,
-  waxing: WaterDropOutlined,
-};
+// Total treatment count per category, derived from the full price list so
+// this tagline never drifts out of sync with the actual menu.
+const CATEGORY_COUNTS: Record<string, number> = Object.fromEntries(
+  priceListCategories.map((cat) => [cat.id, cat.groups.reduce((sum, g) => sum + g.items.length, 0)])
+);
 
 export function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -106,11 +80,27 @@ export function Services() {
           fontSize: { xs: "1.75rem", md: "2.25rem" },
           color: "var(--text)",
           textAlign: "center",
-          mb: { xs: 4, md: 6 },
+          mb: 2,
         }}
       >
         {t("heading")}
       </Typography>
+
+      <Box sx={{ textAlign: "center", mb: { xs: 4, md: 6 } }}>
+        <Typography
+          component={Link}
+          href="/services"
+          sx={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "0.9rem",
+            color: "var(--accent)",
+            textDecoration: "underline",
+            textUnderlineOffset: "3px",
+          }}
+        >
+          {t("ctaFullMenu")} →
+        </Typography>
+      </Box>
 
       <Box
         sx={{
@@ -171,7 +161,6 @@ export function Services() {
           }}
         >
           {list.map((service, i) => {
-            const ServiceIcon = SERVICE_ICONS[service.id];
             return (
             <Box
               key={service.id}
@@ -208,11 +197,7 @@ export function Services() {
                     transition: "color 0.4s ease, border-color 0.4s ease",
                   }}
                 >
-                  {service.id === "footCare" ? (
-                    <FootprintIcon />
-                  ) : ServiceIcon ? (
-                    <ServiceIcon sx={{ fontSize: 20 }} />
-                  ) : null}
+                  <ServiceIcon id={service.id} />
                 </Box>
                 <Typography
                   sx={{
@@ -225,6 +210,19 @@ export function Services() {
                   {service.name}
                 </Typography>
               </Box>
+              <Typography
+                sx={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.05em",
+                  color: activeIndex === i ? "var(--accent)" : "var(--text)",
+                  opacity: 0.6,
+                  mt: 0.5,
+                  transition: "color 0.4s ease",
+                }}
+              >
+                {t("itemCount", { count: CATEGORY_COUNTS[service.id] })}
+              </Typography>
               <Typography
                 sx={{
                   fontFamily: "var(--font-sans)",
