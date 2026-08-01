@@ -29,9 +29,17 @@
     "headline": "Expert care for",
     "typewriterWords": ["Skincare", "Foot", "Hand", "Waxing"],
     "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis eget urna mollis ornare vel eu leo. Cras ultricies ligula sed magna dictum porta.",
-    "cta": "Book an appointment",
-    "footNoteText": "Open {hours}, by appointment.",
+    "cta": "Make a reservation",
+    "footNoteText": "Open {hours}.",
     "footNoteLink": "Find us"
+  },
+  "openingHours": {
+    "summary": "Mon–Thu, Fridays by appointment",
+    "rows": [
+      { "days": "Mon & Wed", "hours": "7:30 AM – 4:30 PM" },
+      { "days": "Tue & Thu", "hours": "7:30 AM – 6 PM" },
+      { "days": "Fri", "hours": "By appointment" }
+    ]
   },
   "stats": {
     "clients": { "value": "5,000+", "shortLabel": "5k+ Clients", "label": "Clients served" },
@@ -101,6 +109,8 @@
     "subheading": "From quick add-ons to our signature programs — everything we offer, in one place.",
     "note": "Valid from February 2026",
     "fromPrefix": "from",
+    "pageOf": "Page {current} of {total}",
+    "backToContents": "Back to contents",
     "footCareNote": "We're trained in diabetic and wound-care foot management.",
     "tabs": {
       "skincare": "Skincare",
@@ -313,8 +323,7 @@
   "book": {
     "heading": "Ready when you are",
     "subhead": "Reach out and we'll find a time that suits you.",
-    "bookButton": "Book an appointment",
-    "callButton": "Call the studio"
+    "bookButton": "Call to reserve"
   },
   "about": {
     "eyebrow": "About us",

@@ -29,9 +29,17 @@
     "headline": "Professionelle Pflege für",
     "typewriterWords": ["Kosmetik", "Füße", "Hände", "Waxing"],
     "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis eget urna mollis ornare vel eu leo. Cras ultricies ligula sed magna dictum porta.",
-    "cta": "Termin buchen",
-    "footNoteText": "Geöffnet {hours}, nach Vereinbarung.",
+    "cta": "Reservieren",
+    "footNoteText": "Geöffnet {hours}.",
     "footNoteLink": "So finden Sie uns"
+  },
+  "openingHours": {
+    "summary": "Mo–Do, freitags nach Vereinbarung",
+    "rows": [
+      { "days": "Mo & Mi", "hours": "7:30–16:30 Uhr" },
+      { "days": "Di & Do", "hours": "7:30–18 Uhr" },
+      { "days": "Fr", "hours": "Nach Vereinbarung" }
+    ]
   },
   "stats": {
     "clients": { "value": "5.000+", "shortLabel": "5.000+ Kunden", "label": "Kunden betreut" },
@@ -101,6 +109,8 @@
     "subheading": "Von schnellen Zusatzbehandlungen bis zu unseren Signature-Programmen — hier finden Sie unser gesamtes Leistungsangebot.",
     "note": "Gültig ab Februar 2026",
     "fromPrefix": "ab",
+    "pageOf": "Seite {current} von {total}",
+    "backToContents": "Zurück zum Inhaltsverzeichnis",
     "footCareNote": "Wir sind Diabetiker und Wundmanagement geschult.",
     "tabs": {
       "skincare": "Kosmetik",
@@ -310,8 +320,7 @@
   "book": {
     "heading": "Wann immer Sie bereit sind",
     "subhead": "Melden Sie sich, wir finden gemeinsam einen passenden Termin.",
-    "bookButton": "Termin buchen",
-    "callButton": "Studio anrufen"
+    "bookButton": "Jetzt anrufen"
   },
   "about": {
     "eyebrow": "Über uns",

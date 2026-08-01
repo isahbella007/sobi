@@ -37,7 +37,7 @@ const languageSx = {
   textDecoration: "none",
 };
 
-export function Nav() {
+export function Nav({ compact = false }: { compact?: boolean }) {
   const { sunDocked, dockedMark } = useIntro();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -59,7 +59,7 @@ export function Nav() {
         position: "sticky",
         top: 0,
         zIndex: 10,
-        height: NAV_HEIGHT,
+        height: compact ? 72 : NAV_HEIGHT,
         display: "grid",
         gridTemplateColumns: { xs: "auto 1fr auto", md: "1fr auto 1fr" },
         alignItems: "center",
@@ -90,14 +90,14 @@ export function Nav() {
           transition: "opacity 0.45s ease",
         }}
       >
-        <Box sx={{ width: SUN_DOCK_SIZE, height: SUN_DOCK_SIZE, flexShrink: 0 }}>
+        <Box sx={{ width: compact ? SUN_DOCK_SIZE * 0.7 : SUN_DOCK_SIZE, height: compact ? SUN_DOCK_SIZE * 0.7 : SUN_DOCK_SIZE, flexShrink: 0 }}>
           {dockedMark ?? <SunMark />}
         </Box>
         <Box
           component="span"
           sx={{
             fontFamily: "var(--font-serif)",
-            fontSize: "1.15rem",
+            fontSize: compact ? "0.95rem" : "1.15rem",
             fontWeight: 500,
             letterSpacing: "0.14em",
             textTransform: "uppercase",
@@ -108,9 +108,14 @@ export function Nav() {
         </Box>
       </Box>
 
-      <Box sx={{ display: { xs: "none", md: "flex" }, justifySelf: "center", alignItems: "center", gap: 5 }}>
+      <Box sx={{ display: { xs: "none", md: "flex" }, justifySelf: "center", alignItems: "center", gap: compact ? 3.5 : 5 }}>
         {navLinks.map((link) => (
-          <Box key={link.id} component={Link} href={link.href} sx={linkSx}>
+          <Box
+            key={link.id}
+            component={Link}
+            href={link.href}
+            sx={{ ...linkSx, fontSize: compact ? "0.7rem" : "0.75rem" }}
+          >
             {t(`links.${link.id}`)}
           </Box>
         ))}

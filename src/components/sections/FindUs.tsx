@@ -11,7 +11,7 @@ import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
 import MyLocationOutlinedIcon from "@mui/icons-material/MyLocationOutlined";
 import { Reveal } from "@/components/common/Reveal";
-import { streetAddress, postalCity, openingHours, mapEmbedSrc, mapQuery } from "@/content/site";
+import { streetAddress, postalCity, mapEmbedSrc, mapQuery } from "@/content/site";
 import { locateAndScan, type ScanResult } from "@/lib/adventureMode";
 
 const navigationUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
@@ -57,6 +57,8 @@ export function FindUs() {
   const [result, setResult] = useState<ScanResult | null>(null);
   const t = useTranslations("findUs");
   const tResults = useTranslations("findUs.adventure.results");
+  const tHours = useTranslations("openingHours");
+  const hoursRows = tHours.raw("rows") as { days: string; hours: string }[];
 
   function resultMessage(result: ScanResult): string {
     switch (result.kind) {
@@ -138,9 +140,19 @@ export function FindUs() {
           <Typography sx={{ fontFamily: "var(--font-sans)", color: "var(--text)", opacity: 0.85, mb: 1 }}>
             {streetAddress}, {postalCity}
           </Typography>
-          <Typography sx={{ fontFamily: "var(--font-sans)", color: "var(--text)", opacity: 0.85, mb: 2 }}>
-            {openingHours}
-          </Typography>
+          <Box sx={{ mb: 2 }}>
+            {hoursRows.map((row) => (
+              <Typography
+                key={row.days}
+                sx={{ fontFamily: "var(--font-sans)", color: "var(--text)", opacity: 0.85, fontSize: "0.95rem" }}
+              >
+                <Box component="span" sx={{ fontWeight: 600 }}>
+                  {row.days}
+                </Box>{" "}
+                — {row.hours}
+              </Typography>
+            ))}
+          </Box>
           <Typography sx={{ fontFamily: "var(--font-sans)", color: "var(--accent)", fontStyle: "italic", mb: 3 }}>
             {t("tagline")}
           </Typography>

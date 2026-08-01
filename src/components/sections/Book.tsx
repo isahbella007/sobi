@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Reveal } from "@/components/common/Reveal";
-import { bookingLink, phoneNumber } from "@/content/site";
+import { phoneNumberTel } from "@/content/site";
 
 export async function Book() {
   const t = await getTranslations("book");
@@ -34,14 +34,11 @@ export async function Book() {
       <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2, justifyContent: "center" }}>
         <Button
           component="a"
-          href={bookingLink}
+          href={`tel:${phoneNumberTel}`}
           variant="contained"
           sx={{ bgcolor: "var(--contrast)", color: "var(--accent)", "&:hover": { bgcolor: "var(--contrast)", opacity: 0.9 } }}
         >
           {t("bookButton")}
-        </Button>
-        <Button component="a" href={`tel:${phoneNumber}`} variant="outlined" sx={{ borderColor: "var(--contrast)", color: "var(--contrast)" }}>
-          {t("callButton")}
         </Button>
       </Box>
     </Reveal>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Nav } from "@/components/nav/Nav";
-import { ServicesMenu } from "@/components/sections/ServicesMenu";
+import { ServicesPamphlet } from "@/components/sections/ServicesPamphlet";
 import { routing } from "@/i18n/routing";
 
 export async function generateMetadata({
@@ -29,8 +29,8 @@ export default async function ServicesPage({
   setRequestLocale(locale);
   return (
     <>
-      <Nav />
-      <ServicesMenu />
+      <Nav compact />
+      <ServicesPamphlet />
       {/* <Footer /> */}
     </>
   );

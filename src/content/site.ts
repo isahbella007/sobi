@@ -11,9 +11,12 @@ export const daughterPhoto = "/team/tyra.jpg";
 
 export const streetAddress = "Street Address";
 export const postalCity = "1120 Wien";
-export const openingHours = "10AM - 4PM";
-export const phoneNumber = "xxx-xxx-xxx-xx";
-export const bookingLink = "#book"; // CONFIRM: replace with phone/email/booking link
+
+// Real contact info from the client's price list (public/sobi folder/*.pdf,
+// page 1). No online booking — every "book" CTA on the site is a phone
+// call, so this is both the display number and the tel: href value.
+export const phoneNumber = "0660 121 00 73";
+export const phoneNumberTel = "+436601620234";
 
 // TODO: replace with the studio's exact address once confirmed — this is a
 // generic 1120 Wien centre placeholder.
@@ -23,8 +26,7 @@ export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
 export const navLinks = [
   { id: "about", href: "/about" },
   { id: "services", href: "/services" },
-  { id: "findUs", href: { pathname: "/", hash: "find-us" } },
-  { id: "book", href: { pathname: "/", hash: "book" } },
+  { id: "findUs", href: { pathname: "/", hash: "find-us" } }
 ] as const;
 
 // Still used by BentoHero.tsx, which is currently unused/unmounted — left

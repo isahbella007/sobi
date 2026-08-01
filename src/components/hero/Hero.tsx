@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useIntro } from "@/components/intro/IntroProvider";
 import { RotatingWord } from "@/components/common/RotatingWord";
-import { openingHours, heroFootNoteHref, services } from "@/content/site";
+import { heroFootNoteHref, phoneNumberTel, services } from "@/content/site";
 
 const eyebrowSx = {
   fontFamily: "var(--font-sans)",
@@ -31,6 +31,7 @@ export function Hero() {
   const { introAwake } = useIntro();
   const t = useTranslations("hero");
   const tStats = useTranslations("stats");
+  const tHours = useTranslations("openingHours");
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const mobileImageRef = useRef<HTMLDivElement>(null);
@@ -180,7 +181,7 @@ export function Hero() {
 
         <Button
           component="a"
-          href="#book"
+          href={`tel:${phoneNumberTel}`}
           variant="contained"
           sx={{
             borderRadius: "44px",
@@ -197,7 +198,7 @@ export function Hero() {
         </Button>
 
         <Box sx={{ mt: 5, display: { xs: "none", md: "block" } }}>
-          <Typography sx={mutedSx}>{t("footNoteText", { hours: openingHours })}</Typography>
+          <Typography sx={mutedSx}>{t("footNoteText", { hours: tHours("summary") })}</Typography>
           <Typography
             component="a"
             href={heroFootNoteHref}
