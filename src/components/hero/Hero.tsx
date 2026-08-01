@@ -263,7 +263,7 @@ export function Hero() {
           opacity: 0,
           position: "relative",
           zIndex: 1,
-          right: { md: 120, lg: 400, xl: 600 }, // increase to shift left, use a negative value to shift right
+          right: { md: 60, lg: 200, xl: 300 }, // increase to shift left, use a negative value to shift right
           textAlign: "left",
         }}
       >
