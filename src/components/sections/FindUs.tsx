@@ -10,6 +10,7 @@ import Collapse from "@mui/material/Collapse";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
 import MyLocationOutlinedIcon from "@mui/icons-material/MyLocationOutlined";
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import AccessibleOutlinedIcon from "@mui/icons-material/AccessibleOutlined";
 import TrainOutlinedIcon from "@mui/icons-material/TrainOutlined";
 import DirectionsBusOutlinedIcon from "@mui/icons-material/DirectionsBusOutlined";
@@ -20,7 +21,7 @@ import LocalParkingOutlinedIcon from "@mui/icons-material/LocalParkingOutlined";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import type { SvgIconComponent } from "@mui/icons-material";
 import { Reveal } from "@/components/common/Reveal";
-import { streetAddress, postalCity, mapEmbedSrc, mapQuery, findUsPerks } from "@/content/site";
+import { streetAddress, postalCity, phoneNumber, phoneNumberTel, mapEmbedSrc, mapQuery, findUsPerks } from "@/content/site";
 import { locateAndScan, type ScanResult } from "@/lib/adventureMode";
 
 const navigationUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
@@ -177,125 +178,24 @@ export function FindUs() {
             {t("tagline")}
           </Typography>
 
-          <Box
+          <Typography
+            component="a"
+            href={`tel:${phoneNumberTel}`}
             sx={{
-              borderTop: "1px solid var(--highlight)",
-              pt: 2.5,
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              color: "var(--accent)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 0.75,
+              width: "fit-content",
+              textDecoration: "none",
+              "&:hover": { textDecoration: "underline" },
             }}
           >
-            <Box
-              component="label"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                cursor: "pointer",
-                userSelect: "none",
-              }}
-            >
-              <ExploreOutlinedIcon sx={{ fontSize: 20, color: "var(--accent)" }} />
-              <Typography
-                sx={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "0.85rem",
-                  letterSpacing: "0.04em",
-                  color: "var(--text)",
-                }}
-              >
-                {t("adventure.label")}
-              </Typography>
-              <Switch
-                checked={adventureMode}
-                onChange={(e) => handleToggle(e.target.checked)}
-                size="small"
-                sx={{
-                  ml: "auto",
-                  "& .MuiSwitch-track": { bgcolor: "var(--text)", opacity: 0.3 },
-                  "& .Mui-checked+.MuiSwitch-track": { bgcolor: "var(--accent) !important", opacity: "0.5 !important" },
-                  "& .Mui-checked .MuiSwitch-thumb": { bgcolor: "var(--accent)" },
-                }}
-              />
-            </Box>
-
-            <Collapse in={adventureMode}>
-              <Box sx={{ pt: 2 }}>
-                <Typography
-                  sx={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "0.8rem",
-                    color: "var(--text)",
-                    opacity: 0.65,
-                    mb: 2,
-                  }}
-                >
-                  {t("adventure.privacyNote")}
-                </Typography>
-
-                <Button
-                  onClick={handleLocate}
-                  disabled={phase === "scanning"}
-                  variant="contained"
-                  startIcon={<MyLocationOutlinedIcon />}
-                  sx={{
-                    bgcolor: "var(--accent)",
-                    color: "var(--contrast)",
-                    "&:hover": { bgcolor: "var(--accent)", opacity: 0.9 },
-                    "&.Mui-disabled": { bgcolor: "var(--accent)", opacity: 0.4, color: "var(--contrast)" },
-                  }}
-                >
-                  {t("adventure.locateButton")}
-                </Button>
-
-                <Box sx={{ minHeight: 96, display: "flex", alignItems: "center", mt: phase === "idle" ? 0 : 2 }}>
-                  {phase === "scanning" && (
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                      <RadarPulse />
-                      <Typography
-                        role="status"
-                        aria-live="polite"
-                        sx={{ fontFamily: "var(--font-sans)", fontSize: "0.85rem", color: "var(--text)", opacity: 0.7 }}
-                      >
-                        {t("adventure.scanning")}
-                      </Typography>
-                    </Box>
-                  )}
-
-                  {phase === "result" && result && (
-                    <Box role="status" aria-live="polite" sx={{ display: "flex", flexDirection: "column", gap: 1.25 }}>
-                      <Typography
-                        sx={{
-                          fontFamily: "var(--font-serif)",
-                          fontSize: "1.15rem",
-                          color: "var(--text)",
-                        }}
-                      >
-                        {resultMessage(result)}
-                      </Typography>
-                      {(result.kind === "nearby" || result.kind === "minutes" || result.kind === "far") && (
-                        <Button
-                          component="a"
-                          href={navigationUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          startIcon={<NearMeOutlinedIcon />}
-                          size="small"
-                          variant="outlined"
-                          sx={{
-                            alignSelf: "flex-start",
-                            borderColor: "var(--accent)",
-                            color: "var(--accent)",
-                            "&:hover": { borderColor: "var(--accent)", bgcolor: "transparent", opacity: 0.85 },
-                          }}
-                        >
-                          {t("adventure.navigateButton")}
-                        </Button>
-                      )}
-                    </Box>
-                  )}
-                </Box>
-              </Box>
-            </Collapse>
-          </Box>
+            <CallOutlinedIcon sx={{ fontSize: 18 }} />
+            {phoneNumberTel}
+          </Typography>
         </Box>
       </Box>
 

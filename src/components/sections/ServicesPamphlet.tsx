@@ -9,9 +9,15 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import { ServiceIcon } from "@/components/common/ServiceIcons";
 import { MenuRow } from "@/components/common/MenuRow";
 import { priceListCategories } from "@/content/site";
+
+// Sentinel activeCategory value for the cover's "All Services" entry —
+// shows every category's every group on one page instead of just one
+// category's pages.
+const ALL_CATEGORIES_ID = "all";
 
 export function ServicesPamphlet() {
   const t = useTranslations("priceList");
@@ -27,7 +33,7 @@ export function ServicesPamphlet() {
   const [activeCategory, setActiveCategory] = useState<string>(
     hasValidCategoryParam ? categoryParam! : priceListCategories[0].id
   );
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState<number | "all">(0);
   // Mobile starts open too (not just on a deep link) — the cover already
   // highlights the first category as "active", so leaving the panel
   // collapsed made it look selected but empty until tapped again.
@@ -54,17 +60,20 @@ export function ServicesPamphlet() {
     panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [mobileOpen, activeCategory]);
 
+  const isAllCategoriesView = activeCategory === ALL_CATEGORIES_ID;
   const category = priceListCategories.find((c) => c.id === activeCategory) ?? priceListCategories[0];
-  const page = category.groups[pageIndex] ?? category.groups[0];
+  const isAllView = pageIndex === "all";
+  const page = isAllView ? null : category.groups[pageIndex] ?? category.groups[0];
   const fromPrefix = t("fromPrefix");
-  const hasPrev = pageIndex > 0;
-  const hasNext = pageIndex < category.groups.length - 1;
+  const numericPageIndex = typeof pageIndex === "number" ? pageIndex : 0;
+  const hasPrev = typeof pageIndex === "number" && pageIndex > 0;
+  const hasNext = typeof pageIndex === "number" && pageIndex < category.groups.length - 1;
 
   // A stylized pseudo-3D page turn — GSAP rotates/fades the current page
   // out on its Y-axis, swaps in the new content, then rotates/fades it in.
   // There's no page-curl library here (deliberately, to avoid a new
   // dependency); this is the closest a CSS transform can get to "flipping".
-  function goTo(nextCategoryId: string, nextPage: number) {
+  function goTo(nextCategoryId: string, nextPage: number | "all") {
     if (nextCategoryId === activeCategory && nextPage === pageIndex) return;
 
     timelineRef.current?.kill();
@@ -118,7 +127,7 @@ export function ServicesPamphlet() {
             flexDirection: "column",
           }}
         >
-          <Box
+          {/* <Box
             aria-hidden
             sx={{
               position: "absolute",
@@ -130,7 +139,7 @@ export function ServicesPamphlet() {
               opacity: 0.1,
               pointerEvents: "none",
             }}
-          />
+          /> */}
 
           <Box sx={{ position: "relative", zIndex: 1 }}>
             
@@ -182,7 +191,7 @@ export function ServicesPamphlet() {
                         color: isActive ? "var(--accent)" : "var(--text)",
                       }}
                     >
-                      {t(`tabs.${cat.id}`)}
+                      {t(`tabs.${cat.id}`)} 
                     </Typography>
                     <Typography
                       sx={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", color: "var(--text)", opacity: 0.6 }}
@@ -193,6 +202,50 @@ export function ServicesPamphlet() {
                 </Box>
               );
             })}
+
+            <Box
+              onClick={() => selectCategory(ALL_CATEGORIES_ID)}
+              role="button"
+              tabIndex={0}
+              sx={{
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 1.5,
+                px: 2,
+                py: 1.5,
+                borderRadius: "10px",
+                bgcolor: isAllCategoriesView ? "color-mix(in oklch, var(--accent) 15%, transparent)" : "transparent",
+                transition: "background-color 0.25s ease",
+                "&:hover": { bgcolor: "color-mix(in oklch, var(--accent) 10%, transparent)" },
+              }}
+            >
+              <Box sx={{ color: isAllCategoriesView ? "var(--accent)" : "var(--text)", display: "flex", flexShrink: 0 }}>
+                <GridViewOutlinedIcon sx={{ fontSize: 20 }} />
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Typography
+                  sx={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.95rem",
+                    fontWeight: 600,
+                    color: isAllCategoriesView ? "var(--accent)" : "var(--text)",
+                  }}
+                >
+                  {t("allCategoriesLabel")}
+                </Typography>
+                <Typography
+                  sx={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", color: "var(--text)", opacity: 0.6 }}
+                >
+                  {tServices("itemCount", {
+                    count: priceListCategories.reduce(
+                      (sum, cat) => sum + cat.groups.reduce((s, g) => s + g.items.length, 0),
+                      0
+                    ),
+                  })}
+                </Typography>
+              </Box>
+            </Box>
           </Box>
 
           <Typography
@@ -243,7 +296,7 @@ export function ServicesPamphlet() {
               category's pages (e.g. skincare has 7) instead of clicking
               Next repeatedly. Lives outside pageRef so it doesn't flip with
               the page content; only shown when there's more than one page. */}
-          {category.groups.length > 1 && (
+          {!isAllCategoriesView && category.groups.length > 1 && (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 3 }}>
               {category.groups.map((g, idx) => {
                 const isActive = idx === pageIndex;
@@ -276,80 +329,201 @@ export function ServicesPamphlet() {
                   </Box>
                 );
               })}
+              <Box
+                onClick={() => goTo(activeCategory, "all")}
+                role="button"
+                tabIndex={0}
+                sx={{
+                  cursor: "pointer",
+                  px: 1.75,
+                  py: 0.6,
+                  borderRadius: "999px",
+                  border: "1px solid",
+                  borderColor: isAllView ? "var(--accent)" : "var(--highlight)",
+                  bgcolor: isAllView ? "var(--accent)" : "transparent",
+                  color: isAllView ? "var(--contrast)" : "var(--text)",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                  transition: "background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease",
+                  "&:hover": {
+                    borderColor: "var(--accent)",
+                    color: isAllView ? "var(--contrast)" : "var(--accent)",
+                  },
+                }}
+              >
+                {t("allPages")}
+              </Box>
             </Box>
           )}
 
           <Box ref={pageRef}>
-            {category.id === "footCare" && pageIndex === 0 && (
-              <Typography
-                sx={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "0.85rem",
-                  fontStyle: "italic",
-                  color: "var(--accent)",
-                  mb: 3,
-                }}
-              >
-                {t("footCareNote")}
-              </Typography>
-            )}
+            {isAllCategoriesView ? (
+              priceListCategories.map((cat) => (
+                <Box key={cat.id} sx={{ mb: 5 }}>
+                  <Typography
+                    sx={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "1.3rem",
+                      color: "var(--accent)",
+                      mb: 2,
+                      pb: 1,
+                      borderBottom: "2px solid var(--accent)",
+                    }}
+                  >
+                    {t(`tabs.${cat.id}`)}
+                  </Typography>
+                  {/* {cat.id === "footCare" && (
+                    <Typography
+                      sx={{
+                        fontFamily: "var(--font-sans)",
+                        fontSize: "0.85rem",
+                        fontStyle: "italic",
+                        color: "var(--accent)",
+                        mb: 3,
+                      }}
+                    >
+                      {t("footCareNote")}
+                    </Typography>
+                  )} */}
+                  {cat.groups.map((g) => (
+                    <Box key={g.id} sx={{ mb: 4 }}>
+                      <Typography
+                        sx={{
+                          fontFamily: "var(--font-sans)",
+                          fontSize: "0.75rem",
+                          letterSpacing: "0.15em",
+                          textTransform: "uppercase",
+                          color: "var(--highlight)",
+                          mb: 2,
+                        }}
+                      >
+                        {t(`groups.${g.id}`)}
+                      </Typography>
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        {g.items.map((item) => (
+                          <MenuRow
+                            key={item.id}
+                            item={item}
+                            name={t(`items.${item.id}.name`)}
+                            description={t(`items.${item.id}.description`)}
+                            fromPrefix={fromPrefix}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  ))}
+                </Box>
+              ))
+            ) : (
+              <>
+                {/* {category.id === "footCare" && pageIndex === 0 && (
+                  <Typography
+                    sx={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "0.85rem",
+                      fontStyle: "italic",
+                      color: "var(--accent)",
+                      mb: 3,
+                    }}
+                  >
+                    {t("footCareNote")}
+                  </Typography>
+                )} */}
 
-            <Typography
+                {isAllView ? (
+                  category.groups.map((g) => (
+                    <Box key={g.id} sx={{ mb: 4 }}>
+                      <Typography
+                        sx={{
+                          fontFamily: "var(--font-sans)",
+                          fontSize: "0.75rem",
+                          letterSpacing: "0.15em",
+                          textTransform: "uppercase",
+                          color: "var(--highlight)",
+                          mb: 2,
+                        }}
+                      >
+                        {t(`groups.${g.id}`)}
+                      </Typography>
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        {g.items.map((item) => (
+                          <MenuRow
+                            key={item.id}
+                            item={item}
+                            name={t(`items.${item.id}.name`)}
+                            description={t(`items.${item.id}.description`)}
+                            fromPrefix={fromPrefix}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  ))
+                ) : (
+                  <>
+                    <Typography
+                      sx={{
+                        fontFamily: "var(--font-sans)",
+                        fontSize: "0.75rem",
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        color: "var(--highlight)",
+                        mb: 2,
+                      }}
+                    >
+                      {t(`groups.${page!.id}`)}
+                    </Typography>
+
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      {page!.items.map((item) => (
+                        <MenuRow
+                          key={item.id}
+                          item={item}
+                          name={t(`items.${item.id}.name`)}
+                          description={t(`items.${item.id}.description`)}
+                          fromPrefix={fromPrefix}
+                        />
+                      ))}
+                    </Box>
+                  </>
+                )}
+              </>
+            )}
+          </Box>
+
+          {!isAllView && !isAllCategoriesView && (
+            <Box
               sx={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.75rem",
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "var(--highlight)",
-                mb: 2,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                mt: 4,
+                pt: 3,
+                borderTop: "1px solid var(--highlight)",
               }}
             >
-              {t(`groups.${page.id}`)}
-            </Typography>
-
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              {page.items.map((item) => (
-                <MenuRow
-                  key={item.id}
-                  item={item}
-                  name={t(`items.${item.id}.name`)}
-                  description={t(`items.${item.id}.description`)}
-                  fromPrefix={fromPrefix}
-                />
-              ))}
+              <IconButton
+                disabled={!hasPrev}
+                onClick={() => goTo(activeCategory, numericPageIndex - 1)}
+                aria-label="Previous page"
+                sx={{ color: hasPrev ? "var(--accent)" : "var(--highlight)" }}
+              >
+                <ChevronLeftIcon />
+              </IconButton>
+              <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", opacity: 0.6 }}>
+                {t("pageOf", { current: numericPageIndex + 1, total: category.groups.length })}
+              </Typography>
+              <IconButton
+                disabled={!hasNext}
+                onClick={() => goTo(activeCategory, numericPageIndex + 1)}
+                aria-label="Next page"
+                sx={{ color: hasNext ? "var(--accent)" : "var(--highlight)" }}
+              >
+                <ChevronRightIcon />
+              </IconButton>
             </Box>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              mt: 4,
-              pt: 3,
-              borderTop: "1px solid var(--highlight)",
-            }}
-          >
-            <IconButton
-              disabled={!hasPrev}
-              onClick={() => goTo(activeCategory, pageIndex - 1)}
-              aria-label="Previous page"
-              sx={{ color: hasPrev ? "var(--accent)" : "var(--highlight)" }}
-            >
-              <ChevronLeftIcon />
-            </IconButton>
-            <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", opacity: 0.6 }}>
-              {t("pageOf", { current: pageIndex + 1, total: category.groups.length })}
-            </Typography>
-            <IconButton
-              disabled={!hasNext}
-              onClick={() => goTo(activeCategory, pageIndex + 1)}
-              aria-label="Next page"
-              sx={{ color: hasNext ? "var(--accent)" : "var(--highlight)" }}
-            >
-              <ChevronRightIcon />
-            </IconButton>
-          </Box>
+          )}
         </Box>
       </Box>
     </Box>

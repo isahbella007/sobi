@@ -16,7 +16,7 @@ export const postalCity = "1120 Wien";
 // page 1). No online booking — every "book" CTA on the site is a phone
 // call, so this is both the display number and the tel: href value.
 export const phoneNumber = "0660 121 00 73";
-export const phoneNumberTel = "+436601620234";
+export const phoneNumberTel = "+436601210073";
 
 // TODO: replace with the studio's exact address once confirmed — this is a
 // generic 1120 Wien centre placeholder.

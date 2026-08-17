@@ -111,6 +111,8 @@
     "fromPrefix": "ab",
     "pageOf": "Seite {current} von {total}",
     "backToContents": "Zurück zum Inhaltsverzeichnis",
+    "allPages": "Alle",
+    "allCategoriesLabel": "Alle Leistungen",
     "footCareNote": "Wir sind Diabetiker und Wundmanagement geschult.",
     "tabs": {
       "skincare": "Kosmetik",

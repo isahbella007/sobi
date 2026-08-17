@@ -111,6 +111,8 @@
     "fromPrefix": "from",
     "pageOf": "Page {current} of {total}",
     "backToContents": "Back to contents",
+    "allPages": "All",
+    "allCategoriesLabel": "All Services",
     "footCareNote": "We're trained in diabetic and wound-care foot management.",
     "tabs": {
       "skincare": "Skincare",

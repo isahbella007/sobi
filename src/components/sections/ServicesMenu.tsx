@@ -113,7 +113,7 @@ export function ServicesMenu() {
       </Box>
 
       <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 6, md: 8 }, maxWidth: 1100, mx: "auto" }}>
-        {category.id === "footCare" && (
+        {/* {category.id === "footCare" && (
           <Typography
             sx={{
               fontFamily: "var(--font-sans)",
@@ -126,7 +126,7 @@ export function ServicesMenu() {
           >
             {t("footCareNote")}
           </Typography>
-        )}
+        )} */}
 
         <Reveal
           stagger
@@ -156,7 +156,7 @@ export function ServicesMenu() {
                   mb: 2,
                 }}
               >
-                {t(`groups.${group.id}`)}
+                {t(`groups.${group.id}`)} 
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 {group.items.map((item) => (
