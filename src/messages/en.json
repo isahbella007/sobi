@@ -28,7 +28,7 @@
     "eyebrow": "SOBI PROFESSIONELLE",
     "headline": "Expert care for",
     "typewriterWords": ["Skincare", "Foot", "Hand", "Waxing"],
-    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis eget urna mollis ornare vel eu leo. Cras ultricies ligula sed magna dictum porta.",
+    "message": "We combine proven expertise with modern methods and place special value on personal, individualized care for your well-being and a well-groomed appearance.",
     "cta": "Make a reservation",
     "footNoteText": "Open {hours}.",
     "footNoteLink": "Find us"
@@ -40,11 +40,6 @@
       { "days": "Tue & Thu", "hours": "7:30 AM – 6 PM" },
       { "days": "Fri", "hours": "By appointment" }
     ]
-  },
-  "stats": {
-    "clients": { "value": "5,000+", "shortLabel": "5k+ Clients", "label": "Clients served" },
-    "years": { "value": "15", "shortLabel": "15 Years", "label": "Years of experience" },
-    "services": { "shortLabel": "{count} Services", "label": "Core services" }
   },
   "services": {
     "heading": "What we do",

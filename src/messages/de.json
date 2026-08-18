@@ -28,7 +28,7 @@
     "eyebrow": "SOBI PROFESSIONELLE",
     "headline": "Professionelle Pflege für",
     "typewriterWords": ["Kosmetik", "Füße", "Hände", "Waxing"],
-    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis eget urna mollis ornare vel eu leo. Cras ultricies ligula sed magna dictum porta.",
+    "message": "Wir verbinden bewährtes Fachwissen mit modernen Methoden und legen besonderen Wert auf persönliche, individuelle Betreuung für Ihr Wohlbefinden und ein gepflegtes Erscheinungsbild.",
     "cta": "Reservieren",
     "footNoteText": "Geöffnet {hours}.",
     "footNoteLink": "So finden Sie uns"
@@ -40,11 +40,6 @@
       { "days": "Di & Do", "hours": "7:30–18 Uhr" },
       { "days": "Fr", "hours": "Nach Vereinbarung" }
     ]
-  },
-  "stats": {
-    "clients": { "value": "5.000+", "shortLabel": "5.000+ Kunden", "label": "Kunden betreut" },
-    "years": { "value": "15", "shortLabel": "15 Jahre", "label": "Jahre Erfahrung" },
-    "services": { "shortLabel": "{count} Leistungen", "label": "Kernleistungen" }
   },
   "services": {
     "heading": "Unsere Leistungen",

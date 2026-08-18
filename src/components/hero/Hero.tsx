@@ -30,23 +30,23 @@ const mutedSx = {
 export function Hero() {
   const { introAwake } = useIntro();
   const t = useTranslations("hero");
-  const tStats = useTranslations("stats");
+  // const tStats = useTranslations("stats");
   const tHours = useTranslations("openingHours");
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const mobileImageRef = useRef<HTMLDivElement>(null);
   const sideRef = useRef<HTMLDivElement>(null);
 
-  const stats = [
-    { key: "clients", value: tStats("clients.value"), shortLabel: tStats("clients.shortLabel"), label: tStats("clients.label") },
-    { key: "years", value: tStats("years.value"), shortLabel: tStats("years.shortLabel"), label: tStats("years.label") },
-    {
-      key: "services",
-      value: `${services.length}`,
-      shortLabel: tStats("services.shortLabel", { count: services.length }),
-      label: tStats("services.label"),
-    },
-  ];
+  // const stats = [
+  //   { key: "clients", value: tStats("clients.value"), shortLabel: tStats("clients.shortLabel"), label: tStats("clients.label") },
+  //   { key: "years", value: tStats("years.value"), shortLabel: tStats("years.shortLabel"), label: tStats("years.label") },
+  //   {
+  //     key: "services",
+  //     value: `${services.length}`,
+  //     shortLabel: tStats("services.shortLabel", { count: services.length }),
+  //     label: tStats("services.label"),
+  //   },
+  // ];
 
   useEffect(() => {
     if (!introAwake) return;
@@ -146,7 +146,7 @@ export function Hero() {
         {/* Mobile-only compact stats — sits before the CTA, left-aligned
             like every other line in this block (desktop keeps its own
             tick-row treatment over in the sideRef column). */}
-        <Box
+        {/* <Box
           sx={{
             display: { xs: "flex", md: "none" },
             alignItems: "center",
@@ -177,7 +177,7 @@ export function Hero() {
               )}
             </Box>
           ))}
-        </Box>
+        </Box> */}
 
         <Button
           component="a"
@@ -216,7 +216,7 @@ export function Hero() {
       </Box>
 
       {/* One large wreath, faded, sitting in the right-middle behind the stats — not tiled. Desktop only. */}
-      <Box
+      {/* <Box
         ref={imageRef}
         aria-hidden="true"
         sx={{
@@ -235,7 +235,7 @@ export function Hero() {
           pointerEvents: "none",
           zIndex: 0,
         }}
-      />
+      /> */}
 
       {/* Mobile-only backdrop — flat.png (leaves) tiled at low opacity
           across the entire section, standing in for the desktop wreath. */}
@@ -257,7 +257,7 @@ export function Hero() {
 
       {/* RIGHT — stats as tick rows, desktop only. The mobile stats live
           inline in the LEFT block above, before the CTA. */}
-      <Box
+      {/* <Box
         ref={sideRef}
         sx={{
           opacity: 0,
@@ -287,7 +287,7 @@ export function Hero() {
             </Box>
           ))}
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
