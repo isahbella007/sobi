@@ -1,14 +1,3 @@
-// "Adventure Mode" distance guesser for FindUs — a playful, zero-cost,
-// zero-network stand-in for a real routing API. Reads the visitor's real
-// coordinates via the browser's HTML5 Geolocation API, then runs them
-// through the Haversine formula against the studio's coordinates. No
-// external requests, no API keys — everything happens on-device. Not a
-// real ETA — replace with a proper routing API if this ever needs to be
-// precise (turn-by-turn distance rather than as-the-crow-flies).
-
-// Approximate centroid of Meidling (1120 Wien), where the studio sits.
-// CONFIRM: swap for the exact studio coordinates once the street address
-// in site.ts is finalized.
 const STUDIO_COORDS = { lat: 48.1775, lon: 16.3345 };
 
 // Assumed average speed for a mixed city trip (car/tram/walk) — enough to
@@ -42,10 +31,7 @@ function classifyDistance(km: number): ScanResult {
   return { kind: "minutes", minutes: Math.max(2, Math.round((km / ASSUMED_KMH) * 60)) };
 }
 
-// Wraps the callback-based Geolocation API in a Promise and buckets the
-// result. "denied" is split out from "error" so the UI can tell "you said
-// no" apart from "your browser/device couldn't do this" and word the
-// message accordingly.
+
 export function locateAndScan(): Promise<ScanResult> {
   return new Promise((resolve) => {
     if (typeof navigator === "undefined" || !("geolocation" in navigator)) {

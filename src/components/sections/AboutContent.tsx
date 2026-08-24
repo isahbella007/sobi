@@ -83,7 +83,7 @@ export function AboutContent() {
         </Box>
 
         {/* Echoes the Hero's wreath motif so the page still feels like SOBI, not a generic doc page. */}
-        <Box
+        {/* <Box
           aria-hidden
           sx={{
             display: { xs: "none", md: "block" },
@@ -100,11 +100,13 @@ export function AboutContent() {
             opacity: 0.35,
             pointerEvents: "none",
           }}
-        />
+        /> */}
       </Box>
 
-      {/* Block A — the founding line, then the 30-year story pulled out as a first-person quote */}
-      <Reveal as="section" stagger sx={{ px: { xs: 3, md: 6 }, py: { xs: 8, md: 10 }, bgcolor: "var(--contrast)" }}>
+      {/* Block A — the founding line, then the 30-year story pulled out as a first-person quote.
+          pb (not py) here: Block B shares this same bgcolor with no divider between them, so a
+          full py on both would double up into a much bigger gap than either section intends. */}
+      <Reveal as="section" stagger sx={{ px: { xs: 3, md: 6 }, pt: { xs: 8, md: 10 }, pb: { xs: 3, md: 4 }, bgcolor: "var(--contrast)" }}>
         <Box sx={{ maxWidth: 640, mx: "auto" }}>
           <Typography sx={{ ...bodySx, mb: 4 }}>{founding}</Typography>
           <Box sx={{ borderLeft: "3px solid var(--accent)", pl: { xs: 2.5, md: 3 } }}>
@@ -123,24 +125,8 @@ export function AboutContent() {
         </Box>
       </Reveal>
 
-      {/* Block B — the mother-daughter team, faces placed right beside the paragraph about them */}
-      <Reveal as="section" sx={{ px: { xs: 3, md: 6 }, py: { xs: 8, md: 10 }, bgcolor: "var(--contrast)" }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            alignItems: "center",
-            gap: { xs: 4, md: 7 },
-            maxWidth: 780,
-            mx: "auto",
-          }}
-        >
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1.5, flexShrink: 0 }}>
-            <Box sx={{ display: "flex", gap: 1.5 }}>
-              <Avatar name="Sobi" size="lg" />
-              <Avatar name={daughterName} src={daughterPhoto} size="lg" />
-            </Box>
-          </Box>
+      <Reveal as="section" sx={{ px: { xs: 3, md: 6 }, pt: { xs: 3, md: 4 }, pb: { xs: 8, md: 10 }, bgcolor: "var(--contrast)" }}>
+        <Box sx={{ maxWidth: 640, mx: "auto" }}>
           <Typography sx={{ ...bodySx, textAlign: { xs: "center", md: "left" } }}>{team}</Typography>
         </Box>
       </Reveal>

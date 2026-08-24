@@ -10,7 +10,7 @@ export const daughterName = "Tyra";
 export const daughterPhoto = "/team/tyra.jpg";
 
 export const streetAddress = "Street Address";
-export const postalCity = "1120 Wien";
+export const postalCity = "1220 Wien";
 
 // Real contact info from the client's price list (public/sobi folder/*.pdf,
 // page 1). No online booking — every "book" CTA on the site is a phone
@@ -20,7 +20,7 @@ export const phoneNumberTel = "+436601210073";
 
 // TODO: replace with the studio's exact address once confirmed — this is a
 // generic 1120 Wien centre placeholder.
-export const mapQuery = "1120 Wien, Austria";
+export const mapQuery = "1220 Wien, Austria";
 export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
 
 // Real "getting here" perks from the client — icon assignment lives in

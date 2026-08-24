@@ -143,43 +143,7 @@ export function Hero() {
           {t("message")}
         </Typography>
 
-        {/* Mobile-only compact stats — sits before the CTA, left-aligned
-            like every other line in this block (desktop keeps its own
-            tick-row treatment over in the sideRef column). */}
-        {/* <Box
-          sx={{
-            display: { xs: "flex", md: "none" },
-            alignItems: "center",
-            justifyContent: "flex-start",
-            flexWrap: "wrap",
-            gap: 1,
-            mb: 3,
-          }}
-        >
-          {stats.map((stat, i) => (
-            <Box key={stat.key} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Typography
-                sx={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "0.95rem",
-                  letterSpacing: "0.02em",
-                  color: "var(--text)",
-                  opacity: 0.85,
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {stat.shortLabel}
-              </Typography>
-              {i < stats.length - 1 && (
-                <Box component="span" sx={{ color: "var(--highlight)", opacity: 0.7, fontSize: "0.95rem" }}>
-                  ·
-                </Box>
-              )}
-            </Box>
-          ))}
-        </Box> */}
-
-        <Button
+        {/* <Button
           component="a"
           href={`tel:${phoneNumberTel}`}
           variant="contained"
@@ -195,7 +159,7 @@ export function Hero() {
           <Box component="span" className="hero-cta-arrow" sx={{ color:"#FFFFFF", display: "inline-block", ml: 1 }}>
             →
           </Box>
-        </Button>
+        </Button> */}
 
         <Box sx={{ mt: 5, display: { xs: "none", md: "block" } }}>
           <Typography sx={mutedSx}>{t("footNoteText", { hours: tHours("summary") })}</Typography>
@@ -214,80 +178,6 @@ export function Hero() {
           </Typography>
         </Box>
       </Box>
-
-      {/* One large wreath, faded, sitting in the right-middle behind the stats — not tiled. Desktop only. */}
-      {/* <Box
-        ref={imageRef}
-        aria-hidden="true"
-        sx={{
-          opacity: 0,
-          display: { xs: "none", md: "block" },
-          position: "absolute",
-          top: "50%",
-          right: { md: "3%" },
-          transform: "translateY(-50%)",
-          width: { md: 480, lg: 600 },
-          aspectRatio: "1 / 1",
-          backgroundImage: "url(/wreath_transparent.png)",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "contain",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      /> */}
-
-      {/* Mobile-only backdrop — flat.png (leaves) tiled at low opacity
-          across the entire section, standing in for the desktop wreath. */}
-      <Box
-        ref={mobileImageRef}
-        aria-hidden="true"
-        sx={{
-          opacity: 0,
-          display: { xs: "block", md: "none" },
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "url(/flat.png)",
-          backgroundRepeat: "repeat",
-          backgroundSize: "340px 340px",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-
-      {/* RIGHT — stats as tick rows, desktop only. The mobile stats live
-          inline in the LEFT block above, before the CTA. */}
-      {/* <Box
-        ref={sideRef}
-        sx={{
-          opacity: 0,
-          position: "relative",
-          zIndex: 1,
-          right: { md: 60, lg: 200, xl: 300 }, // increase to shift left, use a negative value to shift right
-          textAlign: "left",
-        }}
-      >
-        <Box
-          sx={{
-            display: { xs: "none", md: "flex" },
-            flexDirection: "column",
-            alignItems: "flex-end",
-            gap: 2.5,
-          }}
-        >
-          {stats.map((stat) => (
-            <Box key={stat.key} sx={{ display: "flex", alignItems: "center", gap: 1.5, justifyContent: "flex-end" }}>
-              <Box sx={{ width: 22, height: "1px", bgcolor: "var(--highlight)", flexShrink: 0 }} />
-              <Typography sx={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--text)", whiteSpace: "nowrap" }}>
-                <Box component="span" sx={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--text)", mr: 0.5 }}>
-                  {stat.value}
-                </Box>
-                {stat.label}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
-      </Box> */}
     </Box>
   );
 }
