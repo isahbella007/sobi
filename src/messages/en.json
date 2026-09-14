@@ -313,6 +313,11 @@
       "parkingGarage": "On-site parking (discount with the Westfield app)",
       "donauZentrum": "Direct access from Donau Zentrum"
     },
+    "location": {
+      "streetSomething": "Donauzentrum Medical Center",
+      "streetAddress": "1 Donaustadt Street, 5th Floor, Suite 705",
+      "postalCity": "1220 Austria"
+    },
     "adventure": {
       "label": "Adventure Mode — how close are you, really?",
       "privacyNote": "We'll ask your browser for your location and do the math right there — nothing gets sent anywhere.",

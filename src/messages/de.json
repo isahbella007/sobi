@@ -310,6 +310,11 @@
       "parkingGarage": "Parkgarage vor Ort (Rabatt mit der Westfield-App)",
       "donauZentrum": "Direkter Zugang vom Donau Zentrum"
     },
+    "location": {
+      "streetSomething": "Donauzentrum Ärztezentrum ",
+      "streetAddress": "Donaustadtstraße 1, Stock 5 Top 705",
+      "postalCity": "1220 Wien"
+    },
     "adventure": {
       "label": "Abenteuer-Modus — wie nah sind Sie wirklich?",
       "privacyNote": "Wir fragen Ihren Browser nach Ihrem Standort und rechnen direkt dort — es wird nichts irgendwohin gesendet.",

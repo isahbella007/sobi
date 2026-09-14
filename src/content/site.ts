@@ -9,7 +9,8 @@
 export const daughterName = "Tyra";
 export const daughterPhoto = "/team/tyra.jpg";
 
-export const streetAddress = "Street Address";
+export const streetSomething = "Donauzentrum Ärztezentrum "
+export const streetAddress = "Donaustadtstraße 1, Stock 5 Top 705";
 export const postalCity = "1220 Wien";
 
 // Real contact info from the client's price list (public/sobi folder/*.pdf,
@@ -20,7 +21,7 @@ export const phoneNumberTel = "+436601210073";
 
 // TODO: replace with the studio's exact address once confirmed — this is a
 // generic 1120 Wien centre placeholder.
-export const mapQuery = "1220 Wien, Austria";
+export const mapQuery = "Donaustadtstraße 1, 1220 Wien, Austria";
 export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
 
 // Real "getting here" perks from the client — icon assignment lives in

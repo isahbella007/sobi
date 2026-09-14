@@ -21,7 +21,7 @@ import LocalParkingOutlinedIcon from "@mui/icons-material/LocalParkingOutlined";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import type { SvgIconComponent } from "@mui/icons-material";
 import { Reveal } from "@/components/common/Reveal";
-import { streetAddress, postalCity, phoneNumber, phoneNumberTel, mapEmbedSrc, mapQuery, findUsPerks } from "@/content/site";
+import { streetSomething, streetAddress, postalCity, phoneNumber, phoneNumberTel, mapEmbedSrc, mapQuery, findUsPerks } from "@/content/site";
 import { locateAndScan, type ScanResult } from "@/lib/adventureMode";
 
 const navigationUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
@@ -159,7 +159,10 @@ export function FindUs() {
             {t("heading")}
           </Typography>
           <Typography sx={{ fontFamily: "var(--font-sans)", color: "var(--text)", opacity: 0.85, mb: 1 }}>
-            {streetAddress}, {postalCity}
+            {t('location.streetSomething')}
+          </Typography>
+          <Typography sx={{ fontFamily: "var(--font-sans)", color: "var(--text)", opacity: 0.85, mb: 1 }}>
+            {t('location.streetAddress')}, {t('location.postalCity')}
           </Typography>
           <Box sx={{ mb: 2 }}>
             {hoursRows.map((row) => (
