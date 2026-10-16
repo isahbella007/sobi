@@ -93,8 +93,9 @@ export function Nav({ compact = false }: { compact?: boolean }) {
         <Box
           sx={{
             // TEMP debug: larger box + red background to inspect the mark's footprint.
-            width: compact ? 72 * 0.7 : 100,
-            height: compact ? 72 * 0.7 : 100,
+            // Smaller on phones so the mark doesn't crowd the wordmark.
+            width: compact ? 72 * 0.7 : { xs: 60, sm: 100 },
+            height: compact ? 72 * 0.7 : { xs: 60, sm: 100 },
             // backgroundColor: "red",
             flexShrink: 0,
           }}
@@ -131,9 +132,10 @@ export function Nav({ compact = false }: { compact?: boolean }) {
             component="span"
             sx={{
               fontFamily: "var(--font-sans)",
-              fontSize: compact ? "0.5rem" : "0.6rem",
+              fontSize: compact ? "0.5rem" : { xs: "0.55rem", sm: "0.6rem" },
               fontWeight: 500,
-              letterSpacing: "0.28em",
+              // Tighter tracking on phones, where the wordmark above is just "SOBI".
+              letterSpacing: { xs: "0.16em", sm: "0.28em" },
               textTransform: "uppercase",
               color: "var(--accent)",
               lineHeight: 1,
