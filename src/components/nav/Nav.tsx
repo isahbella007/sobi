@@ -38,7 +38,7 @@ const languageSx = {
 };
 
 export function Nav({ compact = false }: { compact?: boolean }) {
-  const { sunDocked, dockedMark } = useIntro();
+  const { sunDocked } = useIntro();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const locale = useLocale();
@@ -90,21 +90,52 @@ export function Nav({ compact = false }: { compact?: boolean }) {
           transition: "opacity 0.45s ease",
         }}
       >
-        <Box sx={{ width: compact ? SUN_DOCK_SIZE * 0.7 : SUN_DOCK_SIZE, height: compact ? SUN_DOCK_SIZE * 0.7 : SUN_DOCK_SIZE, flexShrink: 0 }}>
-          {dockedMark ?? <SunMark />}
-        </Box>
         <Box
-          component="span"
           sx={{
-            fontFamily: "var(--font-serif)",
-            fontSize: compact ? "0.95rem" : "1.15rem",
-            fontWeight: 500,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "var(--text)",
+            // TEMP debug: larger box + red background to inspect the mark's footprint.
+            width: compact ? 72 * 0.7 : 100,
+            height: compact ? 72 * 0.7 : 100,
+            // backgroundColor: "red",
+            flexShrink: 0,
           }}
         >
-          {t("brand")}
+          <SunMark />
+        </Box>
+        {/* Wordmark lockup: SOBI with the tagline tracked out beneath it.
+            inline-flex column so both lines share the wordmark's width. */}
+        <Box
+          component="span"
+          sx={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: compact ? 0.25 : 0.5 }}
+        >
+          <Box
+            component="span"
+            sx={{
+              fontFamily: "var(--font-serif)",
+              fontSize: compact ? "0.95rem" : "1.15rem",
+              fontWeight: 500,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--text)",
+              lineHeight: 1,
+            }}
+          >
+            {t("brand")}
+          </Box>
+          <Box
+            component="span"
+            sx={{
+              fontFamily: "var(--font-sans)",
+              fontSize: compact ? "0.5rem" : "0.6rem",
+              fontWeight: 500,
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              lineHeight: 1,
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t("tagline")}
+          </Box>
         </Box>
       </Box>
 

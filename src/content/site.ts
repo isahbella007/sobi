@@ -1,10 +1,3 @@
-// Placeholder content for the SOBI mockup. Every CONFIRM/TODO marker below
-// is real client-facing copy that must be swapped before launch.
-//
-// Translatable copy lives in src/messages/{en,de}.json instead of here —
-// this file only holds locale-agnostic data (hrefs, prices, image paths,
-// contact placeholders) plus a stable `id` per array item so components
-// can look up the matching translated strings by that id.
 
 export const daughterName = "Tyra";
 export const daughterPhoto = "/team/tyra.jpg";
@@ -19,7 +12,7 @@ export const postalCity = "1220 Wien";
 export const phoneNumber = "0660 121 00 73";
 export const phoneNumberTel = "+436601210073";
 
-// TODO: replace with the studio's exact address once confirmed — this is a
+
 // generic 1120 Wien centre placeholder.
 export const mapQuery = "Donaustadtstraße 1, 1220 Wien, Austria";
 export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;

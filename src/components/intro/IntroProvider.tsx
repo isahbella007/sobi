@@ -11,7 +11,7 @@ import {
 } from "react";
 import gsap from "gsap";
 import { usePathname } from "@/i18n/navigation";
-import { SunMarkV2 } from "@/components/hero/SunMarkV2";
+import { SunMark } from "@/components/hero/SunMark";
 import { SUN_DOCK_TOP, SUN_DOCK_SIZE, getSunDockLeft } from "@/components/hero/sunDock";
 
 const HOLD = 0.4;
@@ -170,7 +170,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <IntroContext.Provider value={{ introAwake, sunDocked, dockedMark: <SunMarkV2 /> }}>
+    <IntroContext.Provider value={{ introAwake, sunDocked, dockedMark: <SunMark/> }}>
       {children}
 
       {showOverlay && (
@@ -249,7 +249,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
                   filter: "grayscale(0.4) saturate(0.3) brightness(0.9)",
                 }}
               >
-                <SunMarkV2 />
+                <SunMark />
               </div>
             </div>
           </div>
