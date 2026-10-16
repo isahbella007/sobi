@@ -117,6 +117,7 @@ export function Nav({ compact = false }: { compact?: boolean }) {
               textTransform: "uppercase",
               color: "var(--text)",
               lineHeight: 1,
+              whiteSpace: "nowrap",
             }}
           >
             {t("brand")}
