@@ -121,6 +121,11 @@ export function Nav({ compact = false }: { compact?: boolean }) {
             }}
           >
             {t("brand")}
+            {/* Full name only from sm up — on phones it would overflow the bar. */}
+            <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+              {" "}
+              {t("brandSuffix")}
+            </Box>
           </Box>
           <Box
             component="span"

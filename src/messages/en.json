@@ -14,7 +14,8 @@
     }
   },
   "nav": {
-    "brand": "Sobi Professionelle",
+    "brand": "Sobi",
+    "brandSuffix": "Professionelle",
     "tagline": "Beauty & Care",
     "brandAria": "Sobi Professionelle — home",
     "openMenuAria": "Open menu",
