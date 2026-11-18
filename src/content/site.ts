@@ -151,7 +151,7 @@ export const priceListCategories: PriceListCategory[] = [
           { id: "faceMassage", price: "€23" },
         ],
       },
-      {
+      { 
         id: "browLash",
         items: [
           { id: "browTinting", price: "€18" },
