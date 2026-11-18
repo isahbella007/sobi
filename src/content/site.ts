@@ -59,7 +59,7 @@ export const pricingCategories = [
     items: [
       { id: "expertCleansProSystem", price: "€90" },
       { id: "aquatermRecovery", price: "€105" },
-      { id: "powerRetinol", price: "€99" },
+      { id: "powerRetinol", price: "€115" },
     ],
   },
   {
@@ -81,9 +81,9 @@ export const pricingCategories = [
   {
     id: "waxing",
     items: [
-      { id: "lowerLegKnee", price: "€25" },
-      { id: "bikini", price: "€20" },
-      { id: "upperLip", price: "€13" },
+      { id: "lowerLegKnee", price: "€29" },
+      { id: "bikini", price: "€23" },
+      { id: "upperLip", price: "€15" },
     ],
   },
 ] as const;
@@ -122,15 +122,15 @@ export const priceListCategories: PriceListCategory[] = [
       {
         id: "intensivSpecial",
         items: [
-          { id: "powerCPlus", price: "€95" },
-          { id: "powerRetinol", price: "€99" },
+          { id: "powerCPlus", price: "€110" },
+          { id: "powerRetinol", price: "€115" },
         ],
       },
       {
         id: "antiAging",
         items: [
-          { id: "globalLift", price: "€120" },
-          { id: "correctiveProgramm", price: "€170" },
+          { id: "globalLift", price: "€140" },
+          { id: "correctiveProgramm", price: "€195" },
         ],
       },
       {
@@ -138,25 +138,25 @@ export const priceListCategories: PriceListCategory[] = [
         items: [
           { id: "intensiveHydratingTreatment", price: "€85" },
           { id: "expressEnergizingTreatment", price: "€85" },
-          { id: "bacialBackTreatment", price: "€75" },
+          { id: "bacialBackTreatment", price: "€86" },
         ],
       },
       {
         id: "addOns",
         items: [
-          { id: "intensivAmpullen", price: "€15", fromPrice: true },
-          { id: "eyeContourPatches", price: "€15" },
-          { id: "diamondPeel", price: "€50" },
-          { id: "ultrasoundTreatment", price: "€20" },
-          { id: "faceMassage", price: "€20" },
+          { id: "intensivAmpullen", price: "€17", fromPrice: true },
+          { id: "eyeContourPatches", price: "€17" },
+          { id: "diamondPeel", price: "€58" },
+          { id: "ultrasoundTreatment", price: "€23" },
+          { id: "faceMassage", price: "€23" },
         ],
       },
       {
         id: "browLash",
         items: [
-          { id: "browTinting", price: "€15" },
-          { id: "lashTinting", price: "€15" },
-          { id: "browShaping", price: "€13" },
+          { id: "browTinting", price: "€18" },
+          { id: "lashTinting", price: "€18" },
+          { id: "browShaping", price: "€15" },
         ],
       },
     ],
@@ -199,23 +199,23 @@ export const priceListCategories: PriceListCategory[] = [
       {
         id: "women",
         items: [
-          { id: "upperLip", price: "€13" },
-          { id: "chin", price: "€13" },
-          { id: "cheeks", price: "€13" },
-          { id: "underarm", price: "€16" },
-          { id: "forearm", price: "€22" },
-          { id: "upperArm", price: "€22" },
-          { id: "lowerLegKnee", price: "€25" },
-          { id: "upperLeg", price: "€25" },
-          { id: "bikini", price: "€20" },
+          { id: "upperLip", price: "€15" },
+          { id: "chin", price: "€15" },
+          { id: "cheeks", price: "€15" },
+          { id: "underarm", price: "€19" },
+          { id: "forearm", price: "€26" },
+          { id: "upperArm", price: "€26" },
+          { id: "lowerLegKnee", price: "€29" },
+          { id: "upperLeg", price: "€29" },
+          { id: "bikini", price: "€23" },
         ],
       },
       {
         id: "men",
         items: [
-          { id: "backNeck", price: "€46" },
-          { id: "chest", price: "€25" },
-          { id: "belly", price: "€25" },
+          { id: "backNeck", price: "€53" },
+          { id: "chest", price: "€29" },
+          { id: "belly", price: "€29" },
         ],
       },
     ],
